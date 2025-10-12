@@ -7,4 +7,33 @@
     <RootNamespace>delivery_website</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Views\" />
+    <Folder Include="Areas\Customer\Controllers\" />
+    <Folder Include="Areas\Customer\Views\" />
+    <Folder Include="Areas\RestaurantOwner\Controllers\" />
+    <Folder Include="Areas\RestaurantOwner\Views\" />
+    <Folder Include="Controllers\API\" />
+    <Folder Include="Controllers\MVC\" />
+    <Folder Include="Data\Configurations\" />
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="Models\DTOs\Auth\" />
+    <Folder Include="Models\DTOs\MenuItem\" />
+    <Folder Include="Models\DTOs\Cart\" />
+    <Folder Include="Models\DTOs\Review\" />
+    <Folder Include="Models\DTOs\Payment\" />
+    <Folder Include="Models\DTOs\Order\" />
+    <Folder Include="Models\DTOs\Restaurant\" />
+    <Folder Include="Models\Entitites\" />
+    <Folder Include="Models\ViewModels\Customer\" />
+    <Folder Include="Models\ViewModels\Admin\" />
+    <Folder Include="Models\ViewModels\Account\" />
+    <Folder Include="Models\ViewModels\RestaurantOwner\" />
+    <Folder Include="Repositories\Interfaces\" />
+    <Folder Include="Repositories\Implementations\" />
+    <Folder Include="Services\Implementations\" />
+    <Folder Include="Services\Interfaces\" />
+  </ItemGroup>
+
 </Project>
