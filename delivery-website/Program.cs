@@ -35,10 +35,10 @@ app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Routes
+// Fixed Routes
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/Account/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 // Test DB connection
 try
