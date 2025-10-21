@@ -1,6 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using delivery_website.Data;
+using delivery_website.Repositories.Interfaces;
+using delivery_website.Repositories.Implementations;
+using delivery_website.Services.Interfaces;
+using delivery_website.Services.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +17,19 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddSession();
+// Register Repositories
+builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
+
+// Register Services
+builder.Services.AddScoped<IRestaurantService, RestaurantService>();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 var app = builder.Build();
 
 // Seed Database
@@ -39,6 +55,7 @@ using (var scope = app.Services.CreateScope())
     catch (Exception ex)
     {
         Console.WriteLine($"✗ Помилка: {ex.Message}");
+        Console.WriteLine($"Stack trace: {ex.StackTrace}");
     }
 }
 
@@ -54,6 +71,10 @@ app.UseRouting();
 app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

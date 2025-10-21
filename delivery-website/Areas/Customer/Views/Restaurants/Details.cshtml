@@ -1,0 +1,239 @@
+﻿@model delivery_website.Models.DTOs.Restaurant.RestaurantDetailsDto
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container mt-4">
+    <!-- Back Button -->
+    <a asp-area="Customer" asp-controller="Restaurants" asp-action="Index" class="btn btn-outline-secondary mb-3">
+        ← Назад до списку ресторанів
+    </a>
+
+    <!-- Restaurant Header -->
+    @if (!string.IsNullOrEmpty(Model.CoverImageUrl))
+    {
+        <div class="mb-4">
+            <img src="@Model.CoverImageUrl" alt="@Model.Name"
+                 class="img-fluid rounded" style="width: 100%; height: 300px; object-fit: cover;">
+        </div>
+    }
+
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="d-flex align-items-center mb-3">
+                @if (!string.IsNullOrEmpty(Model.LogoUrl))
+                {
+                    <img src="@Model.LogoUrl" alt="@Model.Name Logo"
+                         class="rounded-circle me-3" style="width: 80px; height: 80px; object-fit: cover;">
+                }
+                <div>
+                    <h1 class="mb-1">@Model.Name</h1>
+                    <p class="text-muted mb-0">@Model.CuisineType</p>
+                </div>
+            </div>
+
+            <p class="lead">@Model.Description</p>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge bg-warning text-dark me-2">
+                            ⭐ @Model.AverageRating.ToString("F1")
+                        </span>
+                        <span class="text-muted">(@Model.TotalReviews відгуків)</span>
+                    </div>
+                    <p class="mb-1">🚚 Час доставки: ~@Model.EstimatedDeliveryTime хв</p>
+                    <p class="mb-1">💰 Вартість доставки: @Model.DeliveryFee ₴</p>
+                    <p class="mb-1">📦 Мінімальне замовлення: @Model.MinimumOrderAmount ₴</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-1">📍 @Model.FullAddress</p>
+                    <p class="mb-1">📞 @Model.PhoneNumber</p>
+                    <p class="mb-1">✉️ @Model.Email</p>
+                    @if (!string.IsNullOrEmpty(Model.WebsiteUrl))
+                    {
+                        <p class="mb-1">
+                            🌐 <a href="@Model.WebsiteUrl" target="_blank">Веб-сайт</a>
+                        </p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">🕒 Години роботи</h5>
+                    @if (!string.IsNullOrEmpty(Model.OpeningHours))
+                    {
+                        <pre class="mb-0">@Model.OpeningHours</pre>
+                    }
+                    else
+                    {
+                        <p class="text-muted mb-0">Інформація відсутня</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu -->
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">📋 Меню</h3>
+        </div>
+        <div class="card-body">
+            @if (Model.Categories.Any())
+            {
+                @foreach (var category in Model.Categories)
+                {
+                    <div class="mb-5">
+                        <h4 class="border-bottom pb-2 mb-3">@category.Name</h4>
+                        @if (!string.IsNullOrEmpty(category.Description))
+                        {
+                            <p class="text-muted">@category.Description</p>
+                        }
+
+                        @if (category.MenuItems.Any())
+                        {
+                            <div class="row">
+                                @foreach (var item in category.MenuItems)
+                                {
+                                    <div class="col-md-6 mb-3">
+                                        <div class="card menu-item-card">
+                                            <div class="row g-0">
+                                                @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                                {
+                                                    <div class="col-4">
+                                                        <img src="@item.ImageUrl" alt="@item.Name"
+                                                             class="img-fluid rounded-start"
+                                                             style="height: 100%; object-fit: cover;">
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">@item.Name</h6>
+                                                            <p class="card-text small text-muted"
+                                                               style="height: 40px; overflow: hidden;">
+                                                                @item.Description
+                                                            </p>
+                                                            <div class="d-flex justify-content-between align-items-center">
+                                                                <span class="fw-bold text-primary">@item.Price ₴</span>
+                                                                <button class="btn btn-sm btn-primary add-to-cart-btn"
+                                                                        data-item-id="@item.MenuItemId"
+                                                                        data-item-name="@item.Name"
+                                                                        data-item-price="@item.Price">
+                                                                    Додати
+                                                                </button>
+                                                            </div>
+                                                            @if (item.PreparationTime.HasValue)
+                                                            {
+                                                                <small class="text-muted">⏱️ @item.PreparationTime хв</small>
+                                                            }
+                                                            @if (item.Calories.HasValue)
+                                                            {
+                                                                <small class="text-muted ms-2">🔥 @item.Calories ккал</small>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="col-12">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">@item.Name</h6>
+                                                            <p class="card-text small text-muted">@item.Description</p>
+                                                            <div class="d-flex justify-content-between align-items-center">
+                                                                <div>
+                                                                    <span class="fw-bold text-primary d-block">@item.Price ₴</span>
+                                                                    @if (item.PreparationTime.HasValue)
+                                                                    {
+                                                                        <small class="text-muted">⏱️ @item.PreparationTime хв</small>
+                                                                    }
+                                                                    @if (item.Calories.HasValue)
+                                                                    {
+                                                                        <small class="text-muted ms-2">🔥 @item.Calories ккал</small>
+                                                                    }
+                                                                </div>
+                                                                <button class="btn btn-sm btn-primary add-to-cart-btn"
+                                                                        data-item-id="@item.MenuItemId"
+                                                                        data-item-name="@item.Name"
+                                                                        data-item-price="@item.Price">
+                                                                    Додати
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="text-muted">У цій категорії немає доступних страв</p>
+                        }
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="alert alert-info text-center">
+                    <h5>😔 Меню тимчасово недоступне</h5>
+                    <p class="mb-0">Ресторан оновлює своє меню. Спробуйте пізніше.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .menu-item-card {
+        transition: transform 0.2s, box-shadow 0.2s;
+        height: 100%;
+    }
+
+        .menu-item-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+    .add-to-cart-btn {
+        transition: all 0.2s;
+    }
+
+        .add-to-cart-btn:hover {
+            transform: scale(1.05);
+        }
+</style>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = this.dataset.itemId;
+                    const itemName = this.dataset.itemName;
+                    const itemPrice = this.dataset.itemPrice;
+
+                    alert(`Додано до кошика: ${itemName} (${itemPrice} ₴)`);
+
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '✓ Додано';
+                    this.classList.add('btn-success');
+                    this.classList.remove('btn-primary');
+
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.classList.remove('btn-success');
+                        this.classList.add('btn-primary');
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+}

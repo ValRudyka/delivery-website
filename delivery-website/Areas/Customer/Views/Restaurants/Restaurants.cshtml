@@ -1,0 +1,168 @@
+﻿@model IEnumerable<delivery_website.Models.DTOs.Restaurant.RestaurantListDto>
+
+@{
+    ViewData["Title"] = "Ресторани";
+}
+
+<div class="container mt-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>🍽️ Наші ресторани</h2>
+        <span class="text-muted">Знайдено: @Model.Count() ресторанів</span>
+    </div>
+
+    <!-- Filters -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <!-- Search -->
+                <div class="col-md-4">
+                    <label class="form-label">🔍 Пошук</label>
+                    <input type="text" class="form-control" name="searchTerm"
+                           value="@ViewBag.SearchTerm" placeholder="Назва ресторану або кухня...">
+                </div>
+
+                <!-- Cuisine Filter -->
+                <div class="col-md-3">
+                    <label class="form-label">🍴 Тип кухні</label>
+                    <select class="form-select" name="cuisineType">
+                        <option value="">Всі кухні</option>
+                        @foreach (var cuisine in ViewBag.CuisineTypes)
+                        {
+                            <option value="@cuisine" selected="@(ViewBag.SelectedCuisine == cuisine)">
+                                @cuisine
+                            </option>
+                        }
+                    </select>
+                </div>
+
+                <!-- Rating Filter -->
+                <div class="col-md-2">
+                    <label class="form-label">⭐ Мін. рейтинг</label>
+                    <select class="form-select" name="minRating">
+                        <option value="">Будь-який</option>
+                        <option value="4.5" selected="@(ViewBag.MinRating == 4.5m)">4.5+</option>
+                        <option value="4.0" selected="@(ViewBag.MinRating == 4.0m)">4.0+</option>
+                        <option value="3.5" selected="@(ViewBag.MinRating == 3.5m)">3.5+</option>
+                    </select>
+                </div>
+
+                <!-- Delivery Time Filter -->
+                <div class="col-md-2">
+                    <label class="form-label">🚚 Час доставки</label>
+                    <select class="form-select" name="maxDeliveryTime">
+                        <option value="">Будь-який</option>
+                        <option value="30" selected="@(ViewBag.MaxDeliveryTime == 30)">До 30 хв</option>
+                        <option value="45" selected="@(ViewBag.MaxDeliveryTime == 45)">До 45 хв</option>
+                        <option value="60" selected="@(ViewBag.MaxDeliveryTime == 60)">До 60 хв</option>
+                    </select>
+                </div>
+
+                <!-- Sort By -->
+                <div class="col-md-1">
+                    <label class="form-label">Сортування</label>
+                    <select class="form-select" name="sortBy">
+                        <option value="rating" selected="@(ViewBag.SortBy == "rating")">Рейтинг</option>
+                        <option value="name" selected="@(ViewBag.SortBy == "name")">Назва</option>
+                        <option value="deliveryTime" selected="@(ViewBag.SortBy == "deliveryTime")">Час</option>
+                        <option value="deliveryFee" selected="@(ViewBag.SortBy == "deliveryFee")">Вартість</option>
+                    </select>
+                </div>
+
+                <!-- Buttons -->
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-search"></i> Застосувати фільтри
+                    </button>
+                    <a href="@Url.Action("Index", "Restaurants", new { area = "Customer" })" class="btn btn-outline-secondary">
+                        Скинути
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Restaurant Cards -->
+    @if (Model.Any())
+    {
+        <div class="row">
+            @foreach (var restaurant in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 restaurant-card">
+                        @if (!string.IsNullOrEmpty(restaurant.CoverImageUrl))
+                        {
+                            <img src="@restaurant.CoverImageUrl" class="card-img-top" alt="@restaurant.Name"
+                                 style="height: 200px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center"
+                                 style="height: 200px;">
+                                <span style="font-size: 4rem;">🍽️</span>
+                            </div>
+                        }
+
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">@restaurant.Name</h5>
+                                @if (!string.IsNullOrEmpty(restaurant.LogoUrl))
+                                {
+                                    <img src="@restaurant.LogoUrl" alt="Logo"
+                                         class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+                                }
+                            </div>
+
+                            <p class="text-muted small mb-2">@restaurant.CuisineType</p>
+
+                            <p class="card-text text-muted small" style="height: 40px; overflow: hidden;">
+                                @restaurant.Description
+                            </p>
+
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-warning text-dark">
+                                    ⭐ @restaurant.AverageRating.ToString("F1") (@restaurant.TotalReviews)
+                                </span>
+                                <span class="badge bg-info text-dark">
+                                    🚚 ~@restaurant.EstimatedDeliveryTime хв
+                                </span>
+                            </div>
+
+                            <div class="d-flex justify-content-between text-muted small mb-3">
+                                <span>Мін. замовлення: @restaurant.MinimumOrderAmount?.ToString("C0") ₴</span>
+                                <span>Доставка: @restaurant.DeliveryFee?.ToString("C0") ₴</span>
+                            </div>
+
+                            <div class="text-muted small mb-3">
+                                📍 @restaurant.FullAddress
+                            </div>
+
+                            <a asp-area="Customer" asp-controller="Restaurants" asp-action="Details" asp-route-id="@restaurant.RestaurantId"
+                               class="btn btn-primary w-100">
+                                Переглянути меню
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            <h4>😔 Ресторани не знайдено</h4>
+            <p>Спробуйте змінити параметри пошуку або скинути фільтри</p>
+        </div>
+    }
+</div>
+
+<style>
+    .restaurant-card {
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+        .restaurant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+</style>
