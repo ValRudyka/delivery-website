@@ -211,91 +211,103 @@
 
 @section Scripts {
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-
-            addToCartButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const itemId = this.dataset.itemId;
-                    const itemName = this.dataset.itemName;
-                    const itemPrice = this.dataset.itemPrice;
-                    const restaurantId = '@Model.RestaurantId';
-
-                    // Show loading state
-                    const originalText = this.innerHTML;
-                    this.innerHTML = '⏳ Додавання...';
-                    this.disabled = true;
-
-                    // Make AJAX request to add to cart
-                    $.ajax({
-                        url: '@Url.Action("AddToCart", "Cart", new { area = "Customer" })',
-                        type: 'POST',
-                        contentType: 'application/json',
-                        data: JSON.stringify({
-                            menuItemId: itemId,
-                            restaurantId: restaurantId,
-                            quantity: 1,
-                            customizations: null
-                        }),
-                        headers: {
-                            'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
-                        },
-                        success: (response) => {
-                            if (response.success) {
-                                // Show success state
-                                this.innerHTML = '✓ Додано';
-                                this.classList.add('btn-success');
-                                this.classList.remove('btn-primary');
-
-                                $(document).trigger('cartUpdated');
-                                showToast(`${itemName} додано до кошика!`, 'success');
-
-                                // Reset button after 2 seconds
-                                setTimeout(() => {
-                                    this.innerHTML = originalText;
-                                    this.classList.remove('btn-success');
-                                    this.classList.add('btn-primary');
-                                    this.disabled = false;
-                                }, 2000);
-                            } else {
-                                // Show error
-                                alert(response.message || 'Помилка при додаванні до кошика');
-                                this.innerHTML = originalText;
-                                this.disabled = false;
-                            }
-                        },
-                        error: (xhr, status, error) => {
-                            console.error('Error:', error);
-
-                            if (xhr.status === 401) {
-                                alert('Будь ласка, увійдіть до системи для додавання товарів до кошика');
-                                window.location.href = '@Url.Action("Login", "Account", new { area = "", returnUrl = Context.Request.Path })';
-                            } else {
-                                alert('Помилка при додаванні до кошика. Спробуйте ще раз.');
-                            }
-
-                            this.innerHTML = originalText;
-                            this.disabled = false;
+        $(document).ready(function() {
+            // Add anti-forgery token to AJAX requests
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (settings.type === 'POST') {
+                        var token = $('input[name="__RequestVerificationToken"]').val();
+                        if (token) {
+                            xhr.setRequestHeader('RequestVerificationToken', token);
                         }
-                    });
+                    }
+                }
+            });
+
+            // Handle add to cart button clicks
+            $('.add-to-cart-btn').on('click', function(e) {
+                e.preventDefault();
+
+                const button = $(this);
+                const itemId = button.data('item-id');
+                const itemName = button.data('item-name');
+                const restaurantId = '@Model.RestaurantId';
+
+                // Show loading state
+                const originalText = button.html();
+                button.html('⏳ Додавання...');
+                button.prop('disabled', true);
+
+                // Make AJAX request
+                $.ajax({
+                    url: '@Url.Action("AddToCart", "Cart", new { area = "Customer" })',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        menuItemId: itemId,
+                        restaurantId: restaurantId,
+                        quantity: 1,
+                        customizations: null
+                    }),
+                    success: function(response) {
+                        if (response.success) {
+                            // Show success state
+                            button.html('✓ Додано');
+                            button.removeClass('btn-primary').addClass('btn-success');
+
+                            // Update cart badge
+                            if (window.updateCartBadge) {
+                                window.updateCartBadge(response.itemCount);
+                            }
+
+                            // Show toast notification
+                            showToast(itemName + ' додано до кошика!', 'success');
+
+                            // Reset button after 2 seconds
+                            setTimeout(function() {
+                                button.html(originalText);
+                                button.removeClass('btn-success').addClass('btn-primary');
+                                button.prop('disabled', false);
+                            }, 2000);
+                        } else {
+                            // Show error
+                            alert(response.message || 'Помилка при додаванні до кошика');
+                            button.html(originalText);
+                            button.prop('disabled', false);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                        console.error('Status:', status);
+                        console.error('Response:', xhr.responseText);
+
+                        if (xhr.status === 401) {
+                            alert('Будь ласка, увійдіть до системи для додавання товарів до кошика');
+                            window.location.href = '@Url.Action("Login", "Account", new { area = "", returnUrl = Context.Request.Path })';
+                        } else {
+                            alert('Помилка при додаванні до кошика. Спробуйте ще раз.');
+                        }
+
+                        button.html(originalText);
+                        button.prop('disabled', false);
+                    }
                 });
             });
 
-                    function showToast(message, type = 'success') {
-            const toast = $(`
-                <div class="toast-notification ${type}">
-                    ${message}
-                </div>
-            `);
+            function showToast(message, type) {
+                const toastClass = type === 'success' ? 'alert-success' : 'alert-danger';
+                const toast = $('<div class="alert ' + toastClass + ' alert-dismissible fade show position-fixed" role="alert" style="top: 20px; right: 20px; z-index: 9999; min-width: 300px;">' +
+                    message +
+                    '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
+                    '</div>');
 
-            $('body').append(toast);
+                $('body').append(toast);
 
-            setTimeout(() => {
-                toast.fadeOut(300, function() {
-                    $(this).remove();
-                });
-            }, 3000);
-        }
+                setTimeout(function() {
+                    toast.alert('close');
+                }, 3000);
+            }
+        });
     </script>
 
     @Html.AntiForgeryToken()
