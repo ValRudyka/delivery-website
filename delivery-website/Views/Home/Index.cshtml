@@ -1,15 +1,166 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Головна";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Відомості про студента:</h1>
-    <h2>Прізвище та ім'я</h2>
-    <p>Рудика Валерій</p>
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container text-center">
+        <h1>🍕 Платформа замовлення та доставки їжі</h1>
+        <p>Замовте їжу з найкращих ресторанів вашого міста швидко та зручно</p>
+        <a asp-controller="Restaurants" asp-action="Index" class="btn btn-light btn-lg">
+            Переглянути ресторани
+        </a>
+    </div>
+</div>
 
-    <h2>Група та номер по списку:</h2>
-    <p>ІПЗс-25-1</p>
+<div class="container">
+    <!-- Main Features -->
+    <div class="section-title text-center mb-4">
+        <h2>🌟 Чому обирають нас</h2>
+        <p class="text-muted">Найкраща платформа для замовлення їжі онлайн</p>
+    </div>
 
-    <h2>Тема курсового проєкту:</h2>
-    <p>Платформа замовлення та доставки їжі</p>
+    <div class="row mb-5">
+        <div class="col-md-4 mb-4">
+            <div class="card text-center p-4 h-100">
+                <div style="font-size: 3.5rem;">🍔</div>
+                <h5 class="mt-3">Великий вибір ресторанів</h5>
+                <p class="text-muted">Понад 100+ ресторанів з різними кухнями: італійська, японська, українська, американська та інші</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center p-4 h-100">
+                <div style="font-size: 3.5rem;">🚀</div>
+                <h5 class="mt-3">Швидка доставка</h5>
+                <p class="text-muted">Середній час доставки 30-40 хвилин. Відстежуйте ваше замовлення в реальному часі</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center p-4 h-100">
+                <div style="font-size: 3.5rem;">💳</div>
+                <h5 class="mt-3">Зручна оплата</h5>
+                <p class="text-muted">Оплата онлайн карткою або готівкою при отриманні. Безпечні транзакції</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="section-title text-center mb-4">
+        <h2>📱 Як це працює</h2>
+        <p class="text-muted">Замовити їжу легко — всього за 4 простих кроки</p>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-3 mb-3">
+            <div class="card text-center p-3">
+                <div class="bg-primary text-white rounded-circle mx-auto mb-3" style="width: 50px; height: 50px; line-height: 50px; font-size: 1.5rem;">
+                    1
+                </div>
+                <h6>Оберіть ресторан</h6>
+                <small class="text-muted">Перегляньте меню та виберіть улюблені страви</small>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card text-center p-3">
+                <div class="bg-primary text-white rounded-circle mx-auto mb-3" style="width: 50px; height: 50px; line-height: 50px; font-size: 1.5rem;">
+                    2
+                </div>
+                <h6>Додайте до кошика</h6>
+                <small class="text-muted">Налаштуйте страви за вашим смаком</small>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card text-center p-3">
+                <div class="bg-primary text-white rounded-circle mx-auto mb-3" style="width: 50px; height: 50px; line-height: 50px; font-size: 1.5rem;">
+                    3
+                </div>
+                <h6>Оформіть замовлення</h6>
+                <small class="text-muted">Вкажіть адресу та спосіб оплати</small>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card text-center p-3">
+                <div class="bg-primary text-white rounded-circle mx-auto mb-3" style="width: 50px; height: 50px; line-height: 50px; font-size: 1.5rem;">
+                    4
+                </div>
+                <h6>Отримайте доставку</h6>
+                <small class="text-muted">Насолоджуйтесь смачною їжею!</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popular Cuisines -->
+    <div class="section-title text-center mb-4">
+        <h2>🍽️ Популярні кухні</h2>
+        <p class="text-muted">Виберіть улюблену кухню</p>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card text-center p-3">
+                <div style="font-size: 2.5rem;">🍕</div>
+                <h6 class="mt-2">Італійська</h6>
+                <small class="text-muted">Піца, паста</small>
+            </div>
+        </div>
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card text-center p-3">
+                <div style="font-size: 2.5rem;">🍣</div>
+                <h6 class="mt-2">Японська</h6>
+                <small class="text-muted">Суші, роли</small>
+            </div>
+        </div>
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card text-center p-3">
+                <div style="font-size: 2.5rem;">🍔</div>
+                <h6 class="mt-2">Американська</h6>
+                <small class="text-muted">Бургери, стейки</small>
+            </div>
+        </div>
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card text-center p-3">
+                <div style="font-size: 2.5rem;">🥟</div>
+                <h6 class="mt-2">Українська</h6>
+                <small class="text-muted">Вареники, борщ</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="card bg-light mb-5">
+        <div class="card-body">
+            <div class="row text-center">
+                <div class="col-md-3 mb-3">
+                    <h3 class="text-primary">500+</h3>
+                    <p class="text-muted mb-0">Ресторанів</p>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h3 class="text-primary">10,000+</h3>
+                    <p class="text-muted mb-0">Активних користувачів</p>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h3 class="text-primary">50,000+</h3>
+                    <p class="text-muted mb-0">Замовлень щомісяця</p>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h3 class="text-primary">4.8⭐</h3>
+                    <p class="text-muted mb-0">Середня оцінка</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="card bg-primary text-white text-center mb-5">
+        <div class="card-body p-5">
+            <h3 class="mb-3">Готові замовити?</h3>
+            <p class="mb-4">Приєднуйтесь до тисяч задоволених клієнтів</p>
+            <a asp-controller="Restaurants" asp-action="Index" class="btn btn-light btn-lg me-2">
+                Переглянути ресторани
+            </a>
+            <a asp-controller="Account" asp-action="Register" class="btn btn-outline-light btn-lg">
+                Зареєструватися
+            </a>
+        </div>
+    </div>
 </div>
