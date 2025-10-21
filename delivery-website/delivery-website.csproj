@@ -22,7 +22,6 @@
     <Folder Include="Models\DTOs\Order\" />
     <Folder Include="Models\ViewModels\Customer\" />
     <Folder Include="Models\ViewModels\Admin\" />
-    <Folder Include="Models\ViewModels\Account\" />
     <Folder Include="Models\ViewModels\RestaurantOwner\" />
   </ItemGroup>
 
