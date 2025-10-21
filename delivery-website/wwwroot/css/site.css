@@ -163,3 +163,36 @@ footer {
         font-size: 1rem;
     }
 }
+
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast-notification {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 9999;
+    animation: slideIn 0.3s ease-out;
+}
+
+    .toast-notification.success {
+        background: #28a745;
+    }
+
+    .toast-notification.error {
+        background: #dc3545;
+    }

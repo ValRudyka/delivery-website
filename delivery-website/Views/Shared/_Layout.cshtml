@@ -32,6 +32,16 @@
 
                         @if (SignInManager.IsSignedIn(User))
                         {
+                            <li class="nav-item">
+                                <a class="nav-link position-relative" asp-area="Customer" asp-controller="Cart" asp-action="Index">
+                                    🛒 Кошик
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                          id="cartBadge" style="display: none; font-size: 0.7rem;">
+                                        0
+                                    </span>
+                                </a>
+                            </li>
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     👤 @User.Identity!.Name
@@ -110,6 +120,37 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <script>
+            $(document).ready(function() {
+                // Load cart count on page load
+                loadCartCount();
+            });
+
+            function loadCartCount() {
+                $.get('@Url.Action("GetItemCount", "Cart", new { area = "Customer" })', function(data) {
+                    updateCartBadgeDisplay(data.count);
+                });
+            }
+
+            function updateCartBadgeDisplay(count) {
+                const badge = $('#cartBadge');
+                if (count > 0) {
+                    badge.text(count).show();
+                } else {
+                    badge.hide();
+                }
+            }
+
+            // Global function for updating cart badge
+            window.updateCartBadge = function(count) {
+                updateCartBadgeDisplay(count);
+            };
+        </script>
+    }
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

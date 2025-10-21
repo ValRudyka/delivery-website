@@ -1,0 +1,247 @@
+﻿@model delivery_website.Models.DTOs.Cart.CartDto
+
+@{
+    ViewData["Title"] = "Кошик";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>🛒 Ваш кошик</h2>
+                @if (Model != null && Model.Items.Any())
+                {
+                    <button type="button" class="btn btn-outline-danger btn-sm" id="clearCartBtn">
+                        🗑️ Очистити кошик
+                    </button>
+                }
+            </div>
+
+            @if (Model == null || !Model.Items.Any())
+            {
+                <div class="card text-center p-5">
+                    <div style="font-size: 5rem; opacity: 0.3;">🛒</div>
+                    <h4 class="mt-3">Ваш кошик порожній</h4>
+                    <p class="text-muted mb-4">Додайте страви з меню ресторанів</p>
+                    <a asp-area="Customer" asp-controller="Restaurants" asp-action="Index" class="btn btn-primary">
+                        Переглянути ресторани
+                    </a>
+                </div>
+            }
+            else
+            {
+                <!-- Restaurant Info -->
+                <div class="alert alert-info">
+                    <strong>📍 Ресторан:</strong> @Model.RestaurantName
+                </div>
+
+                <!-- Cart Items -->
+                @foreach (var item in Model.Items)
+                {
+                    <div class="card mb-3 cart-item" data-item-id="@item.CartItemId">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    @if (!string.IsNullOrEmpty(item.MenuItemImage))
+                                    {
+                                        <img src="@item.MenuItemImage" alt="@item.MenuItemName"
+                                             class="img-fluid rounded" style="max-height: 80px; object-fit: cover;">
+                                    }
+                                    else
+                                    {
+                                        <div class="bg-light rounded d-flex align-items-center justify-content-center"
+                                             style="height: 80px;">
+                                            <span style="font-size: 2rem;">🍽️</span>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="col-md-6">
+                                    <h5 class="mb-1">@item.MenuItemName</h5>
+                                    <p class="text-muted small mb-1">@item.UnitPrice ₴ за штуку</p>
+                                    @if (!string.IsNullOrEmpty(item.Customizations))
+                                    {
+                                        <p class="text-muted small mb-0">
+                                            <em>Доповнення: @item.Customizations</em>
+                                        </p>
+                                    }
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-outline-secondary btn-sm decrease-qty"
+                                                    data-item-id="@item.CartItemId">
+                                                −
+                                            </button>
+                                            <button type="button" class="btn btn-outline-secondary btn-sm disabled"
+                                                    style="min-width: 50px;">
+                                                <span class="item-quantity">@item.Quantity</span>
+                                            </button>
+                                            <button type="button" class="btn btn-outline-secondary btn-sm increase-qty"
+                                                    data-item-id="@item.CartItemId">
+                                                +
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <strong class="item-total">@item.TotalPrice ₴</strong>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-link btn-sm text-danger mt-2 remove-item"
+                                            data-item-id="@item.CartItemId">
+                                        🗑️ Видалити
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        <!-- Order Summary -->
+        @if (Model != null && Model.Items.Any())
+        {
+            <div class="col-md-4">
+                <div class="card sticky-top" style="top: 20px;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">📋 Підсумок замовлення</h5>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Вартість страв:</span>
+                            <span id="subtotal">@Model.SubtotalAmount ₴</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Доставка:</span>
+                            <span id="deliveryFee">@Model.DeliveryFee ₴</span>
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <strong>Разом:</strong>
+                            <strong id="totalAmount" class="text-primary">@Model.TotalAmount ₴</strong>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <a asp-area="Customer" asp-controller="Checkout" asp-action="Index"
+                               class="btn btn-primary btn-lg">
+                                Оформити замовлення →
+                            </a>
+                            <a asp-area="Customer" asp-controller="Restaurants" asp-action="Details"
+                               asp-route-id="@Model.RestaurantId" class="btn btn-outline-secondary">
+                                ← Продовжити покупки
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Increase quantity
+            $('.increase-qty').click(function() {
+                const itemId = $(this).data('item-id');
+                const $quantitySpan = $(this).closest('.btn-group').find('.item-quantity');
+                const currentQty = parseInt($quantitySpan.text());
+                updateQuantity(itemId, currentQty + 1);
+            });
+
+            // Decrease quantity
+            $('.decrease-qty').click(function() {
+                const itemId = $(this).data('item-id');
+                const $quantitySpan = $(this).closest('.btn-group').find('.item-quantity');
+                const currentQty = parseInt($quantitySpan.text());
+                if (currentQty > 1) {
+                    updateQuantity(itemId, currentQty - 1);
+                }
+            });
+
+            // Remove item
+            $('.remove-item').click(function() {
+                const itemId = $(this).data('item-id');
+                if (confirm('Видалити цю страву з кошика?')) {
+                    removeItem(itemId);
+                }
+            });
+
+            // Clear cart
+            $('#clearCartBtn').click(function() {
+                if (confirm('Очистити весь кошик?')) {
+                    clearCart();
+                }
+            });
+
+            function updateQuantity(itemId, quantity) {
+                $.ajax({
+                    url: '@Url.Action("UpdateQuantity", "Cart", new { area = "Customer" })',
+                    type: 'POST',
+                    data: JSON.stringify({
+                        cartItemId: itemId,
+                        quantity: quantity
+                    }),
+                    contentType: 'application/json',
+                    headers: {
+                        'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('Помилка при оновленні кількості');
+                    }
+                });
+            }
+
+            function removeItem(itemId) {
+                $.ajax({
+                    url: '@Url.Action("RemoveItem", "Cart", new { area = "Customer" })',
+                    type: 'POST',
+                    data: { cartItemId: itemId },
+                    headers: {
+                        'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('Помилка при видаленні товару');
+                    }
+                });
+            }
+
+            function clearCart() {
+                $.ajax({
+                    url: '@Url.Action("Clear", "Cart", new { area = "Customer" })',
+                    type: 'POST',
+                    headers: {
+                        'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('Помилка при очищенні кошика');
+                    }
+                });
+            }
+        });
+    </script>
+}
+
+@Html.AntiForgeryToken()
