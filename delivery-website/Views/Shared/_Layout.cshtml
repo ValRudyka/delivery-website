@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom shadow-sm">
             <div class="container">
-                <a class="navbar-brand fw-bold text-primary" asp-controller="Home" asp-action="Index">
+                <a class="navbar-brand fw-bold text-primary" asp-controller="Home" asp-action="Index" asp-area="">
                     🍕 Доставка їжі
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -20,16 +20,16 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Index">Головна</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Index" asp-area="">Головна</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="Customer" asp-controller="Restaurants" asp-action="Index">Ресторани</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Account" asp-action="Login">Увійти</a>
+                            <a class="nav-link" asp-controller="Account" asp-action="Login" asp-area="">Увійти</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-primary text-white ms-2" asp-controller="Account" asp-action="Register">Реєстрація</a>
+                            <a class="nav-link btn btn-primary text-white ms-2" asp-controller="Account" asp-action="Register" asp-area="">Реєстрація</a>
                         </li>
                     </ul>
                 </div>
