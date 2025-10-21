@@ -4,24 +4,44 @@ using delivery_website.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services
 builder.Services.AddControllersWithViews();
 
-// PostgreSQL Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-// Session
 builder.Services.AddSession();
-
 var app = builder.Build();
 
-// Middleware
+// Seed Database
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<ApplicationDbContext>();
+        var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+
+        var canConnect = await context.Database.CanConnectAsync();
+        Console.WriteLine(canConnect ? "✓ База даних підключена!" : "✗ Помилка підключення до бази даних!");
+
+        if (canConnect)
+        {
+            await context.Database.MigrateAsync();
+            Console.WriteLine("✓ Міграції застосовано");
+
+            await DbSeeder.SeedAsync(context, userManager);
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"✗ Помилка: {ex.Message}");
+    }
+}
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -35,22 +55,8 @@ app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Fixed Routes
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-// Test DB connection
-try
-{
-    using var scope = app.Services.CreateScope();
-    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    var canConnect = await context.Database.CanConnectAsync();
-    Console.WriteLine(canConnect ? "✓ Database Connected!" : "✗ Database Connection Failed!");
-}
-catch (Exception ex)
-{
-    Console.WriteLine($"✗ Error: {ex.Message}");
-}
 
 app.Run();
