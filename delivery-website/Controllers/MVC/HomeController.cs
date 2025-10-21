@@ -2,7 +2,7 @@ using System.Diagnostics;
 using delivery_website.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace delivery_website.Controllers
+namespace delivery_website.Controllers.MVC
 {
     public class HomeController : Controller
     {

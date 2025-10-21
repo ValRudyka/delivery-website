@@ -13,7 +13,6 @@
     <Folder Include="Areas\RestaurantOwner\Controllers\" />
     <Folder Include="Areas\RestaurantOwner\Views\" />
     <Folder Include="Controllers\API\" />
-    <Folder Include="Controllers\MVC\" />
     <Folder Include="Data\Migrations\" />
     <Folder Include="Models\DTOs\Auth\" />
     <Folder Include="Models\DTOs\Cart\" />
