@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Доступ заборонено";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-danger">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <div class="mb-3" style="font-size: 3rem;">🚫</div>
+                        <h2 class="fw-bold text-danger">Доступ заборонено</h2>
+                        <p class="text-muted">
+                            У вас немає прав для доступу до цієї сторінки.
+                            Можливо, вам потрібно увійти до системи або звернутися до адміністратора.
+                        </p>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <strong>⚠️ Увага:</strong> Якщо ви вважаєте, що це помилка, будь ласка, зв'яжіться з підтримкою
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-primary">
+                            ← Повернутися на головну
+                        </a>
+                        <a asp-action="Login" class="btn btn-outline-primary">
+                            Увійти до системи
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

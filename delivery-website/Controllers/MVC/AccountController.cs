@@ -4,6 +4,9 @@ using delivery_website.Models.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
+using System.Text.Encodings.Web;
 
 namespace delivery_website.Controllers.MVC
 {
@@ -198,16 +201,31 @@ namespace delivery_website.Controllers.MVC
 
             var user = await _userManager.FindByEmailAsync(model.Email);
 
-            if (user == null)
+            if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
             {
-                // Don't reveal that the user does not exist
+                // Don't reveal that the user does not exist or is not confirmed
                 return RedirectToAction(nameof(ForgotPasswordConfirmation));
             }
 
-            // TODO: Implement email sending for password reset
-            // For now, just show confirmation page
+            // Generate password reset token
+            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
-            _logger.LogInformation($"Password reset requested for {model.Email}");
+            var callbackUrl = Url.Action(
+                "ResetPassword",
+                "Account",
+                new { code = code, email = model.Email },
+                protocol: Request.Scheme);
+
+            // TODO: Send email with password reset link
+            // For now, just log it
+            _logger.LogInformation($"Password reset link for {model.Email}: {callbackUrl}");
+
+            // In development, display the link
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+            {
+                TempData["ResetLink"] = callbackUrl;
+            }
 
             return RedirectToAction(nameof(ForgotPasswordConfirmation));
         }
@@ -215,6 +233,64 @@ namespace delivery_website.Controllers.MVC
         // GET: /Account/ForgotPasswordConfirmation
         [HttpGet]
         public IActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+
+        // GET: /Account/ResetPassword
+        [HttpGet]
+        public IActionResult ResetPassword(string? code = null, string? email = null)
+        {
+            if (code == null || email == null)
+            {
+                TempData["ErrorMessage"] = "Невірне посилання для скидання паролю";
+                return RedirectToAction("Index", "Home");
+            }
+
+            var model = new ResetPasswordViewModel
+            {
+                Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code)),
+                Email = email
+            };
+
+            return View(model);
+        }
+
+        // POST: /Account/ResetPassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                // Don't reveal that the user does not exist
+                return RedirectToAction(nameof(ResetPasswordConfirmation));
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
+            if (result.Succeeded)
+            {
+                _logger.LogInformation($"Password reset successful for {model.Email}");
+                return RedirectToAction(nameof(ResetPasswordConfirmation));
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return View(model);
+        }
+
+        // GET: /Account/ResetPasswordConfirmation
+        [HttpGet]
+        public IActionResult ResetPasswordConfirmation()
         {
             return View();
         }
