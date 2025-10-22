@@ -14,7 +14,8 @@ namespace delivery_website.ViewModels.Customer
         public string RestaurantPhone { get; set; }
 
         public List<OrderItemDetailViewModel>
-    OrderItems { get; set; } = new List<OrderItemDetailViewModel>
+    OrderItems
+        { get; set; } = new List<OrderItemDetailViewModel>
         ();
 
         public decimal Subtotal { get; set; }
@@ -30,14 +31,14 @@ namespace delivery_website.ViewModels.Customer
         public string PaymentStatus { get; set; }
 
         public DateTime? EstimatedDeliveryTime { get; set; }
-        }
+    }
 
-        public class OrderItemDetailViewModel
-        {
+    public class OrderItemDetailViewModel
+    {
         public string ItemName { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal Total { get; set; }
         public string Customizations { get; set; }
-        }
-        }
+    }
+}
