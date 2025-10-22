@@ -1,0 +1,43 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace delivery_website.ViewModels.Customer
+{
+    public class OrderConfirmationViewModel
+    {
+        public Guid OrderId { get; set; }
+        public string OrderNumber { get; set; }
+        public DateTime OrderDate { get; set; }
+        public string OrderStatus { get; set; }
+
+        public string RestaurantName { get; set; }
+        public string RestaurantPhone { get; set; }
+
+        public List<OrderItemDetailViewModel>
+    OrderItems { get; set; } = new List<OrderItemDetailViewModel>
+        ();
+
+        public decimal Subtotal { get; set; }
+        public decimal Tax { get; set; }
+        public decimal DeliveryFee { get; set; }
+        public decimal Total { get; set; }
+
+        public string DeliveryAddress { get; set; }
+        public string ContactPhone { get; set; }
+        public string SpecialInstructions { get; set; }
+
+        public string PaymentMethod { get; set; }
+        public string PaymentStatus { get; set; }
+
+        public DateTime? EstimatedDeliveryTime { get; set; }
+        }
+
+        public class OrderItemDetailViewModel
+        {
+        public string ItemName { get; set; }
+        public int Quantity { get; set; }
+        public decimal UnitPrice { get; set; }
+        public decimal Total { get; set; }
+        public string Customizations { get; set; }
+        }
+        }

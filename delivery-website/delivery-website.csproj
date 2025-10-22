@@ -17,7 +17,6 @@
     <Folder Include="Models\DTOs\Review\" />
     <Folder Include="Models\DTOs\Payment\" />
     <Folder Include="Models\DTOs\Order\" />
-    <Folder Include="Models\ViewModels\Customer\" />
     <Folder Include="Models\ViewModels\Admin\" />
     <Folder Include="Models\ViewModels\RestaurantOwner\" />
   </ItemGroup>
