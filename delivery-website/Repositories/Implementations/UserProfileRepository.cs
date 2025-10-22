@@ -37,8 +37,18 @@ namespace delivery_website.Repositories.Implementations
         public async Task<UserProfile> UpdateAsync(UserProfile userProfile)
         {
             userProfile.UpdatedDate = DateTime.UtcNow;
-            _context.UserProfiles.Update(userProfile);
+
+            // More explicit update approach
+            _context.Entry(userProfile).State = EntityState.Modified;
+
+            // Explicitly mark DateOfBirth as modified if it has a value
+            if (userProfile.DateOfBirth.HasValue)
+            {
+                _context.Entry(userProfile).Property(p => p.DateOfBirth).IsModified = true;
+            }
+
             await _context.SaveChangesAsync();
+
             return userProfile;
         }
 

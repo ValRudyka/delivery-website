@@ -52,12 +52,13 @@ namespace delivery_website.Services.Implementations
             if (userProfile == null)
                 throw new Exception("User profile not found");
 
-            // Update profile
+            // Update profile fields
             userProfile.FirstName = dto.FirstName;
             userProfile.LastName = dto.LastName;
             userProfile.PhoneNumber = dto.PhoneNumber;
             userProfile.DateOfBirth = dto.DateOfBirth;
             userProfile.PreferredLanguage = dto.PreferredLanguage;
+            userProfile.UpdatedDate = DateTime.UtcNow; 
 
             await _userProfileRepository.UpdateAsync(userProfile);
 

@@ -29,6 +29,9 @@ namespace delivery_website.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+            modelBuilder.Entity<UserProfile>()
+                .Property(u => u.DateOfBirth)
+                .HasColumnType("date");
         }
     }
 }
