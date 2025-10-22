@@ -155,7 +155,14 @@
                 const itemId = $(this).data('item-id');
                 const $quantitySpan = $(this).closest('.btn-group').find('.item-quantity');
                 const currentQty = parseInt($quantitySpan.text());
-                if (currentQty > 1) {
+
+                if (currentQty === 1) {
+                    // If quantity is 1, remove the item
+                    if (confirm('Видалити цю страву з кошика?')) {
+                        removeItem(itemId);
+                    }
+                } else {
+                    // Otherwise, decrease quantity
                     updateQuantity(itemId, currentQty - 1);
                 }
             });
@@ -189,7 +196,18 @@
                     },
                     success: function(response) {
                         if (response.success) {
-                            location.reload();
+                            // Update cart badge in navbar
+                            if (window.updateCartBadge) {
+                                window.updateCartBadge(response.itemCount);
+                            }
+
+                            // Show success message briefly
+                            showToast('Кількість оновлено', 'success');
+
+                            // Reload page to update totals
+                            setTimeout(function() {
+                                location.reload();
+                            }, 500);
                         } else {
                             alert(response.message);
                         }
@@ -210,7 +228,18 @@
                     },
                     success: function(response) {
                         if (response.success) {
-                            location.reload();
+                            // Update cart badge in navbar
+                            if (window.updateCartBadge) {
+                                window.updateCartBadge(response.itemCount);
+                            }
+
+                            // Show success message
+                            showToast('Товар видалено з кошика', 'success');
+
+                            // Reload page
+                            setTimeout(function() {
+                                location.reload();
+                            }, 500);
                         } else {
                             alert(response.message);
                         }
@@ -230,7 +259,17 @@
                     },
                     success: function(response) {
                         if (response.success) {
-                            location.reload();
+                            // Update cart badge in navbar
+                            if (window.updateCartBadge) {
+                                window.updateCartBadge(0);
+                            }
+
+                            showToast('Кошик очищено', 'success');
+
+                            // Reload page
+                            setTimeout(function() {
+                                location.reload();
+                            }, 500);
                         } else {
                             alert(response.message);
                         }
@@ -240,8 +279,24 @@
                     }
                 });
             }
+
+            function showToast(message, type) {
+                const toastClass = type === 'success' ? 'alert-success' : 'alert-danger';
+                const toast = $('<div class="alert ' + toastClass + ' alert-dismissible fade show position-fixed" role="alert" style="top: 80px; right: 20px; z-index: 9999; min-width: 300px;">' +
+                    message +
+                    '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
+                    '</div>');
+
+                $('body').append(toast);
+
+                setTimeout(function() {
+                    toast.alert('close');
+                }, 2000);
+            }
         });
     </script>
 }
+
+@Html.AntiForgeryToken()
 
 @Html.AntiForgeryToken()

@@ -14,7 +14,6 @@
     <Folder Include="Areas\RestaurantOwner\Views\" />
     <Folder Include="Controllers\API\" />
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Models\DTOs\Auth\" />
     <Folder Include="Models\DTOs\Review\" />
     <Folder Include="Models\DTOs\Payment\" />
     <Folder Include="Models\DTOs\Order\" />
