@@ -1,0 +1,204 @@
+﻿@model delivery_website.Models.DTOs.UserProfile.UserProfileDto
+
+@{
+    ViewData["Title"] = "Мій профіль";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    @if (!string.IsNullOrEmpty(Model.ProfileImageUrl))
+                    {
+                        <img src="@Model.ProfileImageUrl" alt="Profile"
+                             class="rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover;">
+                    }
+                    else
+                    {
+                        <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 120px; height: 120px; font-size: 3rem;">
+                            @Model.FirstName.Substring(0, 1)@Model.LastName.Substring(0, 1)
+                        </div>
+                    }
+                    <h5 class="mb-1">@Model.FullName</h5>
+                    <p class="text-muted mb-0">@Model.Email</p>
+                    <small class="text-muted">Користувач з @Model.CreatedDate.ToString("MMMM yyyy")</small>
+                </div>
+            </div>
+
+            <div class="list-group mt-3">
+                <a asp-action="Index" class="list-group-item list-group-item-action active">
+                    👤 Профіль
+                </a>
+                <a asp-controller="Address" asp-action="Index" class="list-group-item list-group-item-action">
+                    📍 Мої адреси
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    📋 Історія замовлень
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    ⭐ Мої відгуки
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    💳 Платіжні методи
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">📋 Інформація профілю</h4>
+                    <a asp-action="Edit" class="btn btn-primary">
+                        ✏️ Редагувати профіль
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted">Ім'я</label>
+                            <p class="form-control-plaintext">@Model.FirstName</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted">Прізвище</label>
+                            <p class="form-control-plaintext">@Model.LastName</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted">Email</label>
+                            <p class="form-control-plaintext">@Model.Email</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted">Номер телефону</label>
+                            <p class="form-control-plaintext">@Model.PhoneNumber</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted">Дата народження</label>
+                            <p class="form-control-plaintext">
+                                @(Model.DateOfBirth.HasValue? Model.DateOfBirth.Value.ToString("dd.MM.yyyy") : "Не вказано")
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted">Мова</label>
+                            <p class="form-control-plaintext">
+                                @(Model.PreferredLanguage == "uk" ? "Українська" : Model.PreferredLanguage)
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h5 class="mb-3">🔐 Безпека</h5>
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                            Змінити пароль
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="row mt-4">
+                <div class="col-md-4 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3 class="text-primary">0</h3>
+                            <p class="text-muted mb-0">Всього замовлень</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3 class="text-success">0 ₴</h3>
+                            <p class="text-muted mb-0">Загальна сума</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3 class="text-warning">0</h3>
+                            <p class="text-muted mb-0">Відгуки</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Change Password Modal -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePasswordModalLabel">🔐 Зміна паролю</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="changePasswordForm">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="currentPassword" class="form-label">Поточний пароль</label>
+                        <input type="password" class="form-control" id="currentPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">Новий пароль</label>
+                        <input type="password" class="form-control" id="newPassword" required minlength="6">
+                        <small class="form-text text-muted">Мінімум 6 символів</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Підтвердження нового паролю</label>
+                        <input type="password" class="form-control" id="confirmPassword" required>
+                    </div>
+                    <div id="passwordError" class="alert alert-danger d-none"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+                    <button type="submit" class="btn btn-primary">Змінити пароль</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#changePasswordForm').on('submit', function(e) {
+                e.preventDefault();
+
+                const currentPassword = $('#currentPassword').val();
+                const newPassword = $('#newPassword').val();
+                const confirmPassword = $('#confirmPassword').val();
+
+                // Clear previous errors
+                $('#passwordError').addClass('d-none');
+
+                // Validate
+                if (newPassword !== confirmPassword) {
+                    $('#passwordError').removeClass('d-none').text('Паролі не співпадають');
+                    return;
+                }
+
+                if (newPassword.length < 6) {
+                    $('#passwordError').removeClass('d-none').text('Пароль повинен містити мінімум 6 символів');
+                    return;
+                }
+
+                // TODO: Implement password change API call
+                alert('Функція зміни паролю буде реалізована пізніше');
+                $('#changePasswordModal').modal('hide');
+                $('#changePasswordForm')[0].reset();
+            });
+        });
+    </script>
+}

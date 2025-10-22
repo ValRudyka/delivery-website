@@ -1,0 +1,175 @@
+﻿@model IEnumerable<delivery_website.Models.DTOs.Address.AddressDto>
+
+@{
+    ViewData["Title"] = "Мої адреси";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 mb-4">
+            <div class="list-group">
+                <a asp-controller="Profile" asp-action="Index" class="list-group-item list-group-item-action">
+                    👤 Профіль
+                </a>
+                <a asp-action="Index" class="list-group-item list-group-item-action active">
+                    📍 Мої адреси
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    📋 Історія замовлень
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    ⭐ Мої відгуки
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    💳 Платіжні методи
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">📍 Мої адреси доставки</h4>
+                    <a asp-action="Create" class="btn btn-primary">
+                        ➕ Додати адресу
+                    </a>
+                </div>
+                <div class="card-body">
+                    @if (Model.Any())
+                    {
+                        <div class="row">
+                            @foreach (var address in Model)
+                            {
+                                <div class="col-md-6 mb-3">
+                                    <div class="card @(address.IsDefault ? "border-primary" : "")">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                                <div>
+                                                    @if (address.IsDefault)
+                                                    {
+                                                        <span class="badge bg-primary mb-2">За замовчуванням</span>
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(address.Label))
+                                                    {
+                                                        <h6 class="mb-1">@address.Label</h6>
+                                                    }
+                                                </div>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                        ⋮
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a class="dropdown-item" asp-action="Edit" asp-route-id="@address.AddressId">
+                                                                ✏️ Редагувати
+                                                            </a>
+                                                        </li>
+                                                        @if (!address.IsDefault)
+                                                        {
+                                                            <li>
+                                                                <button class="dropdown-item set-default-btn"
+                                                                        data-address-id="@address.AddressId">
+                                                                    ⭐ Зробити основною
+                                                                </button>
+                                                            </li>
+                                                        }
+                                                        <li><hr class="dropdown-divider"></li>
+                                                        <li>
+                                                            <button class="dropdown-item text-danger delete-address-btn"
+                                                                    data-address-id="@address.AddressId">
+                                                                🗑️ Видалити
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <p class="mb-1">📍 @address.AddressLine1</p>
+                                            @if (!string.IsNullOrEmpty(address.AddressLine2))
+                                            {
+                                                <p class="mb-1 text-muted">@address.AddressLine2</p>
+                                            }
+                                            <p class="mb-0 text-muted">@address.City, @address.PostalCode</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-5">
+                            <div style="font-size: 4rem; opacity: 0.3;">📍</div>
+                            <h5 class="mt-3">У вас ще немає збережених адрес</h5>
+                            <p class="text-muted mb-4">Додайте адресу для швидшого оформлення замовлень</p>
+                            <a asp-action="Create" class="btn btn-primary">
+                                ➕ Додати першу адресу
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Delete address
+            $('.delete-address-btn').on('click', function() {
+                const addressId = $(this).data('address-id');
+
+                if (confirm('Ви впевнені, що хочете видалити цю адресу?')) {
+                    $.ajax({
+                        url: '@Url.Action("Delete", "Address", new { area = "Customer" })',
+                        type: 'POST',
+                        data: { id: addressId },
+                        headers: {
+                            'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                location.reload();
+                            } else {
+                                alert(response.message || 'Помилка при видаленні адреси');
+                            }
+                        },
+                        error: function() {
+                            alert('Помилка при видаленні адреси');
+                        }
+                    });
+                }
+            });
+
+            // Set default address
+            $('.set-default-btn').on('click', function() {
+                const addressId = $(this).data('address-id');
+
+                $.ajax({
+                    url: '@Url.Action("SetDefault", "Address", new { area = "Customer" })',
+                    type: 'POST',
+                    data: { id: addressId },
+                    headers: {
+                        'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            alert(response.message || 'Помилка при встановленні адреси за замовчуванням');
+                        }
+                    },
+                    error: function() {
+                        alert('Помилка при встановленні адреси за замовчуванням');
+                    }
+                });
+            });
+        });
+    </script>
+
+    @Html.AntiForgeryToken()
+}

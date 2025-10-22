@@ -47,9 +47,10 @@
                                     👤 @User.Identity!.Name
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-area="Customer" asp-controller="Profile" asp-action="Index">👤 Мій профіль</a></li>
+                                    <li><a class="dropdown-item" asp-area="Customer" asp-controller="Address" asp-action="Index">📍 Мої адреси</a></li>
                                     <li><a class="dropdown-item" href="#">📋 Мої замовлення</a></li>
-                                    <li><a class="dropdown-item" href="#">⚙️ Налаштування профілю</a></li>
-                                    <li><a class="dropdown-item" href="#">📍 Мої адреси</a></li>
+                                    <li><a class="dropdown-item" href="#">⭐ Мої відгуки</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">

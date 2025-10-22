@@ -1,0 +1,79 @@
+﻿@model delivery_website.Models.DTOs.Address.UpdateAddressDto
+
+@{
+    ViewData["Title"] = "Редагувати адресу";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-white">
+                    <h4 class="mb-0">✏️ Редагувати адресу</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        <div asp-validation-summary="All" class="alert alert-danger"></div>
+
+                        <input asp-for="AddressId" type="hidden" />
+
+                        <div class="mb-3">
+                            <label asp-for="Label" class="form-label">Назва адреси (необов'язково)</label>
+                            <input asp-for="Label" class="form-control" placeholder="Наприклад: Дім, Робота, Офіс" />
+                            <span asp-validation-for="Label" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="AddressLine1" class="form-label">Адреса *</label>
+                            <input asp-for="AddressLine1" class="form-control"
+                                   placeholder="Вулиця, номер будинку, квартира" />
+                            <span asp-validation-for="AddressLine1" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="AddressLine2" class="form-label">Додаткова інформація</label>
+                            <input asp-for="AddressLine2" class="form-control"
+                                   placeholder="Під'їзд, поверх, домофон тощо" />
+                            <span asp-validation-for="AddressLine2" class="text-danger"></span>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <label asp-for="City" class="form-label">Місто *</label>
+                                <input asp-for="City" class="form-control" placeholder="Київ" />
+                                <span asp-validation-for="City" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="PostalCode" class="form-label">Індекс *</label>
+                                <input asp-for="PostalCode" class="form-control" placeholder="01001" />
+                                <span asp-validation-for="PostalCode" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input asp-for="IsDefault" class="form-check-input" />
+                            <label asp-for="IsDefault" class="form-check-label">
+                                Зробити адресою за замовчуванням
+                            </label>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                ← Скасувати
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                💾 Зберегти зміни
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
