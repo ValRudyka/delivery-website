@@ -1,5 +1,7 @@
 ﻿@{
+    @using Microsoft.AspNetCore.Identity
     ViewData["Title"] = "Головна";
+    @inject SignInManager<IdentityUser> SignInManager
 }
 
 <!-- Hero Section -->
@@ -155,12 +157,20 @@
         <div class="card-body p-5">
             <h3 class="mb-3">Готові замовити?</h3>
             <p class="mb-4">Приєднуйтесь до тисяч задоволених клієнтів</p>
-            <a asp-area="Customer" asp-controller="Restaurants" asp-action="Index" class="btn btn-light btn-lg me-2">
-                Переглянути ресторани
-            </a>
-            <a asp-controller="Account" asp-action="Register" class="btn btn-outline-light btn-lg">
-                Зареєструватися
-            </a>
+            @if (!SignInManager.IsSignedIn(User))
+            {
+                <a asp-area="Customer" asp-controller="Restaurants" asp-action="Index" class="btn btn-light btn-lg me-2">
+                    Переглянути ресторани
+                </a>
+                <a asp-controller="Account" asp-action="Register" class="btn btn-outline-light btn-lg">
+                    Зареєструватися
+                </a>
+            } else
+            {
+                <a asp-area="Customer" asp-controller="Restaurants" asp-action="Index" class="btn btn-light btn-lg">
+                    Переглянути ресторани
+                </a>
+            }
         </div>
     </div>
 </div>
