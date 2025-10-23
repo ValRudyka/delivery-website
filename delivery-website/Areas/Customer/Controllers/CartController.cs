@@ -1,5 +1,4 @@
-﻿// Areas/Customer/Controllers/CartController.cs
-using delivery_website.Models.DTOs.Cart;
+﻿using delivery_website.Models.DTOs.Cart;
 using delivery_website.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
