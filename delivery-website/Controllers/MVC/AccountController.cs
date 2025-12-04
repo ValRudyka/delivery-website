@@ -249,7 +249,7 @@ namespace delivery_website.Controllers.MVC
 
             var model = new ResetPasswordViewModel
             {
-                Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code)),
+                Code = code,
                 Email = email
             };
 
@@ -269,11 +269,21 @@ namespace delivery_website.Controllers.MVC
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
-                // Don't reveal that the user does not exist
                 return RedirectToAction(nameof(ResetPasswordConfirmation));
             }
 
-            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
+            string decodedCode;
+            try
+            {
+                decodedCode = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(model.Code));
+            }
+            catch
+            {
+                ModelState.AddModelError(string.Empty, "Невірний токен скидання паролю");
+                return View(model);
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, decodedCode, model.Password);
             if (result.Succeeded)
             {
                 _logger.LogInformation($"Password reset successful for {model.Email}");
