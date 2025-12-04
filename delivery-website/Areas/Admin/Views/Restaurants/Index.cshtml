@@ -1,0 +1,212 @@
+@model PaginatedResult<AdminRestaurantListDto>
+@{
+    ViewData["Title"] = "Управління ресторанами";
+    var filter = ViewBag.Filter as RestaurantFilterDto ?? new RestaurantFilterDto();
+    var cuisineTypes = ViewBag.CuisineTypes as List<string> ?? new List<string>();
+}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+    <div>
+        <h1 class="page-title">Ресторани</h1>
+        <p class="text-muted">Управління ресторанами системи</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a asp-action="Pending" class="btn btn-warning">
+            <i class="bi bi-hourglass-split me-1"></i>На модерації
+        </a>
+        <span class="badge bg-primary fs-6 d-flex align-items-center">Всього: @Model.TotalCount</span>
+    </div>
+</div>
+
+<!-- Filters -->
+<div class="filter-card">
+    <form method="get" class="row g-3 align-items-end">
+        <div class="col-md-3">
+            <label class="form-label">Пошук</label>
+            <input type="text" name="SearchTerm" class="form-control" placeholder="Назва, місто, email..." value="@filter.SearchTerm">
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Тип кухні</label>
+            <select name="CuisineType" class="form-select">
+                <option value="">Всі типи</option>
+                @foreach (var cuisine in cuisineTypes)
+                {
+                    <option value="@cuisine" selected="@(filter.CuisineType == cuisine)">@cuisine</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Статус</label>
+            <select name="IsActive" class="form-select">
+                <option value="">Всі</option>
+                <option value="true" selected="@(filter.IsActive == true)">Активні</option>
+                <option value="false" selected="@(filter.IsActive == false)">Неактивні</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Модерація</label>
+            <select name="IsApproved" class="form-select">
+                <option value="">Всі</option>
+                <option value="true" selected="@(filter.IsApproved == true)">Схвалені</option>
+                <option value="false" selected="@(filter.IsApproved == false)">На модерації</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Сортування</label>
+            <select name="SortBy" class="form-select">
+                <option value="CreatedDate" selected="@(filter.SortBy == "CreatedDate")">За датою</option>
+                <option value="Name" selected="@(filter.SortBy == "Name")">За назвою</option>
+                <option value="Rating" selected="@(filter.SortBy == "Rating")">За рейтингом</option>
+            </select>
+        </div>
+        <div class="col-md-1">
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Restaurants Table -->
+<div class="admin-table">
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Ресторан</th>
+                    <th>Кухня</th>
+                    <th>Власник</th>
+                    <th>Рейтинг</th>
+                    <th>Замовлень</th>
+                    <th>Дохід</th>
+                    <th>Статус</th>
+                    <th class="text-center">Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Items.Any())
+                {
+                    @foreach (var restaurant in Model.Items)
+                    {
+                        <tr>
+                            <td>
+                                <div class="fw-medium">@restaurant.Name</div>
+                                <small class="text-muted">@restaurant.City</small>
+                            </td>
+                            <td>@restaurant.CuisineType</td>
+                            <td>
+                                <small>@restaurant.OwnerEmail</small>
+                            </td>
+                            <td>
+                                <span class="text-warning"><i class="bi bi-star-fill"></i></span>
+                                @restaurant.AverageRating.ToString("N1")
+                                <small class="text-muted">(@restaurant.TotalReviews)</small>
+                            </td>
+                            <td>@restaurant.TotalOrders</td>
+                            <td>@restaurant.TotalRevenue.ToString("N0") ₴</td>
+                            <td>
+                                @if (!restaurant.IsApproved)
+                                {
+                                    <span class="badge bg-warning">На модерації</span>
+                                }
+                                else if (restaurant.IsActive)
+                                {
+                                    <span class="badge bg-success">Активний</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Неактивний</span>
+                                }
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm">
+                                    <a asp-action="Details" asp-route-id="@restaurant.RestaurantId" class="btn btn-outline-primary" title="Деталі">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    @if (!restaurant.IsApproved)
+                                    {
+                                        <form asp-action="Approve" method="post" class="d-inline">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="restaurantId" value="@restaurant.RestaurantId" />
+                                            <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                                            <button type="submit" class="btn btn-outline-success" title="Схвалити">
+                                                <i class="bi bi-check-lg"></i>
+                                            </button>
+                                        </form>
+                                        <form asp-action="Reject" method="post" class="d-inline">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="restaurantId" value="@restaurant.RestaurantId" />
+                                            <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                                            <button type="submit" class="btn btn-outline-danger" title="Відхилити">
+                                                <i class="bi bi-x-lg"></i>
+                                            </button>
+                                        </form>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" class="text-center py-5">
+                            <i class="bi bi-shop fs-1 text-muted d-block mb-2"></i>
+                            <span class="text-muted">Ресторанів не знайдено</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (Model.TotalPages > 1)
+    {
+        <div class="pagination-wrapper">
+            <div class="text-muted">
+                Показано @((filter.Page - 1) * filter.PageSize + 1) - @Math.Min(filter.Page * filter.PageSize, Model.TotalCount) з @Model.TotalCount
+            </div>
+            <nav>
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item @(!Model.HasPreviousPage ? "disabled" : "")">
+                        <a class="page-link" asp-action="Index" asp-all-route-data="@(new Dictionary<string, string> {
+                            {"SearchTerm", filter.SearchTerm ?? ""},
+                            {"CuisineType", filter.CuisineType ?? ""},
+                            {"IsActive", filter.IsActive?.ToString() ?? ""},
+                            {"IsApproved", filter.IsApproved?.ToString() ?? ""},
+                            {"SortBy", filter.SortBy ?? ""},
+                            {"Page", (filter.Page - 1).ToString()}
+                        })">
+                            <i class="bi bi-chevron-left"></i>
+                        </a>
+                    </li>
+                    @for (int i = 1; i <= Math.Min(Model.TotalPages, 10); i++)
+                    {
+                        <li class="page-item @(i == filter.Page ? "active" : "")">
+                            <a class="page-link" asp-action="Index" asp-all-route-data="@(new Dictionary<string, string> {
+                                {"SearchTerm", filter.SearchTerm ?? ""},
+                                {"CuisineType", filter.CuisineType ?? ""},
+                                {"IsActive", filter.IsActive?.ToString() ?? ""},
+                                {"IsApproved", filter.IsApproved?.ToString() ?? ""},
+                                {"SortBy", filter.SortBy ?? ""},
+                                {"Page", i.ToString()}
+                            })">@i</a>
+                        </li>
+                    }
+                    <li class="page-item @(!Model.HasNextPage ? "disabled" : "")">
+                        <a class="page-link" asp-action="Index" asp-all-route-data="@(new Dictionary<string, string> {
+                            {"SearchTerm", filter.SearchTerm ?? ""},
+                            {"CuisineType", filter.CuisineType ?? ""},
+                            {"IsActive", filter.IsActive?.ToString() ?? ""},
+                            {"IsApproved", filter.IsApproved?.ToString() ?? ""},
+                            {"SortBy", filter.SortBy ?? ""},
+                            {"Page", (filter.Page + 1).ToString()}
+                        })">
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    }
+</div>

@@ -1,0 +1,290 @@
+@model AdminDashboardDto
+@{
+    ViewData["Title"] = "Панель керування";
+}
+
+<div class="page-header">
+    <h1 class="page-title">Панель керування</h1>
+    <p class="text-muted">Огляд системи та статистика</p>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row g-4 mb-4">
+    <!-- Users -->
+    <div class="col-xl-3 col-md-6">
+        <div class="card stat-card primary">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="stat-value">@Model.TotalUsers</div>
+                        <div class="stat-label">Користувачів</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+                </div>
+                <div class="mt-3 small">
+                    <span class="text-success"><i class="bi bi-arrow-up"></i> @Model.NewUsersToday</span>
+                    <span class="text-muted">нових сьогодні</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Restaurants -->
+    <div class="col-xl-3 col-md-6">
+        <div class="card stat-card success">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="stat-value">@Model.TotalRestaurants</div>
+                        <div class="stat-label">Ресторанів</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="bi bi-shop"></i>
+                    </div>
+                </div>
+                <div class="mt-3 small">
+                    @if (Model.PendingApprovalRestaurants > 0)
+                    {
+                        <span class="text-warning"><i class="bi bi-hourglass-split"></i> @Model.PendingApprovalRestaurants</span>
+                        <span class="text-muted">на модерації</span>
+                    }
+                    else
+                    {
+                        <span class="text-success"><i class="bi bi-check-circle"></i></span>
+                        <span class="text-muted">всі перевірені</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Orders -->
+    <div class="col-xl-3 col-md-6">
+        <div class="card stat-card warning">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="stat-value">@Model.TotalOrders</div>
+                        <div class="stat-label">Замовлень</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="bi bi-bag-check"></i>
+                    </div>
+                </div>
+                <div class="mt-3 small">
+                    <span class="text-primary"><i class="bi bi-clock"></i> @Model.PendingOrders</span>
+                    <span class="text-muted">очікують</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Revenue -->
+    <div class="col-xl-3 col-md-6">
+        <div class="card stat-card danger">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="stat-value">@Model.TotalRevenue.ToString("N0") ₴</div>
+                        <div class="stat-label">Дохід</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="bi bi-currency-dollar"></i>
+                    </div>
+                </div>
+                <div class="mt-3 small">
+                    <span class="text-success"><i class="bi bi-arrow-up"></i> @Model.RevenueToday.ToString("N0") ₴</span>
+                    <span class="text-muted">сьогодні</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Secondary Stats -->
+<div class="row g-4 mb-4">
+    <div class="col-xl-3 col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center">
+                <h3 class="mb-0 text-primary">@Model.OrdersToday</h3>
+                <small class="text-muted">Замовлень сьогодні</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center">
+                <h3 class="mb-0 text-success">@Model.CompletedOrdersToday</h3>
+                <small class="text-muted">Виконано сьогодні</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center">
+                <h3 class="mb-0 text-warning">@Model.PendingReviews</h3>
+                <small class="text-muted">Відгуків на модерації</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center">
+                <h3 class="mb-0 text-info">@Model.AverageRating.ToString("N1") <i class="bi bi-star-fill text-warning"></i></h3>
+                <small class="text-muted">Середній рейтинг</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <!-- Recent Orders -->
+    <div class="col-xl-8">
+        <div class="card detail-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-clock-history me-2"></i>Останні замовлення</span>
+                <a asp-action="Index" asp-controller="Orders" class="btn btn-sm btn-outline-primary">Всі замовлення</a>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>№ Замовлення</th>
+                                <th>Клієнт</th>
+                                <th>Ресторан</th>
+                                <th>Сума</th>
+                                <th>Статус</th>
+                                <th>Дата</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.RecentOrders.Any())
+                            {
+                                @foreach (var order in Model.RecentOrders)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a asp-action="Details" asp-controller="Orders" asp-route-id="@order.OrderId" class="fw-medium">
+                                                @order.OrderNumber
+                                            </a>
+                                        </td>
+                                        <td>@order.CustomerName</td>
+                                        <td>@order.RestaurantName</td>
+                                        <td>@order.TotalAmount.ToString("N0") ₴</td>
+                                        <td>
+                                            @{
+                                                var statusClass = order.OrderStatus switch
+                                                {
+                                                    "Pending" => "bg-warning",
+                                                    "Confirmed" => "bg-info",
+                                                    "Preparing" => "bg-primary",
+                                                    "Ready" => "bg-success",
+                                                    "OutForDelivery" => "bg-info",
+                                                    "Delivered" => "bg-success",
+                                                    "Cancelled" => "bg-danger",
+                                                    _ => "bg-secondary"
+                                                };
+                                                var statusText = order.OrderStatus switch
+                                                {
+                                                    "Pending" => "Очікує",
+                                                    "Confirmed" => "Підтверджено",
+                                                    "Preparing" => "Готується",
+                                                    "Ready" => "Готово",
+                                                    "OutForDelivery" => "Доставляється",
+                                                    "Delivered" => "Доставлено",
+                                                    "Cancelled" => "Скасовано",
+                                                    _ => order.OrderStatus
+                                                };
+                                            }
+                                            <span class="badge @statusClass">@statusText</span>
+                                        </td>
+                                        <td class="text-muted">@order.OrderDate.ToString("dd.MM.yyyy HH:mm")</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted py-4">Немає замовлень</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Users & Reviews -->
+    <div class="col-xl-4">
+        <!-- Recent Users -->
+        <div class="card detail-card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-person-plus me-2"></i>Нові користувачі</span>
+                <a asp-action="Index" asp-controller="Users" class="btn btn-sm btn-outline-primary">Всі</a>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                    @if (Model.RecentUsers.Any())
+                    {
+                        @foreach (var user in Model.RecentUsers)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="fw-medium">@user.FullName</div>
+                                    <small class="text-muted">@user.CreatedDate.ToString("dd.MM.yyyy")</small>
+                                </div>
+                                <span class="badge bg-secondary">@user.Role</span>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="list-group-item text-center text-muted">Немає нових користувачів</li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <!-- Recent Reviews -->
+        <div class="card detail-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-star me-2"></i>Останні відгуки</span>
+                <a asp-action="Pending" asp-controller="Reviews" class="btn btn-sm btn-outline-primary">На модерації</a>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                    @if (Model.RecentReviews.Any())
+                    {
+                        @foreach (var review in Model.RecentReviews)
+                        {
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <span class="fw-medium">@review.RestaurantName</span>
+                                    <span>
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <i class="bi bi-star@(i <= review.Rating ? "-fill" : "") text-warning small"></i>
+                                        }
+                                    </span>
+                                </div>
+                                <small class="text-muted">@review.CustomerName • @review.CreatedDate.ToString("dd.MM.yyyy")</small>
+                                @if (!review.IsApproved)
+                                {
+                                    <span class="badge bg-warning ms-2">На модерації</span>
+                                }
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="list-group-item text-center text-muted">Немає відгуків</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

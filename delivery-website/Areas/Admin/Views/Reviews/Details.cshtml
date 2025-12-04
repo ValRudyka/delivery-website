@@ -1,0 +1,238 @@
+@model AdminReviewDetailsDto
+@{
+    ViewData["Title"] = "Деталі відгуку";
+}
+
+<div class="page-header d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-1">
+                <li class="breadcrumb-item"><a asp-action="Index">Відгуки</a></li>
+                <li class="breadcrumb-item active">Деталі</li>
+            </ol>
+        </nav>
+        <h1 class="page-title">Відгук від @Model.CustomerName</h1>
+    </div>
+    <div>
+        @if (Model.IsApproved)
+        {
+            <span class="badge bg-success fs-6 p-2">Схвалено</span>
+        }
+        else
+        {
+            <span class="badge bg-warning text-dark fs-6 p-2">На модерації</span>
+        }
+    </div>
+</div>
+
+<div class="row">
+    <!-- Left Column - Review Content -->
+    <div class="col-lg-8">
+        <!-- Review Content -->
+        <div class="detail-card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-chat-quote me-2"></i>Зміст відгуку</span>
+                <div>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        <i class="bi @(i <= Model.Rating ? "bi-star-fill text-warning" : "bi-star text-muted") fs-5"></i>
+                    }
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="mb-0" style="white-space: pre-line;">@Model.ReviewText</p>
+            </div>
+        </div>
+
+        <!-- Images (if any) -->
+        @if (Model.ImageUrls?.Any() == true)
+        {
+            <div class="detail-card mb-4">
+                <div class="card-header">
+                    <i class="bi bi-images me-2"></i>Фотографії
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        @foreach (var imageUrl in Model.ImageUrls)
+                        {
+                            <div class="col-md-4">
+                                <a href="@imageUrl" target="_blank">
+                                    <img src="@imageUrl" alt="Review photo" class="img-fluid rounded shadow-sm">
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Moderation History -->
+        @if (Model.ModerationDate.HasValue)
+        {
+            <div class="detail-card">
+                <div class="card-header">
+                    <i class="bi bi-shield-check me-2"></i>Модерація
+                </div>
+                <div class="card-body">
+                    <div class="detail-row">
+                        <span class="detail-label">Дата модерації:</span>
+                        <span class="detail-value">@Model.ModerationDate.Value.ToString("dd.MM.yyyy HH:mm")</span>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model.ModeratorName))
+                    {
+                        <div class="detail-row">
+                            <span class="detail-label">Модератор:</span>
+                            <span class="detail-value">@Model.ModeratorName</span>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.ModerationNotes))
+                    {
+                        <div class="detail-row">
+                            <span class="detail-label">Примітки:</span>
+                            <span class="detail-value">@Model.ModerationNotes</span>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Right Column - Info & Actions -->
+    <div class="col-lg-4">
+        <!-- Actions -->
+        @if (!Model.IsApproved)
+        {
+            <div class="detail-card mb-4">
+                <div class="card-header">
+                    <i class="bi bi-gear me-2"></i>Модерація
+                </div>
+                <div class="card-body">
+                    <form asp-action="Approve" method="post" class="mb-3">
+                        <input type="hidden" name="reviewId" value="@Model.ReviewId" />
+                        <div class="mb-3">
+                            <label class="form-label">Примітки (необов'язково)</label>
+                            <textarea name="notes" class="form-control" rows="2" placeholder="Коментар модератора..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="bi bi-check-lg me-1"></i>Схвалити відгук
+                        </button>
+                    </form>
+                    <form asp-action="Reject" method="post">
+                        <input type="hidden" name="reviewId" value="@Model.ReviewId" />
+                        <div class="mb-3">
+                            <label class="form-label">Причина відхилення</label>
+                            <textarea name="notes" class="form-control" rows="2" placeholder="Вкажіть причину..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-outline-danger w-100">
+                            <i class="bi bi-x-lg me-1"></i>Відхилити відгук
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+
+        <!-- Delete Action -->
+        <div class="detail-card mb-4">
+            <div class="card-header text-danger">
+                <i class="bi bi-trash me-2"></i>Небезпечна зона
+            </div>
+            <div class="card-body">
+                <p class="text-muted small">Видалення відгуку неможливо скасувати. Оновиться середній рейтинг ресторану.</p>
+                <form asp-action="Delete" method="post" onsubmit="return confirm('Ви впевнені, що хочете видалити цей відгук?');">
+                    <input type="hidden" name="reviewId" value="@Model.ReviewId" />
+                    <button type="submit" class="btn btn-danger w-100">
+                        <i class="bi bi-trash me-1"></i>Видалити відгук
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Customer Info -->
+        <div class="detail-card mb-4">
+            <div class="card-header">
+                <i class="bi bi-person me-2"></i>Автор відгуку
+            </div>
+            <div class="card-body">
+                <div class="detail-row">
+                    <span class="detail-label">Ім'я:</span>
+                    <span class="detail-value">
+                        <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.UserId" class="text-decoration-none">
+                            @Model.CustomerName
+                        </a>
+                    </span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Email:</span>
+                    <span class="detail-value">@Model.CustomerEmail</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Підтверджена покупка:</span>
+                    <span class="detail-value">
+                        @if (Model.IsVerifiedPurchase)
+                        {
+                            <span class="text-success"><i class="bi bi-check-circle-fill me-1"></i>Так</span>
+                        }
+                        else
+                        {
+                            <span class="text-muted">Ні</span>
+                        }
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Restaurant Info -->
+        <div class="detail-card mb-4">
+            <div class="card-header">
+                <i class="bi bi-shop me-2"></i>Ресторан
+            </div>
+            <div class="card-body">
+                <div class="detail-row">
+                    <span class="detail-label">Назва:</span>
+                    <span class="detail-value">
+                        <a asp-controller="Restaurants" asp-action="Details" asp-route-id="@Model.RestaurantId" class="text-decoration-none">
+                            @Model.RestaurantName
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Info (if verified purchase) -->
+        @if (Model.OrderId.HasValue)
+        {
+            <div class="detail-card">
+                <div class="card-header">
+                    <i class="bi bi-bag me-2"></i>Пов'язане замовлення
+                </div>
+                <div class="card-body">
+                    <div class="detail-row">
+                        <span class="detail-label">Номер:</span>
+                        <span class="detail-value">
+                            <a asp-controller="Orders" asp-action="Details" asp-route-id="@Model.OrderId" class="text-decoration-none">
+                                @Model.OrderNumber
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Meta Info -->
+        <div class="detail-card">
+            <div class="card-header">
+                <i class="bi bi-info-circle me-2"></i>Інформація
+            </div>
+            <div class="card-body">
+                <div class="detail-row">
+                    <span class="detail-label">Дата створення:</span>
+                    <span class="detail-value">@Model.CreatedDate.ToString("dd.MM.yyyy HH:mm")</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">ID відгуку:</span>
+                    <span class="detail-value"><code class="small">@Model.ReviewId</code></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using delivery_website.Services.Interfaces;
@@ -13,30 +11,53 @@ namespace delivery_website.Areas.Customer.Controllers
     public class CheckoutController : Controller
     {
         private readonly IOrderService _orderService;
+        private readonly ICartService _cartService;
+        private readonly ILogger<CheckoutController> _logger;
 
-        public CheckoutController(IOrderService orderService)
+        public CheckoutController(
+            IOrderService orderService,
+            ICartService cartService,
+            ILogger<CheckoutController> logger)
         {
             _orderService = orderService;
+            _cartService = cartService;
+            _logger = logger;
         }
 
         // GET: /Customer/Checkout
         [HttpGet]
-        public async Task<IActionResult> Index(Guid restaurantId)
+        public async Task<IActionResult> Index(Guid? restaurantId = null)
         {
-            var userId = GetCurrentUserId();
-
-            if (userId == Guid.Empty)
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Account", new { area = "" });
             }
 
-            // Prepare checkout data
-            var model = await _orderService.PrepareCheckoutAsync(userId, restaurantId);
+            // Get cart to determine restaurantId if not provided
+            var cart = await _cartService.GetUserCartAsync(userId);
+
+            if (cart == null || !cart.Items.Any())
+            {
+                TempData["ErrorMessage"] = "Ваш кошик порожній. Додайте страви перед оформленням замовлення.";
+                return RedirectToAction("Index", "Restaurants", new { area = "Customer" });
+            }
+
+            var actualRestaurantId = restaurantId ?? cart.RestaurantId;
+
+            // Parse userId to Guid for the service
+            if (!Guid.TryParse(userId, out Guid userGuid))
+            {
+                TempData["ErrorMessage"] = "Помилка авторизації. Спробуйте увійти знову.";
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
+
+            var model = await _orderService.PrepareCheckoutAsync(userGuid, actualRestaurantId);
 
             if (model.CartItems.Count == 0)
             {
-                TempData["Error"] = "Your cart is empty. Please add items before checkout.";
-                return RedirectToAction("Details", "Restaurant", new { id = restaurantId });
+                TempData["ErrorMessage"] = "Ваш кошик порожній. Додайте страви перед оформленням замовлення.";
+                return RedirectToAction("Details", "Restaurants", new { area = "Customer", id = actualRestaurantId });
             }
 
             return View(model);
@@ -47,22 +68,65 @@ namespace delivery_website.Areas.Customer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(CheckoutViewModel model)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
+
+            // Validate required fields
+            if (string.IsNullOrEmpty(model.PaymentMethod))
+            {
+                ModelState.AddModelError("PaymentMethod", "Оберіть спосіб оплати");
+            }
+
+            if (string.IsNullOrEmpty(model.ContactPhone))
+            {
+                ModelState.AddModelError("ContactPhone", "Вкажіть контактний телефон");
+            }
+
+            if (!model.UseExistingAddress && string.IsNullOrEmpty(model.NewStreetAddress))
+            {
+                if (!model.SelectedAddressId.HasValue)
+                {
+                    ModelState.AddModelError("", "Оберіть адресу доставки або введіть нову");
+                }
+            }
+
             if (!ModelState.IsValid)
             {
+                // Reload cart data for view
+                if (Guid.TryParse(userId, out Guid userGuid))
+                {
+                    var reloadedModel = await _orderService.PrepareCheckoutAsync(userGuid, model.RestaurantId);
+                    model.CartItems = reloadedModel.CartItems;
+                    model.SavedAddresses = reloadedModel.SavedAddresses;
+                    model.Subtotal = reloadedModel.Subtotal;
+                    model.Tax = reloadedModel.Tax;
+                    model.DeliveryFee = reloadedModel.DeliveryFee;
+                    model.Total = reloadedModel.Total;
+                }
                 return View(model);
             }
 
-            var userId = GetCurrentUserId();
+            if (!Guid.TryParse(userId, out Guid userIdGuid))
+            {
+                TempData["ErrorMessage"] = "Помилка авторизації.";
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
 
             try
             {
                 // Create the order
-                var order = await _orderService.CreateOrderAsync(model, userId);
+                var order = await _orderService.CreateOrderAsync(model, userIdGuid);
+
+                _logger.LogInformation($"Order {order.OrderNumber} created for user {userId}");
 
                 // If Cash on Delivery, go directly to confirmation
                 if (model.PaymentMethod == "CashOnDelivery")
                 {
                     await _orderService.UpdateOrderStatusAsync(order.OrderId, "Confirmed");
+                    TempData["SuccessMessage"] = "Замовлення успішно оформлено!";
                     return RedirectToAction("Confirmation", new { orderId = order.OrderId });
                 }
 
@@ -71,17 +135,13 @@ namespace delivery_website.Areas.Customer.Controllers
                 {
                     try
                     {
-                        var sessionId = await _orderService.CreateStripeCheckoutSessionAsync(order);
-
-                        // Store session ID in TempData for later verification
-                        TempData["StripeSessionId"] = sessionId;
-
-                        // Redirect to Stripe Checkout
-                        return Redirect($"https://checkout.stripe.com/pay/{sessionId}");
+                        var stripeUrl = await _orderService.CreateStripeCheckoutSessionAsync(order);
+                        return Redirect(stripeUrl);
                     }
                     catch (Exception ex)
                     {
-                        TempData["Error"] = "Payment processing error: " + ex.Message;
+                        _logger.LogError($"Stripe error: {ex.Message}");
+                        TempData["ErrorMessage"] = "Помилка платіжної системи: " + ex.Message;
                         return RedirectToAction("Cancel", new { orderId = order.OrderId });
                     }
                 }
@@ -90,7 +150,16 @@ namespace delivery_website.Areas.Customer.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", "An error occurred while processing your order: " + ex.Message);
+                _logger.LogError($"Error creating order: {ex.Message}");
+                ModelState.AddModelError("", "Помилка при створенні замовлення: " + ex.Message);
+
+                // Reload cart data
+                if (Guid.TryParse(userId, out Guid reloadUserGuid))
+                {
+                    var reloadedModel = await _orderService.PrepareCheckoutAsync(reloadUserGuid, model.RestaurantId);
+                    model.CartItems = reloadedModel.CartItems;
+                    model.SavedAddresses = reloadedModel.SavedAddresses;
+                }
                 return View(model);
             }
         }
@@ -103,8 +172,8 @@ namespace delivery_website.Areas.Customer.Controllers
 
             if (model == null)
             {
-                TempData["Error"] = "Order not found.";
-                return RedirectToAction("Index", "Home");
+                TempData["ErrorMessage"] = "Замовлення не знайдено.";
+                return RedirectToAction("Index", "Home", new { area = "" });
             }
 
             return View(model);
@@ -112,11 +181,12 @@ namespace delivery_website.Areas.Customer.Controllers
 
         // GET: /Customer/Checkout/Success (Stripe callback)
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Success(string session_id, Guid orderId)
         {
             if (string.IsNullOrEmpty(session_id))
             {
-                TempData["Error"] = "Invalid payment session.";
+                TempData["ErrorMessage"] = "Невірна сесія оплати.";
                 return RedirectToAction("Cancel", new { orderId });
             }
 
@@ -125,38 +195,27 @@ namespace delivery_website.Areas.Customer.Controllers
 
             if (success)
             {
-                TempData["Success"] = "Payment successful! Your order has been confirmed.";
+                TempData["SuccessMessage"] = "Оплата успішна! Ваше замовлення підтверджено.";
                 return RedirectToAction("Confirmation", new { orderId });
             }
             else
             {
-                TempData["Error"] = "Payment verification failed. Please contact support.";
+                TempData["ErrorMessage"] = "Помилка верифікації оплати. Зверніться до підтримки.";
                 return RedirectToAction("Cancel", new { orderId });
             }
         }
 
         // GET: /Customer/Checkout/Cancel (Stripe callback)
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Cancel(Guid orderId)
         {
             // Update order status to cancelled
             await _orderService.UpdateOrderStatusAsync(orderId, "Cancelled");
 
-            TempData["Warning"] = "Payment was cancelled. Your order has been cancelled.";
+            TempData["WarningMessage"] = "Оплату скасовано. Ваше замовлення було скасовано.";
 
             return View(orderId);
-        }
-
-        private Guid GetCurrentUserId()
-        {
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            if (Guid.TryParse(userIdClaim, out Guid userId))
-            {
-                return userId;
-            }
-
-            return Guid.Empty;
         }
     }
 }

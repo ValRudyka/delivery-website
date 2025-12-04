@@ -1,0 +1,281 @@
+@model AdminRestaurantDetailsDto
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-1">
+                <li class="breadcrumb-item"><a asp-action="Index">Ресторани</a></li>
+                <li class="breadcrumb-item active">@Model.Name</li>
+            </ol>
+        </nav>
+        <h1 class="page-title">@Model.Name</h1>
+        <div class="mt-2">
+            @if (!Model.IsApproved)
+            {
+                <span class="badge bg-warning fs-6 me-2">На модерації</span>
+            }
+            @if (Model.IsActive)
+            {
+                <span class="badge bg-success">Активний</span>
+            }
+            else
+            {
+                <span class="badge bg-secondary">Неактивний</span>
+            }
+        </div>
+    </div>
+    <a asp-action="Index" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left me-1"></i>Назад
+    </a>
+</div>
+
+<div class="row g-4">
+    <!-- Main Info -->
+    <div class="col-lg-8">
+        <!-- Restaurant Info -->
+        <div class="card detail-card">
+            <div class="card-header">
+                <i class="bi bi-shop me-2"></i>Інформація про ресторан
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="detail-row">
+                            <div class="detail-label">Назва</div>
+                            <div class="detail-value">@Model.Name</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Тип кухні</div>
+                            <div class="detail-value">@Model.CuisineType</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Телефон</div>
+                            <div class="detail-value">@Model.PhoneNumber</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Email</div>
+                            <div class="detail-value">@Model.Email</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Вебсайт</div>
+                            <div class="detail-value">@(Model.WebsiteUrl ?? "-")</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="detail-row">
+                            <div class="detail-label">Адреса</div>
+                            <div class="detail-value">@Model.FullAddress</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Мін. замовлення</div>
+                            <div class="detail-value">@(Model.MinimumOrderAmount?.ToString("N0") ?? "0") ₴</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Вартість доставки</div>
+                            <div class="detail-value">@(Model.DeliveryFee?.ToString("N0") ?? "0") ₴</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Час доставки</div>
+                            <div class="detail-value">@(Model.EstimatedDeliveryTime?.ToString() ?? "-") хв</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Дата створення</div>
+                            <div class="detail-value">@Model.CreatedDate.ToString("dd.MM.yyyy HH:mm")</div>
+                        </div>
+                    </div>
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.Description))
+                {
+                    <hr>
+                    <div>
+                        <strong>Опис:</strong>
+                        <p class="text-muted mt-2 mb-0">@Model.Description</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Owner Info -->
+        <div class="card detail-card">
+            <div class="card-header">
+                <i class="bi bi-person me-2"></i>Власник
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="detail-row">
+                            <div class="detail-label">Ім'я</div>
+                            <div class="detail-value">@Model.OwnerName</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="detail-row">
+                            <div class="detail-label">Email</div>
+                            <div class="detail-value">@Model.OwnerEmail</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.OwnerId" class="btn btn-sm btn-outline-primary">
+                        <i class="bi bi-person me-1"></i>Переглянути профіль власника
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="card detail-card">
+            <div class="card-header">
+                <i class="bi bi-bar-chart me-2"></i>Статистика
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-md-3">
+                        <div class="fs-3 fw-bold text-primary">@Model.TotalOrders</div>
+                        <div class="text-muted">Всього замовлень</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="fs-3 fw-bold text-success">@Model.CompletedOrders</div>
+                        <div class="text-muted">Виконано</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="fs-3 fw-bold text-warning">@Model.PendingOrders</div>
+                        <div class="text-muted">В обробці</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="fs-3 fw-bold text-danger">@Model.CancelledOrders</div>
+                        <div class="text-muted">Скасовано</div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row text-center">
+                    <div class="col-md-3">
+                        <div class="fs-3 fw-bold text-success">@Model.TotalRevenue.ToString("N0") ₴</div>
+                        <div class="text-muted">Загальний дохід</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="fs-3 fw-bold text-info">@Model.MenuItemsCount</div>
+                        <div class="text-muted">Страв у меню</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="fs-3 fw-bold text-secondary">@Model.CategoriesCount</div>
+                        <div class="text-muted">Категорій</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="fs-3 fw-bold text-warning">
+                            @Model.AverageRating.ToString("N1") <i class="bi bi-star-fill small"></i>
+                        </div>
+                        <div class="text-muted">@Model.TotalReviews відгуків</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions Sidebar -->
+    <div class="col-lg-4">
+        <!-- Quick Actions -->
+        <div class="card detail-card">
+            <div class="card-header">
+                <i class="bi bi-lightning me-2"></i>Дії
+            </div>
+            <div class="card-body">
+                @if (!Model.IsApproved)
+                {
+                    <div class="d-grid gap-2 mb-3">
+                        <form asp-action="Approve" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="restaurantId" value="@Model.RestaurantId" />
+                            <button type="submit" class="btn btn-success w-100">
+                                <i class="bi bi-check-lg me-1"></i>Схвалити ресторан
+                            </button>
+                        </form>
+                        <form asp-action="Reject" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="restaurantId" value="@Model.RestaurantId" />
+                            <button type="submit" class="btn btn-danger w-100">
+                                <i class="bi bi-x-lg me-1"></i>Відхилити
+                            </button>
+                        </form>
+                    </div>
+                    <hr>
+                }
+
+                @if (Model.IsApproved)
+                {
+                    @if (Model.IsActive)
+                    {
+                        <form asp-action="Deactivate" method="post" class="mb-3">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="restaurantId" value="@Model.RestaurantId" />
+                            <button type="submit" class="btn btn-warning w-100">
+                                <i class="bi bi-pause-circle me-1"></i>Деактивувати
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-action="Activate" method="post" class="mb-3">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="restaurantId" value="@Model.RestaurantId" />
+                            <button type="submit" class="btn btn-success w-100">
+                                <i class="bi bi-play-circle me-1"></i>Активувати
+                            </button>
+                        </form>
+                    }
+                }
+
+                <a asp-controller="Orders" asp-action="Index" asp-route-RestaurantId="@Model.RestaurantId" class="btn btn-outline-primary w-100 mb-2">
+                    <i class="bi bi-bag me-1"></i>Переглянути замовлення
+                </a>
+
+                <a asp-controller="Reviews" asp-action="Index" asp-route-RestaurantId="@Model.RestaurantId" class="btn btn-outline-secondary w-100">
+                    <i class="bi bi-star me-1"></i>Переглянути відгуки
+                </a>
+            </div>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="card detail-card border-danger">
+            <div class="card-header bg-danger text-white">
+                <i class="bi bi-exclamation-triangle me-2"></i>Небезпечна зона
+            </div>
+            <div class="card-body">
+                <p class="text-muted small">Видалення ресторану видалить всі пов'язані дані: меню, категорії, відгуки. Замовлення залишаться в історії.</p>
+                <form asp-action="Delete" method="post" onsubmit="return confirm('Ви впевнені, що хочете видалити цей ресторан? Цю дію неможливо скасувати.');">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="restaurantId" value="@Model.RestaurantId" />
+                    <button type="submit" class="btn btn-danger w-100">
+                        <i class="bi bi-trash me-1"></i>Видалити ресторан
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="card detail-card">
+            <div class="card-header">
+                <i class="bi bi-clock-history me-2"></i>Хронологія
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mb-0">
+                    <li class="mb-2">
+                        <small class="text-muted">Створено</small>
+                        <div>@Model.CreatedDate.ToString("dd.MM.yyyy HH:mm")</div>
+                    </li>
+                    @if (Model.ApprovedDate.HasValue)
+                    {
+                        <li class="mb-2">
+                            <small class="text-muted">Схвалено</small>
+                            <div>@Model.ApprovedDate.Value.ToString("dd.MM.yyyy HH:mm")</div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

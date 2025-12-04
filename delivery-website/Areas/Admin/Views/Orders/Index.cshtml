@@ -1,0 +1,231 @@
+@model PaginatedResult<AdminOrderListDto>
+@{
+    ViewData["Title"] = "Управління замовленнями";
+    var filter = ViewBag.Filter as OrderFilterDto ?? new OrderFilterDto();
+    var statuses = ViewBag.Statuses as string[] ?? Array.Empty<string>();
+}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+    <div>
+        <h1 class="page-title">Замовлення</h1>
+        <p class="text-muted">Перегляд та управління всіма замовленнями</p>
+    </div>
+    <div>
+        <span class="badge bg-primary fs-6">Всього: @Model.TotalCount</span>
+    </div>
+</div>
+
+<!-- Filters -->
+<div class="filter-card">
+    <form method="get" class="row g-3 align-items-end">
+        <div class="col-md-3">
+            <label class="form-label">Пошук</label>
+            <input type="text" name="SearchTerm" class="form-control" placeholder="Номер замовлення, ресторан..." value="@filter.SearchTerm">
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Статус</label>
+            <select name="OrderStatus" class="form-select">
+                <option value="">Всі статуси</option>
+                <option value="Pending" selected="@(filter.OrderStatus == "Pending")">Очікує</option>
+                <option value="Confirmed" selected="@(filter.OrderStatus == "Confirmed")">Підтверджено</option>
+                <option value="Preparing" selected="@(filter.OrderStatus == "Preparing")">Готується</option>
+                <option value="Ready" selected="@(filter.OrderStatus == "Ready")">Готове</option>
+                <option value="OutForDelivery" selected="@(filter.OrderStatus == "OutForDelivery")">Доставляється</option>
+                <option value="Delivered" selected="@(filter.OrderStatus == "Delivered")">Доставлено</option>
+                <option value="Cancelled" selected="@(filter.OrderStatus == "Cancelled")">Скасовано</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Від дати</label>
+            <input type="date" name="FromDate" class="form-control" value="@filter.FromDate?.ToString("yyyy-MM-dd")">
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">До дати</label>
+            <input type="date" name="ToDate" class="form-control" value="@filter.ToDate?.ToString("yyyy-MM-dd")">
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Сортування</label>
+            <select name="SortBy" class="form-select">
+                <option value="OrderDate" selected="@(filter.SortBy == "OrderDate")">За датою</option>
+                <option value="TotalAmount" selected="@(filter.SortBy == "TotalAmount")">За сумою</option>
+                <option value="OrderNumber" selected="@(filter.SortBy == "OrderNumber")">За номером</option>
+            </select>
+        </div>
+        <div class="col-md-1">
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Orders Table -->
+<div class="admin-table">
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Номер</th>
+                    <th>Клієнт</th>
+                    <th>Ресторан</th>
+                    <th>Сума</th>
+                    <th>Оплата</th>
+                    <th>Статус</th>
+                    <th>Дата</th>
+                    <th class="text-center">Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Items.Any())
+                {
+                    @foreach (var order in Model.Items)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@order.OrderId" class="fw-bold text-decoration-none">
+                                    @order.OrderNumber
+                                </a>
+                            </td>
+                            <td>
+                                <div>@order.CustomerName</div>
+                                <small class="text-muted">@order.CustomerEmail</small>
+                            </td>
+                            <td>
+                                <a asp-controller="Restaurants" asp-action="Details" asp-route-id="@order.RestaurantId" class="text-decoration-none">
+                                    @order.RestaurantName
+                                </a>
+                            </td>
+                            <td class="fw-bold">@order.TotalAmount.ToString("N0") ₴</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(order.PaymentMethod))
+                                {
+                                    var paymentText = order.PaymentMethod switch
+                                    {
+                                        "Card" => "Картка",
+                                        "Cash" => "Готівка",
+                                        _ => order.PaymentMethod
+                                    };
+                                    <div>@paymentText</div>
+                                    @if (!string.IsNullOrEmpty(order.PaymentStatus))
+                                    {
+                                        var paymentStatusClass = order.PaymentStatus switch
+                                        {
+                                            "Paid" => "text-success",
+                                            "Pending" => "text-warning",
+                                            "Failed" => "text-danger",
+                                            _ => "text-muted"
+                                        };
+                                        var paymentStatusText = order.PaymentStatus switch
+                                        {
+                                            "Paid" => "Оплачено",
+                                            "Pending" => "Очікує",
+                                            "Failed" => "Помилка",
+                                            _ => order.PaymentStatus
+                                        };
+                                        <small class="@paymentStatusClass">@paymentStatusText</small>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="text-muted">-</span>
+                                }
+                            </td>
+                            <td>
+                                @{
+                                    var statusClass = order.OrderStatus switch
+                                    {
+                                        "Pending" => "bg-warning text-dark",
+                                        "Confirmed" => "bg-info",
+                                        "Preparing" => "bg-primary",
+                                        "Ready" => "bg-success",
+                                        "OutForDelivery" => "bg-info",
+                                        "Delivered" => "bg-success",
+                                        "Cancelled" => "bg-danger",
+                                        _ => "bg-secondary"
+                                    };
+                                    var statusText = order.OrderStatus switch
+                                    {
+                                        "Pending" => "Очікує",
+                                        "Confirmed" => "Підтверджено",
+                                        "Preparing" => "Готується",
+                                        "Ready" => "Готове",
+                                        "OutForDelivery" => "Доставляється",
+                                        "Delivered" => "Доставлено",
+                                        "Cancelled" => "Скасовано",
+                                        _ => order.OrderStatus
+                                    };
+                                }
+                                <span class="badge @statusClass badge-status">@statusText</span>
+                            </td>
+                            <td>
+                                <div>@order.OrderDate.ToString("dd.MM.yyyy")</div>
+                                <small class="text-muted">@order.OrderDate.ToString("HH:mm")</small>
+                            </td>
+                            <td class="text-center">
+                                <a asp-action="Details" asp-route-id="@order.OrderId" class="btn btn-sm btn-outline-primary" title="Деталі">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" class="text-center py-5">
+                            <i class="bi bi-inbox fs-1 text-muted d-block mb-2"></i>
+                            <span class="text-muted">Замовлень не знайдено</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (Model.TotalPages > 1)
+    {
+        <div class="pagination-wrapper">
+            <div class="text-muted">
+                Показано @((filter.Page - 1) * filter.PageSize + 1) - @Math.Min(filter.Page * filter.PageSize, Model.TotalCount) з @Model.TotalCount
+            </div>
+            <nav>
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item @(!Model.HasPreviousPage ? "disabled" : "")">
+                        <a class="page-link" asp-action="Index" 
+                           asp-route-SearchTerm="@filter.SearchTerm"
+                           asp-route-OrderStatus="@filter.OrderStatus"
+                           asp-route-FromDate="@filter.FromDate?.ToString("yyyy-MM-dd")"
+                           asp-route-ToDate="@filter.ToDate?.ToString("yyyy-MM-dd")"
+                           asp-route-SortBy="@filter.SortBy"
+                           asp-route-Page="@(filter.Page - 1)">
+                            <i class="bi bi-chevron-left"></i>
+                        </a>
+                    </li>
+                    @for (int i = Math.Max(1, filter.Page - 2); i <= Math.Min(Model.TotalPages, filter.Page + 2); i++)
+                    {
+                        <li class="page-item @(i == filter.Page ? "active" : "")">
+                            <a class="page-link" asp-action="Index"
+                               asp-route-SearchTerm="@filter.SearchTerm"
+                               asp-route-OrderStatus="@filter.OrderStatus"
+                               asp-route-FromDate="@filter.FromDate?.ToString("yyyy-MM-dd")"
+                               asp-route-ToDate="@filter.ToDate?.ToString("yyyy-MM-dd")"
+                               asp-route-SortBy="@filter.SortBy"
+                               asp-route-Page="@i">@i</a>
+                        </li>
+                    }
+                    <li class="page-item @(!Model.HasNextPage ? "disabled" : "")">
+                        <a class="page-link" asp-action="Index"
+                           asp-route-SearchTerm="@filter.SearchTerm"
+                           asp-route-OrderStatus="@filter.OrderStatus"
+                           asp-route-FromDate="@filter.FromDate?.ToString("yyyy-MM-dd")"
+                           asp-route-ToDate="@filter.ToDate?.ToString("yyyy-MM-dd")"
+                           asp-route-SortBy="@filter.SortBy"
+                           asp-route-Page="@(filter.Page + 1)">
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    }
+</div>

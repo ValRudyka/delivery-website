@@ -1,0 +1,224 @@
+@model PaginatedResult<AdminReviewListDto>
+@{
+    ViewData["Title"] = ViewBag.IsPendingView == true ? "Відгуки на модерації" : "Управління відгуками";
+    var filter = ViewBag.Filter as ReviewFilterDto ?? new ReviewFilterDto();
+}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+    <div>
+        <h1 class="page-title">@ViewData["Title"]</h1>
+        <p class="text-muted">Модерація та управління відгуками користувачів</p>
+    </div>
+    <div class="d-flex gap-2">
+        @if (ViewBag.IsPendingView != true)
+        {
+            <a asp-action="Pending" class="btn btn-warning">
+                <i class="bi bi-hourglass me-1"></i>На модерації
+            </a>
+        }
+        <span class="badge bg-primary fs-6 align-self-center">Всього: @Model.TotalCount</span>
+    </div>
+</div>
+
+<!-- Filters -->
+@if (ViewBag.IsPendingView != true)
+{
+    <div class="filter-card">
+        <form method="get" class="row g-3 align-items-end">
+            <div class="col-md-3">
+                <label class="form-label">Пошук</label>
+                <input type="text" name="SearchTerm" class="form-control" placeholder="Текст відгуку, ресторан..." value="@filter.SearchTerm">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Статус</label>
+                <select name="IsApproved" class="form-select">
+                    <option value="">Всі</option>
+                    <option value="true" selected="@(filter.IsApproved == true)">Схвалені</option>
+                    <option value="false" selected="@(filter.IsApproved == false)">На модерації</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Рейтинг від</label>
+                <select name="MinRating" class="form-select">
+                    <option value="">Будь-який</option>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        <option value="@i" selected="@(filter.MinRating == i)">@i ★</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Підтверджена покупка</label>
+                <select name="IsVerifiedPurchase" class="form-select">
+                    <option value="">Всі</option>
+                    <option value="true" selected="@(filter.IsVerifiedPurchase == true)">Так</option>
+                    <option value="false" selected="@(filter.IsVerifiedPurchase == false)">Ні</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Сортування</label>
+                <select name="SortBy" class="form-select">
+                    <option value="CreatedDate" selected="@(filter.SortBy == "CreatedDate")">За датою</option>
+                    <option value="Rating" selected="@(filter.SortBy == "Rating")">За рейтингом</option>
+                    <option value="Restaurant" selected="@(filter.SortBy == "Restaurant")">За рестораном</option>
+                </select>
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+}
+
+<!-- Reviews Table -->
+<div class="admin-table">
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Клієнт</th>
+                    <th>Ресторан</th>
+                    <th>Рейтинг</th>
+                    <th style="width: 35%">Відгук</th>
+                    <th>Статус</th>
+                    <th>Дата</th>
+                    <th class="text-center">Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Items.Any())
+                {
+                    @foreach (var review in Model.Items)
+                    {
+                        <tr>
+                            <td>
+                                <div>@review.CustomerName</div>
+                                <small class="text-muted">@review.CustomerEmail</small>
+                            </td>
+                            <td>
+                                <a asp-controller="Restaurants" asp-action="Details" asp-route-id="@review.RestaurantId" class="text-decoration-none">
+                                    @review.RestaurantName
+                                </a>
+                            </td>
+                            <td>
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <i class="bi @(i <= review.Rating ? "bi-star-fill text-warning" : "bi-star text-muted")"></i>
+                                }
+                            </td>
+                            <td>
+                                <div class="text-truncate" style="max-width: 300px;" title="@review.ReviewText">
+                                    @review.ReviewText
+                                </div>
+                                @if (review.IsVerifiedPurchase)
+                                {
+                                    <small class="text-success"><i class="bi bi-patch-check-fill me-1"></i>Підтверджена покупка</small>
+                                }
+                            </td>
+                            <td>
+                                @if (review.IsApproved)
+                                {
+                                    <span class="badge bg-success badge-status">Схвалено</span>
+                                    @if (review.ModerationDate.HasValue)
+                                    {
+                                        <small class="d-block text-muted">@review.ModerationDate.Value.ToString("dd.MM.yyyy")</small>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark badge-status">На модерації</span>
+                                }
+                            </td>
+                            <td>
+                                <div>@review.CreatedDate.ToString("dd.MM.yyyy")</div>
+                                <small class="text-muted">@review.CreatedDate.ToString("HH:mm")</small>
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm">
+                                    <a asp-action="Details" asp-route-id="@review.ReviewId" class="btn btn-outline-primary" title="Деталі">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    @if (!review.IsApproved)
+                                    {
+                                        <form asp-action="Approve" method="post" class="d-inline">
+                                            <input type="hidden" name="reviewId" value="@review.ReviewId" />
+                                            <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                                            <button type="submit" class="btn btn-outline-success" title="Схвалити">
+                                                <i class="bi bi-check-lg"></i>
+                                            </button>
+                                        </form>
+                                        <form asp-action="Reject" method="post" class="d-inline">
+                                            <input type="hidden" name="reviewId" value="@review.ReviewId" />
+                                            <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                                            <button type="submit" class="btn btn-outline-danger" title="Відхилити">
+                                                <i class="bi bi-x-lg"></i>
+                                            </button>
+                                        </form>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" class="text-center py-5">
+                            <i class="bi bi-chat-square-text fs-1 text-muted d-block mb-2"></i>
+                            <span class="text-muted">Відгуків не знайдено</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (Model.TotalPages > 1)
+    {
+        <div class="pagination-wrapper">
+            <div class="text-muted">
+                Показано @((filter.Page - 1) * filter.PageSize + 1) - @Math.Min(filter.Page * filter.PageSize, Model.TotalCount) з @Model.TotalCount
+            </div>
+            <nav>
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item @(!Model.HasPreviousPage ? "disabled" : "")">
+                        <a class="page-link" asp-action="Index" 
+                           asp-route-SearchTerm="@filter.SearchTerm"
+                           asp-route-IsApproved="@filter.IsApproved"
+                           asp-route-MinRating="@filter.MinRating"
+                           asp-route-IsVerifiedPurchase="@filter.IsVerifiedPurchase"
+                           asp-route-SortBy="@filter.SortBy"
+                           asp-route-Page="@(filter.Page - 1)">
+                            <i class="bi bi-chevron-left"></i>
+                        </a>
+                    </li>
+                    @for (int i = Math.Max(1, filter.Page - 2); i <= Math.Min(Model.TotalPages, filter.Page + 2); i++)
+                    {
+                        <li class="page-item @(i == filter.Page ? "active" : "")">
+                            <a class="page-link" asp-action="Index"
+                               asp-route-SearchTerm="@filter.SearchTerm"
+                               asp-route-IsApproved="@filter.IsApproved"
+                               asp-route-MinRating="@filter.MinRating"
+                               asp-route-IsVerifiedPurchase="@filter.IsVerifiedPurchase"
+                               asp-route-SortBy="@filter.SortBy"
+                               asp-route-Page="@i">@i</a>
+                        </li>
+                    }
+                    <li class="page-item @(!Model.HasNextPage ? "disabled" : "")">
+                        <a class="page-link" asp-action="Index"
+                           asp-route-SearchTerm="@filter.SearchTerm"
+                           asp-route-IsApproved="@filter.IsApproved"
+                           asp-route-MinRating="@filter.MinRating"
+                           asp-route-IsVerifiedPurchase="@filter.IsVerifiedPurchase"
+                           asp-route-SortBy="@filter.SortBy"
+                           asp-route-Page="@(filter.Page + 1)">
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    }
+</div>

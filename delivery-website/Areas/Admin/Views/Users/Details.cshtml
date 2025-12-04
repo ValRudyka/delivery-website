@@ -1,0 +1,225 @@
+@model UserDetailsDto
+@{
+    ViewData["Title"] = "Деталі користувача";
+}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-1">
+                <li class="breadcrumb-item"><a asp-action="Index">Користувачі</a></li>
+                <li class="breadcrumb-item active">@Model.FullName</li>
+            </ol>
+        </nav>
+        <h1 class="page-title">@Model.FullName</h1>
+    </div>
+    <a asp-action="Index" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left me-1"></i>Назад
+    </a>
+</div>
+
+<div class="row g-4">
+    <!-- User Info -->
+    <div class="col-lg-8">
+        <div class="card detail-card">
+            <div class="card-header">
+                <i class="bi bi-person me-2"></i>Інформація про користувача
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="detail-row">
+                            <div class="detail-label">Email</div>
+                            <div class="detail-value">
+                                @Model.Email
+                                @if (Model.IsEmailConfirmed)
+                                {
+                                    <i class="bi bi-patch-check-fill text-success ms-1" title="Підтверджено"></i>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning ms-1">Не підтверджено</span>
+                                }
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Ім'я</div>
+                            <div class="detail-value">@Model.FirstName</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Прізвище</div>
+                            <div class="detail-value">@Model.LastName</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Телефон</div>
+                            <div class="detail-value">@(string.IsNullOrEmpty(Model.PhoneNumber) ? "-" : Model.PhoneNumber)</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="detail-row">
+                            <div class="detail-label">Дата народження</div>
+                            <div class="detail-value">@(Model.DateOfBirth?.ToString("dd.MM.yyyy") ?? "-")</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Мова</div>
+                            <div class="detail-value">@(Model.PreferredLanguage == "uk" ? "Українська" : Model.PreferredLanguage)</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Дата реєстрації</div>
+                            <div class="detail-value">@Model.CreatedDate.ToString("dd.MM.yyyy HH:mm")</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">User ID</div>
+                            <div class="detail-value"><code class="small">@Model.UserId</code></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="card detail-card">
+            <div class="card-header">
+                <i class="bi bi-bar-chart me-2"></i>Статистика
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-md-3">
+                        <div class="fs-3 fw-bold text-primary">@Model.OrdersCount</div>
+                        <div class="text-muted">Замовлень</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="fs-3 fw-bold text-success">@Model.TotalSpent.ToString("N0") ₴</div>
+                        <div class="text-muted">Витрачено</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="fs-3 fw-bold text-warning">@Model.ReviewsCount</div>
+                        <div class="text-muted">Відгуків</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="fs-3 fw-bold text-info">@Model.AddressesCount</div>
+                        <div class="text-muted">Адрес</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="col-lg-4">
+        <!-- Status Card -->
+        <div class="card detail-card">
+            <div class="card-header">
+                <i class="bi bi-shield me-2"></i>Статус та роль
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <label class="form-label fw-medium">Поточна роль</label>
+                    <div>
+                        @{
+                            var roleClass = Model.Role switch
+                            {
+                                "Admin" => "bg-danger",
+                                "RestaurantOwner" => "bg-info",
+                                _ => "bg-secondary"
+                            };
+                            var roleText = Model.Role switch
+                            {
+                                "Admin" => "Адміністратор",
+                                "RestaurantOwner" => "Власник ресторану",
+                                "Customer" => "Клієнт",
+                                _ => Model.Role
+                            };
+                        }
+                        <span class="badge @roleClass fs-6">@roleText</span>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-medium">Статус акаунту</label>
+                    <div>
+                        @if (Model.IsLockedOut)
+                        {
+                            <span class="badge bg-danger fs-6">Заблоковано</span>
+                            @if (Model.LockoutEnd.HasValue && Model.LockoutEnd.Value < DateTime.MaxValue)
+                            {
+                                <div class="text-muted small mt-1">до @Model.LockoutEnd.Value.ToString("dd.MM.yyyy HH:mm")</div>
+                            }
+                            else
+                            {
+                                <div class="text-muted small mt-1">назавжди</div>
+                            }
+                        }
+                        else
+                        {
+                            <span class="badge bg-success fs-6">Активний</span>
+                        }
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- Change Role -->
+                <form asp-action="UpdateRole" method="post" class="mb-3">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="userId" value="@Model.UserId" />
+                    <label class="form-label">Змінити роль</label>
+                    <div class="input-group">
+                        <select name="newRole" class="form-select">
+                            <option value="Customer" selected="@(Model.Role == "Customer")">Клієнт</option>
+                            <option value="RestaurantOwner" selected="@(Model.Role == "RestaurantOwner")">Власник ресторану</option>
+                            <option value="Admin" selected="@(Model.Role == "Admin")">Адміністратор</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Змінити</button>
+                    </div>
+                </form>
+
+                <hr>
+
+                <!-- Lock/Unlock -->
+                @if (Model.IsLockedOut)
+                {
+                    <form asp-action="Unlock" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="userId" value="@Model.UserId" />
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="bi bi-unlock me-1"></i>Розблокувати
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <form asp-action="Lock" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="userId" value="@Model.UserId" />
+                        <label class="form-label">Заблокувати</label>
+                        <div class="input-group mb-2">
+                            <input type="number" name="durationInDays" class="form-control" placeholder="Днів (пусто = назавжди)">
+                            <button type="submit" class="btn btn-warning">
+                                <i class="bi bi-lock"></i>
+                            </button>
+                        </div>
+                        <small class="text-muted">Залиште поле порожнім для постійного блокування</small>
+                    </form>
+                }
+            </div>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="card detail-card border-danger">
+            <div class="card-header bg-danger text-white">
+                <i class="bi bi-exclamation-triangle me-2"></i>Небезпечна зона
+            </div>
+            <div class="card-body">
+                <p class="text-muted small">Видалення користувача видалить всі пов'язані дані (профіль, адреси, кошик). Замовлення та відгуки залишаться.</p>
+                <form asp-action="Delete" method="post" onsubmit="return confirm('Ви впевнені, що хочете видалити цього користувача? Цю дію неможливо скасувати.');">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="userId" value="@Model.UserId" />
+                    <button type="submit" class="btn btn-danger w-100">
+                        <i class="bi bi-trash me-1"></i>Видалити користувача
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

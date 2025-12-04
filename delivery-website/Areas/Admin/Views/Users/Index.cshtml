@@ -1,0 +1,195 @@
+@model PaginatedResult<UserListDto>
+@{
+    ViewData["Title"] = "Управління користувачами";
+    var filter = ViewBag.Filter as UserFilterDto ?? new UserFilterDto();
+}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+    <div>
+        <h1 class="page-title">Користувачі</h1>
+        <p class="text-muted">Управління обліковими записами користувачів</p>
+    </div>
+    <div>
+        <span class="badge bg-primary fs-6">Всього: @Model.TotalCount</span>
+    </div>
+</div>
+
+<!-- Filters -->
+<div class="filter-card">
+    <form method="get" class="row g-3 align-items-end">
+        <div class="col-md-4">
+            <label class="form-label">Пошук</label>
+            <input type="text" name="SearchTerm" class="form-control" placeholder="Email, ім'я..." value="@filter.SearchTerm">
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Роль</label>
+            <select name="Role" class="form-select">
+                <option value="">Всі ролі</option>
+                <option value="Customer" selected="@(filter.Role == "Customer")">Клієнт</option>
+                <option value="RestaurantOwner" selected="@(filter.Role == "RestaurantOwner")">Власник</option>
+                <option value="Admin" selected="@(filter.Role == "Admin")">Адмін</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Статус</label>
+            <select name="IsLockedOut" class="form-select">
+                <option value="">Всі</option>
+                <option value="false" selected="@(filter.IsLockedOut == false)">Активні</option>
+                <option value="true" selected="@(filter.IsLockedOut == true)">Заблоковані</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Сортування</label>
+            <select name="SortBy" class="form-select">
+                <option value="CreatedDate" selected="@(filter.SortBy == "CreatedDate")">За датою</option>
+                <option value="Email" selected="@(filter.SortBy == "Email")">За email</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="bi bi-search me-1"></i>Фільтрувати
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Users Table -->
+<div class="admin-table">
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Користувач</th>
+                    <th>Email</th>
+                    <th>Телефон</th>
+                    <th>Роль</th>
+                    <th>Замовлень</th>
+                    <th>Статус</th>
+                    <th>Дата реєстрації</th>
+                    <th class="text-center">Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Items.Any())
+                {
+                    @foreach (var user in Model.Items)
+                    {
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-light rounded-circle d-flex align-items-center justify-content-center me-2" 
+                                         style="width: 36px; height: 36px;">
+                                        <i class="bi bi-person text-secondary"></i>
+                                    </div>
+                                    <div>
+                                        <div class="fw-medium">@user.FullName</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                @user.Email
+                                @if (user.IsEmailConfirmed)
+                                {
+                                    <i class="bi bi-patch-check-fill text-success ms-1" title="Email підтверджено"></i>
+                                }
+                            </td>
+                            <td>@(string.IsNullOrEmpty(user.PhoneNumber) ? "-" : user.PhoneNumber)</td>
+                            <td>
+                                @{
+                                    var roleClass = user.Role switch
+                                    {
+                                        "Admin" => "bg-danger",
+                                        "RestaurantOwner" => "bg-info",
+                                        _ => "bg-secondary"
+                                    };
+                                    var roleText = user.Role switch
+                                    {
+                                        "Admin" => "Адміністратор",
+                                        "RestaurantOwner" => "Власник ресторану",
+                                        "Customer" => "Клієнт",
+                                        _ => user.Role
+                                    };
+                                }
+                                <span class="badge @roleClass">@roleText</span>
+                            </td>
+                            <td>@user.OrdersCount</td>
+                            <td>
+                                @if (user.IsLockedOut)
+                                {
+                                    <span class="badge bg-danger">Заблоковано</span>
+                                    @if (user.LockoutEnd.HasValue && user.LockoutEnd.Value < DateTime.MaxValue)
+                                    {
+                                        <small class="d-block text-muted">до @user.LockoutEnd.Value.ToString("dd.MM.yyyy")</small>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">Активний</span>
+                                }
+                            </td>
+                            <td>@user.CreatedDate.ToString("dd.MM.yyyy")</td>
+                            <td class="text-center">
+                                <a asp-action="Details" asp-route-id="@user.UserId" class="btn btn-sm btn-outline-primary" title="Деталі">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" class="text-center py-5">
+                            <i class="bi bi-inbox fs-1 text-muted d-block mb-2"></i>
+                            <span class="text-muted">Користувачів не знайдено</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (Model.TotalPages > 1)
+    {
+        <div class="pagination-wrapper">
+            <div class="text-muted">
+                Показано @((filter.Page - 1) * filter.PageSize + 1) - @Math.Min(filter.Page * filter.PageSize, Model.TotalCount) з @Model.TotalCount
+            </div>
+            <nav>
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item @(!Model.HasPreviousPage ? "disabled" : "")">
+                        <a class="page-link" asp-action="Index" 
+                           asp-route-SearchTerm="@filter.SearchTerm"
+                           asp-route-Role="@filter.Role"
+                           asp-route-IsLockedOut="@filter.IsLockedOut"
+                           asp-route-SortBy="@filter.SortBy"
+                           asp-route-Page="@(filter.Page - 1)">
+                            <i class="bi bi-chevron-left"></i>
+                        </a>
+                    </li>
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == filter.Page ? "active" : "")">
+                            <a class="page-link" asp-action="Index"
+                               asp-route-SearchTerm="@filter.SearchTerm"
+                               asp-route-Role="@filter.Role"
+                               asp-route-IsLockedOut="@filter.IsLockedOut"
+                               asp-route-SortBy="@filter.SortBy"
+                               asp-route-Page="@i">@i</a>
+                        </li>
+                    }
+                    <li class="page-item @(!Model.HasNextPage ? "disabled" : "")">
+                        <a class="page-link" asp-action="Index"
+                           asp-route-SearchTerm="@filter.SearchTerm"
+                           asp-route-Role="@filter.Role"
+                           asp-route-IsLockedOut="@filter.IsLockedOut"
+                           asp-route-SortBy="@filter.SortBy"
+                           asp-route-Page="@(filter.Page + 1)">
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    }
+</div>

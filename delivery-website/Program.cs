@@ -6,6 +6,7 @@ using delivery_website.Repositories.Implementations;
 using delivery_website.Services.Interfaces;
 using delivery_website.Services.Implementations;
 using delivery_website.Models.Configuration;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,17 +48,32 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.Configure<EmailSettings>(
     builder.Configuration.GetSection("EmailSettings"));
 
+// Configure Stripe Settings
+builder.Services.Configure<StripeSettings>(
+    builder.Configuration.GetSection("Stripe"));
+
+// Set Stripe API Key globally
+var stripeSettings = builder.Configuration.GetSection("Stripe").Get<StripeSettings>();
+if (stripeSettings != null && !string.IsNullOrEmpty(stripeSettings.SecretKey))
+{
+    StripeConfiguration.ApiKey = stripeSettings.SecretKey;
+}
+
+// Register Repositories
 builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+//builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
+// Register Services
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IUserProfileService, UserProfileService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
-
+//builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
 
 builder.Services.AddSession(options =>
 {

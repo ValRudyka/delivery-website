@@ -1,0 +1,346 @@
+@model AdminOrderDetailsDto
+@{
+    ViewData["Title"] = $"Замовлення {Model.OrderNumber}";
+    var statuses = ViewBag.Statuses as string[] ?? new[] { "Pending", "Confirmed", "Preparing", "Ready", "OutForDelivery", "Delivered", "Cancelled" };
+}
+
+<div class="page-header d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-1">
+                <li class="breadcrumb-item"><a asp-action="Index">Замовлення</a></li>
+                <li class="breadcrumb-item active">@Model.OrderNumber</li>
+            </ol>
+        </nav>
+        <h1 class="page-title">Замовлення @Model.OrderNumber</h1>
+    </div>
+    <div>
+        @{
+            var statusClass = Model.OrderStatus switch
+            {
+                "Pending" => "bg-warning text-dark",
+                "Confirmed" => "bg-info",
+                "Preparing" => "bg-primary",
+                "Ready" => "bg-success",
+                "OutForDelivery" => "bg-info",
+                "Delivered" => "bg-success",
+                "Cancelled" => "bg-danger",
+                _ => "bg-secondary"
+            };
+            var statusText = Model.OrderStatus switch
+            {
+                "Pending" => "Очікує",
+                "Confirmed" => "Підтверджено",
+                "Preparing" => "Готується",
+                "Ready" => "Готове",
+                "OutForDelivery" => "Доставляється",
+                "Delivered" => "Доставлено",
+                "Cancelled" => "Скасовано",
+                _ => Model.OrderStatus
+            };
+        }
+        <span class="badge @statusClass fs-6 p-2">@statusText</span>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Left Column -->
+    <div class="col-lg-8">
+        <!-- Order Items -->
+        <div class="detail-card mb-4">
+            <div class="card-header">
+                <i class="bi bi-bag me-2"></i>Позиції замовлення
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Назва</th>
+                                <th class="text-center">К-сть</th>
+                                <th class="text-end">Ціна</th>
+                                <th class="text-end">Сума</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Items)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="fw-medium">@item.MenuItemName</div>
+                                        @if (!string.IsNullOrEmpty(item.Customizations))
+                                        {
+                                            <small class="text-muted">@item.Customizations</small>
+                                        }
+                                    </td>
+                                    <td class="text-center">@item.Quantity</td>
+                                    <td class="text-end">@item.UnitPrice.ToString("N0") ₴</td>
+                                    <td class="text-end fw-bold">@item.TotalPrice.ToString("N0") ₴</td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot class="bg-light">
+                            <tr>
+                                <td colspan="3" class="text-end">Підсумок:</td>
+                                <td class="text-end">@Model.SubtotalAmount.ToString("N0") ₴</td>
+                            </tr>
+                            @if (Model.DeliveryFee > 0)
+                            {
+                                <tr>
+                                    <td colspan="3" class="text-end">Доставка:</td>
+                                    <td class="text-end">@Model.DeliveryFee.ToString("N0") ₴</td>
+                                </tr>
+                            }
+                            @if (Model.TaxAmount > 0)
+                            {
+                                <tr>
+                                    <td colspan="3" class="text-end">Податок:</td>
+                                    <td class="text-end">@Model.TaxAmount.ToString("N0") ₴</td>
+                                </tr>
+                            }
+                            @if (Model.DiscountAmount > 0)
+                            {
+                                <tr class="text-success">
+                                    <td colspan="3" class="text-end">Знижка:</td>
+                                    <td class="text-end">-@Model.DiscountAmount.ToString("N0") ₴</td>
+                                </tr>
+                            }
+                            <tr class="fw-bold fs-5">
+                                <td colspan="3" class="text-end">Всього:</td>
+                                <td class="text-end">@Model.TotalAmount.ToString("N0") ₴</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Timeline -->
+        <div class="detail-card">
+            <div class="card-header">
+                <i class="bi bi-clock-history me-2"></i>Історія замовлення
+            </div>
+            <div class="card-body">
+                <div class="timeline">
+                    @{
+                        var timelineItems = new List<(string Status, DateTime? Date, string Icon, string ColorClass)>
+                        {
+                            ("Створено", Model.OrderDate, "bi-plus-circle", "success"),
+                            ("Підтверджено", Model.ConfirmedDate, "bi-check-circle", "info"),
+                            ("Готується", Model.PreparingDate, "bi-fire", "primary"),
+                            ("Готове", Model.ReadyDate, "bi-bag-check", "success"),
+                            ("Доставляється", Model.OutForDeliveryDate, "bi-truck", "info"),
+                            ("Доставлено", Model.DeliveredDate, "bi-check2-all", "success"),
+                        };
+
+                        if (Model.CancelledDate.HasValue)
+                        {
+                            timelineItems.Add(("Скасовано", Model.CancelledDate, "bi-x-circle", "danger"));
+                        }
+                    }
+
+                    @foreach (var item in timelineItems.Where(t => t.Date.HasValue).OrderBy(t => t.Date))
+                    {
+                        <div class="d-flex mb-3">
+                            <div class="text-@item.ColorClass me-3">
+                                <i class="bi @item.Icon fs-5"></i>
+                            </div>
+                            <div>
+                                <div class="fw-medium">@item.Status</div>
+                                <small class="text-muted">@item.Date?.ToString("dd.MM.yyyy HH:mm")</small>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.CancellationReason))
+                {
+                    <div class="alert alert-danger mt-3 mb-0">
+                        <strong>Причина скасування:</strong> @Model.CancellationReason
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="col-lg-4">
+        <!-- Update Status -->
+        @if (Model.OrderStatus != "Delivered" && Model.OrderStatus != "Cancelled")
+        {
+            <div class="detail-card mb-4">
+                <div class="card-header">
+                    <i class="bi bi-gear me-2"></i>Змінити статус
+                </div>
+                <div class="card-body">
+                    <form asp-action="UpdateStatus" method="post">
+                        <input type="hidden" name="orderId" value="@Model.OrderId" />
+                        <div class="mb-3">
+                            <select name="newStatus" class="form-select" id="statusSelect">
+                                @foreach (var status in statuses)
+                                {
+                                    var displayStatus = status switch
+                                    {
+                                        "Pending" => "Очікує",
+                                        "Confirmed" => "Підтверджено",
+                                        "Preparing" => "Готується",
+                                        "Ready" => "Готове",
+                                        "OutForDelivery" => "Доставляється",
+                                        "Delivered" => "Доставлено",
+                                        "Cancelled" => "Скасовано",
+                                        _ => status
+                                    };
+                                    <option value="@status" selected="@(status == Model.OrderStatus)">@displayStatus</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3 d-none" id="cancellationReasonDiv">
+                            <label class="form-label">Причина скасування</label>
+                            <textarea name="cancellationReason" class="form-control" rows="2"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-check me-1"></i>Оновити статус
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+
+        <!-- Customer Info -->
+        <div class="detail-card mb-4">
+            <div class="card-header">
+                <i class="bi bi-person me-2"></i>Клієнт
+            </div>
+            <div class="card-body">
+                <div class="detail-row">
+                    <span class="detail-label">Ім'я:</span>
+                    <span class="detail-value">
+                        <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.CustomerId" class="text-decoration-none">
+                            @Model.CustomerName
+                        </a>
+                    </span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Email:</span>
+                    <span class="detail-value">@Model.CustomerEmail</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Телефон:</span>
+                    <span class="detail-value">@(string.IsNullOrEmpty(Model.CustomerPhone) ? "-" : Model.CustomerPhone)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Restaurant Info -->
+        <div class="detail-card mb-4">
+            <div class="card-header">
+                <i class="bi bi-shop me-2"></i>Ресторан
+            </div>
+            <div class="card-body">
+                <div class="detail-row">
+                    <span class="detail-label">Назва:</span>
+                    <span class="detail-value">
+                        <a asp-controller="Restaurants" asp-action="Details" asp-route-id="@Model.RestaurantId" class="text-decoration-none">
+                            @Model.RestaurantName
+                        </a>
+                    </span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Телефон:</span>
+                    <span class="detail-value">@Model.RestaurantPhone</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delivery Info -->
+        <div class="detail-card mb-4">
+            <div class="card-header">
+                <i class="bi bi-geo-alt me-2"></i>Доставка
+            </div>
+            <div class="card-body">
+                <div class="detail-row">
+                    <span class="detail-label">Адреса:</span>
+                    <span class="detail-value">@(Model.DeliveryAddress ?? "-")</span>
+                </div>
+                @if (!string.IsNullOrEmpty(Model.DeliveryInstructions))
+                {
+                    <div class="detail-row">
+                        <span class="detail-label">Інструкції:</span>
+                        <span class="detail-value">@Model.DeliveryInstructions</span>
+                    </div>
+                }
+                @if (Model.EstimatedDeliveryTime.HasValue)
+                {
+                    <div class="detail-row">
+                        <span class="detail-label">Очікуваний час:</span>
+                        <span class="detail-value">@Model.EstimatedDeliveryTime.Value.ToString("HH:mm")</span>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Payment Info -->
+        <div class="detail-card">
+            <div class="card-header">
+                <i class="bi bi-credit-card me-2"></i>Оплата
+            </div>
+            <div class="card-body">
+                <div class="detail-row">
+                    <span class="detail-label">Метод:</span>
+                    <span class="detail-value">
+                        @(Model.PaymentMethod switch
+                        {
+                            "Card" => "Банківська картка",
+                            "Cash" => "Готівка",
+                            _ => Model.PaymentMethod ?? "-"
+                        })
+                    </span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Статус:</span>
+                    <span class="detail-value">
+                        @{
+                            var paymentStatusClass = Model.PaymentStatus switch
+                            {
+                                "Paid" => "text-success",
+                                "Pending" => "text-warning",
+                                "Failed" => "text-danger",
+                                "Refunded" => "text-info",
+                                _ => "text-muted"
+                            };
+                            var paymentStatusText = Model.PaymentStatus switch
+                            {
+                                "Paid" => "Оплачено",
+                                "Pending" => "Очікує оплати",
+                                "Failed" => "Помилка оплати",
+                                "Refunded" => "Повернено",
+                                _ => Model.PaymentStatus ?? "-"
+                            };
+                        }
+                        <span class="@paymentStatusClass fw-medium">@paymentStatusText</span>
+                    </span>
+                </div>
+                @if (!string.IsNullOrEmpty(Model.TransactionId))
+                {
+                    <div class="detail-row">
+                        <span class="detail-label">Transaction ID:</span>
+                        <span class="detail-value"><code>@Model.TransactionId</code></span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('statusSelect').addEventListener('change', function() {
+            var cancellationDiv = document.getElementById('cancellationReasonDiv');
+            if (this.value === 'Cancelled') {
+                cancellationDiv.classList.remove('d-none');
+            } else {
+                cancellationDiv.classList.add('d-none');
+            }
+        });
+    </script>
+}
