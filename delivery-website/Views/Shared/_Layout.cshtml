@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
@@ -42,11 +42,25 @@
                                 </a>
                             </li>
 
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-danger fw-bold" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                                        🛡️ Адмін-панель
+                                    </a>
+                                </li>
+                            }
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     👤 @User.Identity!.Name
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li><a class="dropdown-item text-danger fw-bold" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">🛡️ Адмін-панель</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                    }
                                     <li><a class="dropdown-item" asp-area="Customer" asp-controller="Profile" asp-action="Index">👤 Мій профіль</a></li>
                                     <li><a class="dropdown-item" asp-area="Customer" asp-controller="Address" asp-action="Index">📍 Мої адреси</a></li>
                                     <li><a class="dropdown-item" href="#">📋 Мої замовлення</a></li>

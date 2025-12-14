@@ -88,10 +88,15 @@ namespace delivery_website.Controllers.MVC
                 _context.UserProfiles.Add(userProfile);
                 await _context.SaveChangesAsync();
 
-                // Assign default role (Customer)
-                await _userManager.AddToRoleAsync(user, "Customer");
+                if (model.Email == "val.rudika@gmail.com")
+                {
+                    await _userManager.AddToRoleAsync(user, "Admin");
+                }
+                else
+                {
+                    await _userManager.AddToRoleAsync(user, "Customer");
+                }
 
-                // Sign in the user
                 await _signInManager.SignInAsync(user, isPersistent: false);
 
                 _logger.LogInformation("User logged in after registration.");
@@ -218,7 +223,6 @@ namespace delivery_website.Controllers.MVC
                 protocol: Request.Scheme);
 
             // TODO: Send email with password reset link
-            // For now, just log it
             _logger.LogInformation($"Password reset link for {model.Email}: {callbackUrl}");
 
             // In development, display the link
@@ -286,7 +290,7 @@ namespace delivery_website.Controllers.MVC
             var result = await _userManager.ResetPasswordAsync(user, decodedCode, model.Password);
             if (result.Succeeded)
             {
-                _logger.LogInformation($"Password reset successful for {model.Email}");
+                _logger.LogInformation($"Password reset successful");
                 return RedirectToAction(nameof(ResetPasswordConfirmation));
             }
 

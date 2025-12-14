@@ -1,7 +1,8 @@
-﻿@{
+@{
     @using Microsoft.AspNetCore.Identity
     ViewData["Title"] = "Головна";
     @inject SignInManager<IdentityUser> SignInManager
+    @inject UserManager<IdentityUser> UserManager
 }
 
 <!-- Hero Section -->
@@ -16,6 +17,24 @@
 </div>
 
 <div class="container">
+    <!-- Admin Panel Quick Access (Only for Admin Users) -->
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        <div class="alert alert-danger border-danger shadow-sm my-4" role="alert">
+            <div class="d-flex align-items-center justify-content-between">
+                <div>
+                    <h5 class="alert-heading mb-1">
+                        <i class="bi bi-shield-lock-fill me-2"></i>Доступ адміністратора
+                    </h5>
+                    <p class="mb-0">У вас є права адміністратора. Перейдіть до панелі керування.</p>
+                </div>
+                <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="btn btn-danger">
+                    🛡️ Відкрити адмін-панель
+                </a>
+            </div>
+        </div>
+    }
+
     <!-- Main Features -->
     <div class="section-title text-center mb-4">
         <h2>🌟 Чому обирають нас</h2>
