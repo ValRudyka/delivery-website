@@ -200,6 +200,22 @@ namespace delivery_website.Tests
             Assert.Equal(2, italianRestaurants.Count());
             Assert.All(italianRestaurants, r => Assert.Equal("Італійська", r.CuisineType));
         }
+
+        [Fact]
+        public async Task GetRestaurantsByCuisine_WithNonExistentCuisine_ShouldReturnEmpty()
+        {
+            // Arrange
+            var service = new RestaurantServiceFake();
+
+            await service.Add(new Restaurant { RestaurantId = Guid.NewGuid(), Name = "Pizza Place", CuisineType = "Італійська", MinimumOrderAmount = 100, IsActive = true });
+            await service.Add(new Restaurant { RestaurantId = Guid.NewGuid(), Name = "Sushi Bar", CuisineType = "Японська", MinimumOrderAmount = 150, IsActive = true });
+
+            // Act
+            var mexicanRestaurants = await service.GetRestaurantsByCuisineAsync("Мексиканська");
+
+            // Assert
+            Assert.Empty(mexicanRestaurants);
+        }
     }
 
     public class CartTests
@@ -221,6 +237,25 @@ namespace delivery_website.Tests
             Assert.Single(cart.Items);
             Assert.Equal(2, cart.Items.First().Quantity);
             Assert.Equal(100.00m, cart.TotalAmount);
+        }
+
+        [Fact]
+        public async Task AddToCart_MultipleItems_ShouldCalculateTotalCorrectly()
+        {
+            // Arrange
+            var service = new CartServiceFake();
+            var userId = "user123";
+            var restaurantId = Guid.NewGuid();
+
+            // Act - Add multiple items
+            await service.AddToCartAsync(userId, Guid.NewGuid(), restaurantId, 2, 50.00m);
+            await service.AddToCartAsync(userId, Guid.NewGuid(), restaurantId, 1, 75.00m);
+            var cart = await service.AddToCartAsync(userId, Guid.NewGuid(), restaurantId, 3, 30.00m);
+
+            // Assert
+            Assert.NotNull(cart);
+            Assert.Equal(4, cart.Items.Count);
+            Assert.Equal(265.00m, cart.TotalAmount); // (2*50) + (1*75) + (3*30) = 100 + 75 + 90 = 265
         }
     }
 
@@ -286,6 +321,28 @@ namespace delivery_website.Tests
             // Act & Assert
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
                 service.UpdateOrderStatusAsync(order.OrderId, "Delivered"));
+
+            Assert.Contains("Неможливо змінити статус", exception.Message);
+        }
+
+        [Fact]
+        public async Task UpdateOrderStatus_FromCancelledState_ShouldThrowException()
+        {
+            // Arrange
+            var service = new OrderServiceFake();
+            var userId = "user123";
+            var restaurantId = Guid.NewGuid();
+            var items = new List<OrderItem>
+            {
+                new OrderItem { MenuItemId = Guid.NewGuid(), MenuItemName = "Десерт", Quantity = 1, UnitPrice = 60, TotalPrice = 60 }
+            };
+
+            var order = await service.CreateOrderAsync(userId, restaurantId, items, 60);
+            await service.UpdateOrderStatusAsync(order.OrderId, "Cancelled");
+
+            // Act & Assert - Cancelled is a terminal state, cannot transition to any other status
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                service.UpdateOrderStatusAsync(order.OrderId, "Confirmed"));
 
             Assert.Contains("Неможливо змінити статус", exception.Message);
         }
