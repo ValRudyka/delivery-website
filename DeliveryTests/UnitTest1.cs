@@ -4,10 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace DeliveryTests
+namespace DeliveryTestss
 {
-    // Fake Services для ізоляції тестів
-    public class RestaurantServiceFake
+    public class RestaurantServiceFakes
     {
         private List<Restaurant> _restaurants = new();
 
