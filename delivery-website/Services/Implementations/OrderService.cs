@@ -1,13 +1,9 @@
 ﻿using delivery_website.Data;
-using delivery_website.Models.Configuration;
 using delivery_website.Models.Entities;
 using delivery_website.Repositories.Interfaces;
 using delivery_website.Services.Interfaces;
 using delivery_website.ViewModels.Customer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Stripe;
-using Stripe.Checkout;
 
 namespace delivery_website.Services.Implementations
 {
@@ -18,7 +14,6 @@ namespace delivery_website.Services.Implementations
         private readonly IAddressRepository _addressRepository;
         private readonly IRestaurantRepository _restaurantRepository;
         private readonly IOrderRepository _orderRepository;
-        private readonly StripeSettings _stripeSettings;
         private readonly ILogger<OrderService> _logger;
 
         private const decimal TAX_RATE = 0.10m; // 10% tax
@@ -30,7 +25,6 @@ namespace delivery_website.Services.Implementations
             IAddressRepository addressRepository,
             IRestaurantRepository restaurantRepository,
             IOrderRepository orderRepository,
-            IOptions<StripeSettings> stripeSettings,
             ILogger<OrderService> logger)
         {
             _context = context;
@@ -38,7 +32,6 @@ namespace delivery_website.Services.Implementations
             _addressRepository = addressRepository;
             _restaurantRepository = restaurantRepository;
             _orderRepository = orderRepository;
-            _stripeSettings = stripeSettings.Value;
             _logger = logger;
         }
 
@@ -211,10 +204,10 @@ namespace delivery_website.Services.Implementations
             {
                 PaymentId = Guid.NewGuid(),
                 OrderId = order.OrderId,
-                PaymentMethod = model.PaymentMethod == "CreditCard" ? "CreditCard" : "CashOnDelivery",
-                PaymentStatus = model.PaymentMethod == "CashOnDelivery" ? "Pending" : "Processing",
+                PaymentMethod = "CashOnDelivery",
+                PaymentStatus = "Pending",
                 Amount = total,
-                PaymentGateway = model.PaymentMethod == "CreditCard" ? "Stripe" : "Cash",
+                PaymentGateway = "Cash",
                 PaymentDate = DateTime.UtcNow
             };
             _context.Payments.Add(payment);
@@ -309,151 +302,6 @@ namespace delivery_website.Services.Implementations
             _logger.LogInformation($"Order {order.OrderNumber} status updated to {newStatus}");
 
             return true;
-        }
-
-        public async Task<string> CreateStripeCheckoutSessionAsync(Order order)
-        {
-            StripeConfiguration.ApiKey = _stripeSettings.SecretKey;
-
-            var orderWithItems = await _context.Orders
-                .Include(o => o.OrderItems)
-                .Include(o => o.Restaurant)
-                .FirstOrDefaultAsync(o => o.OrderId == order.OrderId);
-
-            if (orderWithItems == null)
-            {
-                throw new InvalidOperationException("Замовлення не знайдено");
-            }
-
-            var lineItems = new List<SessionLineItemOptions>();
-
-            // Add menu items
-            foreach (var item in orderWithItems.OrderItems)
-            {
-                lineItems.Add(new SessionLineItemOptions
-                {
-                    PriceData = new SessionLineItemPriceDataOptions
-                    {
-                        Currency = _stripeSettings.Currency,
-                        UnitAmount = (long)(item.UnitPrice * 100), // Convert to cents
-                        ProductData = new SessionLineItemPriceDataProductDataOptions
-                        {
-                            Name = item.MenuItemName,
-                            Description = item.Customizations
-                        }
-                    },
-                    Quantity = item.Quantity
-                });
-            }
-
-            // Add delivery fee
-            if (orderWithItems.DeliveryFee > 0)
-            {
-                lineItems.Add(new SessionLineItemOptions
-                {
-                    PriceData = new SessionLineItemPriceDataOptions
-                    {
-                        Currency = _stripeSettings.Currency,
-                        UnitAmount = (long)(orderWithItems.DeliveryFee * 100),
-                        ProductData = new SessionLineItemPriceDataProductDataOptions
-                        {
-                            Name = "Доставка",
-                            Description = $"Доставка з {orderWithItems.Restaurant?.Name}"
-                        }
-                    },
-                    Quantity = 1
-                });
-            }
-
-            // Add tax
-            if (orderWithItems.TaxAmount > 0)
-            {
-                lineItems.Add(new SessionLineItemOptions
-                {
-                    PriceData = new SessionLineItemPriceDataOptions
-                    {
-                        Currency = _stripeSettings.Currency,
-                        UnitAmount = (long)(orderWithItems.TaxAmount * 100),
-                        ProductData = new SessionLineItemPriceDataProductDataOptions
-                        {
-                            Name = "ПДВ (10%)",
-                            Description = "Податок на додану вартість"
-                        }
-                    },
-                    Quantity = 1
-                });
-            }
-
-            var options = new SessionCreateOptions
-            {
-                PaymentMethodTypes = new List<string> { "card" },
-                LineItems = lineItems,
-                Mode = "payment",
-                SuccessUrl = $"https://localhost:7224/Customer/Checkout/Success?session_id={{CHECKOUT_SESSION_ID}}&orderId={order.OrderId}",
-                CancelUrl = $"https://localhost:7224/Customer/Checkout/Cancel?orderId={order.OrderId}",
-                Metadata = new Dictionary<string, string>
-                {
-                    { "OrderId", order.OrderId.ToString() },
-                    { "OrderNumber", order.OrderNumber }
-                },
-                CustomerEmail = null, // Could be fetched from user
-                Locale = "uk"
-            };
-
-            var service = new SessionService();
-            var session = await service.CreateAsync(options);
-
-            // Update payment with session ID
-            var payment = await _context.Payments.FirstOrDefaultAsync(p => p.OrderId == order.OrderId);
-            if (payment != null)
-            {
-                payment.TransactionId = session.Id;
-                await _context.SaveChangesAsync();
-            }
-
-            _logger.LogInformation($"Stripe session {session.Id} created for order {order.OrderNumber}");
-
-            return session.Url; // Return the Stripe Checkout URL
-        }
-
-        public async Task<bool> ProcessPaymentSuccessAsync(string sessionId, Guid orderId)
-        {
-            try
-            {
-                StripeConfiguration.ApiKey = _stripeSettings.SecretKey;
-
-                var service = new SessionService();
-                var session = await service.GetAsync(sessionId);
-
-                if (session.PaymentStatus == "paid")
-                {
-                    // Update payment status
-                    var payment = await _context.Payments.FirstOrDefaultAsync(p => p.OrderId == orderId);
-                    if (payment != null)
-                    {
-                        payment.PaymentStatus = "Completed";
-                        payment.CompletedDate = DateTime.UtcNow;
-                        payment.TransactionId = session.PaymentIntentId ?? session.Id;
-                        payment.GatewayResponse = $"Payment completed via Stripe. Session: {sessionId}";
-                    }
-
-                    // Update order status
-                    await UpdateOrderStatusAsync(orderId, "Confirmed");
-
-                    await _context.SaveChangesAsync();
-
-                    _logger.LogInformation($"Payment for order {orderId} processed successfully");
-                    return true;
-                }
-
-                _logger.LogWarning($"Payment for order {orderId} not completed. Status: {session.PaymentStatus}");
-                return false;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error processing payment for order {orderId}: {ex.Message}");
-                return false;
-            }
         }
 
         private async Task<string> GenerateOrderNumberAsync()

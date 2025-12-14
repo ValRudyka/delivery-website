@@ -122,30 +122,9 @@ namespace delivery_website.Areas.Customer.Controllers
 
                 _logger.LogInformation($"Order {order.OrderNumber} created for user {userId}");
 
-                // If Cash on Delivery, go directly to confirmation
-                if (model.PaymentMethod == "CashOnDelivery")
-                {
-                    await _orderService.UpdateOrderStatusAsync(order.OrderId, "Confirmed");
-                    TempData["SuccessMessage"] = "Замовлення успішно оформлено!";
-                    return RedirectToAction("Confirmation", new { orderId = order.OrderId });
-                }
-
-                // If Credit Card, redirect to Stripe Checkout
-                if (model.PaymentMethod == "CreditCard")
-                {
-                    try
-                    {
-                        var stripeUrl = await _orderService.CreateStripeCheckoutSessionAsync(order);
-                        return Redirect(stripeUrl);
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogError($"Stripe error: {ex.Message}");
-                        TempData["ErrorMessage"] = "Помилка платіжної системи: " + ex.Message;
-                        return RedirectToAction("Cancel", new { orderId = order.OrderId });
-                    }
-                }
-
+                // Go directly to confirmation
+                await _orderService.UpdateOrderStatusAsync(order.OrderId, "Confirmed");
+                TempData["SuccessMessage"] = "Замовлення успішно оформлено!";
                 return RedirectToAction("Confirmation", new { orderId = order.OrderId });
             }
             catch (Exception ex)
@@ -177,45 +156,6 @@ namespace delivery_website.Areas.Customer.Controllers
             }
 
             return View(model);
-        }
-
-        // GET: /Customer/Checkout/Success (Stripe callback)
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> Success(string session_id, Guid orderId)
-        {
-            if (string.IsNullOrEmpty(session_id))
-            {
-                TempData["ErrorMessage"] = "Невірна сесія оплати.";
-                return RedirectToAction("Cancel", new { orderId });
-            }
-
-            // Process the successful payment
-            var success = await _orderService.ProcessPaymentSuccessAsync(session_id, orderId);
-
-            if (success)
-            {
-                TempData["SuccessMessage"] = "Оплата успішна! Ваше замовлення підтверджено.";
-                return RedirectToAction("Confirmation", new { orderId });
-            }
-            else
-            {
-                TempData["ErrorMessage"] = "Помилка верифікації оплати. Зверніться до підтримки.";
-                return RedirectToAction("Cancel", new { orderId });
-            }
-        }
-
-        // GET: /Customer/Checkout/Cancel (Stripe callback)
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> Cancel(Guid orderId)
-        {
-            // Update order status to cancelled
-            await _orderService.UpdateOrderStatusAsync(orderId, "Cancelled");
-
-            TempData["WarningMessage"] = "Оплату скасовано. Ваше замовлення було скасовано.";
-
-            return View(orderId);
         }
     }
 }

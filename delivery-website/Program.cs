@@ -6,7 +6,6 @@ using delivery_website.Repositories.Implementations;
 using delivery_website.Services.Interfaces;
 using delivery_website.Services.Implementations;
 using delivery_website.Models.Configuration;
-using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,17 +46,6 @@ builder.Services.ConfigureApplicationCookie(options =>
 // Configure Email Settings
 builder.Services.Configure<EmailSettings>(
     builder.Configuration.GetSection("EmailSettings"));
-
-// Configure Stripe Settings
-builder.Services.Configure<StripeSettings>(
-    builder.Configuration.GetSection("Stripe"));
-
-// Set Stripe API Key globally
-var stripeSettings = builder.Configuration.GetSection("Stripe").Get<StripeSettings>();
-if (stripeSettings != null && !string.IsNullOrEmpty(stripeSettings.SecretKey))
-{
-    StripeConfiguration.ApiKey = stripeSettings.SecretKey;
-}
 
 // Register Repositories
 builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
