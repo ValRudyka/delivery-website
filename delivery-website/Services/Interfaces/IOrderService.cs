@@ -11,7 +11,5 @@ namespace delivery_website.Services.Interfaces
         Task<Order> CreateOrderAsync(CheckoutViewModel model, Guid userId);
         Task<OrderConfirmationViewModel> GetOrderConfirmationAsync(Guid orderId);
         Task<bool> UpdateOrderStatusAsync(Guid orderId, string newStatus);
-        Task<string> CreateStripeCheckoutSessionAsync(Order order);
-        Task<bool> ProcessPaymentSuccessAsync(string sessionId, Guid orderId);
     }
 }
