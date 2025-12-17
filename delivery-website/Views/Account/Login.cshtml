@@ -1,7 +1,9 @@
-﻿@model delivery_website.Models.ViewModels.Account.LoginViewModel
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<delivery_website.Resources.SharedResources> Localizer
+@model delivery_website.Models.ViewModels.Account.LoginViewModel
 
 @{
-    ViewData["Title"] = "Вхід";
+    ViewData["Title"] = Localizer["Account.Login"];
 }
 
 <div class="container mt-5">
@@ -10,8 +12,8 @@
             <div class="card shadow-sm">
                 <div class="card-body p-5">
                     <div class="text-center mb-4">
-                        <h2 class="fw-bold">🔐 Вхід до системи</h2>
-                        <p class="text-muted">Увійдіть до вашого акаунту</p>
+                        <h2 class="fw-bold">🔐 @Localizer["Account.LoginTitle"]</h2>
+                        <p class="text-muted">@Localizer["Account.LoginSubtitle"]</p>
                     </div>
 
                     @if (TempData["SuccessMessage"] != null)
@@ -36,33 +38,33 @@
                         <input type="hidden" asp-for="ReturnUrl" />
 
                         <div class="mb-3">
-                            <label asp-for="Email" class="form-label">Email адреса</label>
-                            <input asp-for="Email" class="form-control form-control-lg" placeholder="your@email.com" autofocus />
+                            <label asp-for="Email" class="form-label">@Localizer["Account.Email"]</label>
+                            <input asp-for="Email" class="form-control form-control-lg" placeholder="@Localizer["Account.EmailPlaceholder"]" autofocus />
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="Password" class="form-label">Пароль</label>
-                            <input asp-for="Password" type="password" class="form-control form-control-lg" placeholder="Введіть пароль" />
+                            <label asp-for="Password" class="form-label">@Localizer["Account.Password"]</label>
+                            <input asp-for="Password" type="password" class="form-control form-control-lg" placeholder="@Localizer["Account.PasswordPlaceholder"]" />
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3 form-check">
                             <input asp-for="RememberMe" class="form-check-input" />
                             <label asp-for="RememberMe" class="form-check-label">
-                                Запам'ятати мене
+                                @Localizer["Account.RememberMe"]
                             </label>
                         </div>
 
                         <div class="d-grid mb-3">
                             <button type="submit" class="btn btn-primary btn-lg">
-                                Увійти
+                                @Localizer["Account.LoginButton"]
                             </button>
                         </div>
 
                         <div class="text-center">
                             <a asp-action="ForgotPassword" class="text-decoration-none">
-                                Забули пароль?
+                                @Localizer["Account.ForgotPassword"]
                             </a>
                         </div>
                     </form>
@@ -71,9 +73,9 @@
 
                     <div class="text-center">
                         <p class="text-muted mb-0">
-                            Немає акаунту?
+                            @Localizer["Account.NoAccount"]
                             <a asp-action="Register" class="text-decoration-none fw-bold">
-                                Зареєструватися
+                                @Localizer["Account.RegisterButton"]
                             </a>
                         </p>
                     </div>

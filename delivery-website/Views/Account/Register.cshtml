@@ -1,7 +1,9 @@
-﻿@model delivery_website.Models.ViewModels.Account.RegisterViewModel
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<delivery_website.Resources.SharedResources> Localizer
+@model delivery_website.Models.ViewModels.Account.RegisterViewModel
 
 @{
-    ViewData["Title"] = "Реєстрація";
+    ViewData["Title"] = Localizer["Account.Register"];
 }
 
 <div class="container mt-5">
@@ -10,8 +12,8 @@
             <div class="card shadow-sm">
                 <div class="card-body p-5">
                     <div class="text-center mb-4">
-                        <h2 class="fw-bold">📝 Реєстрація</h2>
-                        <p class="text-muted">Створіть ваш акаунт</p>
+                        <h2 class="fw-bold">📝 @Localizer["Account.RegisterTitle"]</h2>
+                        <p class="text-muted">@Localizer["Account.RegisterSubtitle"]</p>
                     </div>
 
                     <form asp-action="Register" method="post">
@@ -19,56 +21,56 @@
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label asp-for="FirstName" class="form-label">Ім'я *</label>
-                                <input asp-for="FirstName" class="form-control" placeholder="Іван" />
+                                <label asp-for="FirstName" class="form-label">@Localizer["Account.FirstName"] @Localizer["Account.RequiredField"]</label>
+                                <input asp-for="FirstName" class="form-control" placeholder="@Localizer["Account.FirstNamePlaceholder"]" />
                                 <span asp-validation-for="FirstName" class="text-danger"></span>
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label asp-for="LastName" class="form-label">Прізвище *</label>
-                                <input asp-for="LastName" class="form-control" placeholder="Іванов" />
+                                <label asp-for="LastName" class="form-label">@Localizer["Account.LastName"] @Localizer["Account.RequiredField"]</label>
+                                <input asp-for="LastName" class="form-control" placeholder="@Localizer["Account.LastNamePlaceholder"]" />
                                 <span asp-validation-for="LastName" class="text-danger"></span>
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="Email" class="form-label">Email адреса *</label>
-                            <input asp-for="Email" class="form-control" placeholder="your@email.com" />
+                            <label asp-for="Email" class="form-label">@Localizer["Account.Email"] @Localizer["Account.RequiredField"]</label>
+                            <input asp-for="Email" class="form-control" placeholder="@Localizer["Account.EmailPlaceholder"]" />
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="PhoneNumber" class="form-label">Номер телефону *</label>
-                            <input asp-for="PhoneNumber" class="form-control" placeholder="+380XXXXXXXXX" />
+                            <label asp-for="PhoneNumber" class="form-label">@Localizer["Account.PhoneNumber"] @Localizer["Account.RequiredField"]</label>
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="@Localizer["Account.PhoneNumberPlaceholder"]" />
                             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="Password" class="form-label">Пароль *</label>
-                            <input asp-for="Password" type="password" class="form-control" placeholder="Мінімум 6 символів" />
+                            <label asp-for="Password" class="form-label">@Localizer["Account.Password"] @Localizer["Account.RequiredField"]</label>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="@Localizer["Account.PasswordMinLength"]" />
                             <span asp-validation-for="Password" class="text-danger"></span>
                             <small class="form-text text-muted">
-                                Пароль повинен містити мінімум 6 символів
+                                @Localizer["Account.PasswordHint"]
                             </small>
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="ConfirmPassword" class="form-label">Підтвердження паролю *</label>
-                            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Повторіть пароль" />
+                            <label asp-for="ConfirmPassword" class="form-label">@Localizer["Account.ConfirmPassword"] @Localizer["Account.RequiredField"]</label>
+                            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="@Localizer["Account.ConfirmPasswordPlaceholder"]" />
                             <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3 form-check">
                             <input asp-for="AgreeToTerms" class="form-check-input" />
                             <label asp-for="AgreeToTerms" class="form-check-label">
-                                Я погоджуюсь з <a href="#" class="text-decoration-none">умовами використання</a> та <a href="#" class="text-decoration-none">політикою конфіденційності</a> *
+                                @Localizer["Account.AgreeToTermsPart1"] <a href="#" class="text-decoration-none">@Localizer["Account.TermsOfService"]</a> @Localizer["Account.And"] <a href="#" class="text-decoration-none">@Localizer["Account.PrivacyPolicy"]</a> @Localizer["Account.RequiredField"]
                             </label>
                             <span asp-validation-for="AgreeToTerms" class="text-danger d-block"></span>
                         </div>
 
                         <div class="d-grid mb-3">
                             <button type="submit" class="btn btn-primary btn-lg">
-                                Зареєструватися
+                                @Localizer["Account.RegisterButton"]
                             </button>
                         </div>
                     </form>
@@ -77,9 +79,9 @@
 
                     <div class="text-center">
                         <p class="text-muted mb-0">
-                            Вже маєте акаунт?
+                            @Localizer["Account.HaveAccount"]
                             <a asp-action="Login" class="text-decoration-none fw-bold">
-                                Увійти
+                                @Localizer["Account.LoginButton"]
                             </a>
                         </p>
                     </div>
