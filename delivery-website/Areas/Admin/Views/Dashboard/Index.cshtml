@@ -1,11 +1,11 @@
 @model AdminDashboardDto
 @{
-    ViewData["Title"] = "Панель керування";
+    ViewData["Title"] = SharedLocalizer["Admin.Dashboard"];
 }
 
 <div class="page-header">
-    <h1 class="page-title">Панель керування</h1>
-    <p class="text-muted">Огляд системи та статистика</p>
+    <h1 class="page-title">@SharedLocalizer["Admin.Dashboard"]</h1>
+    <p class="text-muted">@SharedLocalizer["Admin.SystemOverview"]</p>
 </div>
 
 <!-- Statistics Cards -->
@@ -17,7 +17,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <div class="stat-value">@Model.TotalUsers</div>
-                        <div class="stat-label">Користувачів</div>
+                        <div class="stat-label">@SharedLocalizer["Admin.Users"]</div>
                     </div>
                     <div class="stat-icon">
                         <i class="bi bi-people"></i>
@@ -25,7 +25,7 @@
                 </div>
                 <div class="mt-3 small">
                     <span class="text-success"><i class="bi bi-arrow-up"></i> @Model.NewUsersToday</span>
-                    <span class="text-muted">нових сьогодні</span>
+                    <span class="text-muted">@SharedLocalizer["Admin.NewToday"]</span>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <div class="stat-value">@Model.TotalRestaurants</div>
-                        <div class="stat-label">Ресторанів</div>
+                        <div class="stat-label">@SharedLocalizer["Admin.Restaurants"]</div>
                     </div>
                     <div class="stat-icon">
                         <i class="bi bi-shop"></i>
@@ -48,12 +48,12 @@
                     @if (Model.PendingApprovalRestaurants > 0)
                     {
                         <span class="text-warning"><i class="bi bi-hourglass-split"></i> @Model.PendingApprovalRestaurants</span>
-                        <span class="text-muted">на модерації</span>
+                        <span class="text-muted">@SharedLocalizer["Admin.OnModeration"]</span>
                     }
                     else
                     {
                         <span class="text-success"><i class="bi bi-check-circle"></i></span>
-                        <span class="text-muted">всі перевірені</span>
+                        <span class="text-muted">@SharedLocalizer["Admin.AllVerified"]</span>
                     }
                 </div>
             </div>
@@ -67,7 +67,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <div class="stat-value">@Model.TotalOrders</div>
-                        <div class="stat-label">Замовлень</div>
+                        <div class="stat-label">@SharedLocalizer["Admin.Orders"]</div>
                     </div>
                     <div class="stat-icon">
                         <i class="bi bi-bag-check"></i>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="mt-3 small">
                     <span class="text-primary"><i class="bi bi-clock"></i> @Model.PendingOrders</span>
-                    <span class="text-muted">очікують</span>
+                    <span class="text-muted">@SharedLocalizer["Admin.Pending"]</span>
                 </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <div class="stat-value">@Model.TotalRevenue.ToString("N0") ₴</div>
-                        <div class="stat-label">Дохід</div>
+                        <div class="stat-label">@SharedLocalizer["Admin.Revenue"]</div>
                     </div>
                     <div class="stat-icon">
                         <i class="bi bi-currency-dollar"></i>
@@ -96,7 +96,7 @@
                 </div>
                 <div class="mt-3 small">
                     <span class="text-success"><i class="bi bi-arrow-up"></i> @Model.RevenueToday.ToString("N0") ₴</span>
-                    <span class="text-muted">сьогодні</span>
+                    <span class="text-muted">@SharedLocalizer["Admin.Today"]</span>
                 </div>
             </div>
         </div>
@@ -109,7 +109,7 @@
         <div class="card border-0 shadow-sm">
             <div class="card-body text-center">
                 <h3 class="mb-0 text-primary">@Model.OrdersToday</h3>
-                <small class="text-muted">Замовлень сьогодні</small>
+                <small class="text-muted">@SharedLocalizer["Admin.OrdersToday"]</small>
             </div>
         </div>
     </div>
@@ -117,7 +117,7 @@
         <div class="card border-0 shadow-sm">
             <div class="card-body text-center">
                 <h3 class="mb-0 text-success">@Model.CompletedOrdersToday</h3>
-                <small class="text-muted">Виконано сьогодні</small>
+                <small class="text-muted">@SharedLocalizer["Admin.CompletedToday"]</small>
             </div>
         </div>
     </div>
@@ -125,7 +125,7 @@
         <div class="card border-0 shadow-sm">
             <div class="card-body text-center">
                 <h3 class="mb-0 text-warning">@Model.PendingReviews</h3>
-                <small class="text-muted">Відгуків на модерації</small>
+                <small class="text-muted">@SharedLocalizer["Admin.ReviewsOnModeration"]</small>
             </div>
         </div>
     </div>
@@ -133,7 +133,7 @@
         <div class="card border-0 shadow-sm">
             <div class="card-body text-center">
                 <h3 class="mb-0 text-info">@Model.AverageRating.ToString("N1") <i class="bi bi-star-fill text-warning"></i></h3>
-                <small class="text-muted">Середній рейтинг</small>
+                <small class="text-muted">@SharedLocalizer["Admin.AverageRating"]</small>
             </div>
         </div>
     </div>
@@ -144,20 +144,20 @@
     <div class="col-xl-8">
         <div class="card detail-card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <span><i class="bi bi-clock-history me-2"></i>Останні замовлення</span>
-                <a asp-action="Index" asp-controller="Orders" class="btn btn-sm btn-outline-primary">Всі замовлення</a>
+                <span><i class="bi bi-clock-history me-2"></i>@SharedLocalizer["Admin.RecentOrders"]</span>
+                <a asp-action="Index" asp-controller="Orders" class="btn btn-sm btn-outline-primary">@SharedLocalizer["Admin.AllOrders"]</a>
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>№ Замовлення</th>
-                                <th>Клієнт</th>
-                                <th>Ресторан</th>
-                                <th>Сума</th>
-                                <th>Статус</th>
-                                <th>Дата</th>
+                                <th>@SharedLocalizer["Admin.OrderNumber"]</th>
+                                <th>@SharedLocalizer["Admin.Customer"]</th>
+                                <th>@SharedLocalizer["Restaurant.Restaurant"]</th>
+                                <th>@SharedLocalizer["Admin.Amount"]</th>
+                                <th>@SharedLocalizer["Admin.Status"]</th>
+                                <th>@SharedLocalizer["Admin.Date"]</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -189,13 +189,13 @@
                                                 };
                                                 var statusText = order.OrderStatus switch
                                                 {
-                                                    "Pending" => "Очікує",
-                                                    "Confirmed" => "Підтверджено",
-                                                    "Preparing" => "Готується",
-                                                    "Ready" => "Готово",
-                                                    "OutForDelivery" => "Доставляється",
-                                                    "Delivered" => "Доставлено",
-                                                    "Cancelled" => "Скасовано",
+                                                    "Pending" => SharedLocalizer["OrderStatus.Pending"].Value,
+                                                    "Confirmed" => SharedLocalizer["OrderStatus.Confirmed"].Value,
+                                                    "Preparing" => SharedLocalizer["OrderStatus.Preparing"].Value,
+                                                    "Ready" => SharedLocalizer["OrderStatus.Ready"].Value,
+                                                    "OutForDelivery" => SharedLocalizer["OrderStatus.OutForDelivery"].Value,
+                                                    "Delivered" => SharedLocalizer["OrderStatus.Delivered"].Value,
+                                                    "Cancelled" => SharedLocalizer["OrderStatus.Cancelled"].Value,
                                                     _ => order.OrderStatus
                                                 };
                                             }
@@ -208,7 +208,7 @@
                             else
                             {
                                 <tr>
-                                    <td colspan="6" class="text-center text-muted py-4">Немає замовлень</td>
+                                    <td colspan="6" class="text-center text-muted py-4">@SharedLocalizer["Admin.NoOrders"]</td>
                                 </tr>
                             }
                         </tbody>
@@ -223,8 +223,8 @@
         <!-- Recent Users -->
         <div class="card detail-card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <span><i class="bi bi-person-plus me-2"></i>Нові користувачі</span>
-                <a asp-action="Index" asp-controller="Users" class="btn btn-sm btn-outline-primary">Всі</a>
+                <span><i class="bi bi-person-plus me-2"></i>@SharedLocalizer["Admin.NewUsers"]</span>
+                <a asp-action="Index" asp-controller="Users" class="btn btn-sm btn-outline-primary">@SharedLocalizer["Admin.All"]</a>
             </div>
             <div class="card-body p-0">
                 <ul class="list-group list-group-flush">
@@ -243,7 +243,7 @@
                     }
                     else
                     {
-                        <li class="list-group-item text-center text-muted">Немає нових користувачів</li>
+                        <li class="list-group-item text-center text-muted">@SharedLocalizer["Admin.NoNewUsers"]</li>
                     }
                 </ul>
             </div>
@@ -252,8 +252,8 @@
         <!-- Recent Reviews -->
         <div class="card detail-card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <span><i class="bi bi-star me-2"></i>Останні відгуки</span>
-                <a asp-action="Pending" asp-controller="Reviews" class="btn btn-sm btn-outline-primary">На модерації</a>
+                <span><i class="bi bi-star me-2"></i>@SharedLocalizer["Admin.RecentReviews"]</span>
+                <a asp-action="Pending" asp-controller="Reviews" class="btn btn-sm btn-outline-primary">@SharedLocalizer["Admin.OnModerationReviews"]</a>
             </div>
             <div class="card-body p-0">
                 <ul class="list-group list-group-flush">
@@ -274,14 +274,14 @@
                                 <small class="text-muted">@review.CustomerName • @review.CreatedDate.ToString("dd.MM.yyyy")</small>
                                 @if (!review.IsApproved)
                                 {
-                                    <span class="badge bg-warning ms-2">На модерації</span>
+                                    <span class="badge bg-warning ms-2">@SharedLocalizer["Admin.OnModerationReviews"]</span>
                                 }
                             </li>
                         }
                     }
                     else
                     {
-                        <li class="list-group-item text-center text-muted">Немає відгуків</li>
+                        <li class="list-group-item text-center text-muted">@SharedLocalizer["Admin.NoReviews"]</li>
                     }
                 </ul>
             </div>

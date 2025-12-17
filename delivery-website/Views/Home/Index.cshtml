@@ -1,6 +1,6 @@
 @{
     @using Microsoft.AspNetCore.Identity
-    ViewData["Title"] = "Головна";
+    ViewData["Title"] = SharedLocalizer["Home.Title"];
     @inject SignInManager<IdentityUser> SignInManager
     @inject UserManager<IdentityUser> UserManager
 }
@@ -8,10 +8,10 @@
 <!-- Hero Section -->
 <div class="hero-section">
     <div class="container text-center">
-        <h1>🍕 Платформа замовлення та доставки їжі</h1>
-        <p>Замовте їжу з найкращих ресторанів вашого міста швидко та зручно</p>
+        <h1>🍕 @SharedLocalizer["Home.HeroTitle"]</h1>
+        <p>@SharedLocalizer["Home.HeroSubtitle"]</p>
         <a asp-area="Customer" asp-controller="Restaurants" asp-action="Index" class="btn btn-light btn-lg">
-            Переглянути ресторани
+            @SharedLocalizer["Home.ViewRestaurants"]
         </a>
     </div>
 </div>
@@ -24,12 +24,12 @@
             <div class="d-flex align-items-center justify-content-between">
                 <div>
                     <h5 class="alert-heading mb-1">
-                        <i class="bi bi-shield-lock-fill me-2"></i>Доступ адміністратора
+                        <i class="bi bi-shield-lock-fill me-2"></i>@SharedLocalizer["Home.AdminAccess"]
                     </h5>
-                    <p class="mb-0">У вас є права адміністратора. Перейдіть до панелі керування.</p>
+                    <p class="mb-0">@SharedLocalizer["Home.AdminAccessText"]</p>
                 </div>
                 <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="btn btn-danger">
-                    🛡️ Відкрити адмін-панель
+                    🛡️ @SharedLocalizer["Home.OpenAdminPanel"]
                 </a>
             </div>
         </div>
@@ -37,38 +37,38 @@
 
     <!-- Main Features -->
     <div class="section-title text-center mb-4">
-        <h2>🌟 Чому обирають нас</h2>
-        <p class="text-muted">Найкраща платформа для замовлення їжі онлайн</p>
+        <h2>🌟 @SharedLocalizer["Home.WhyChooseUs"]</h2>
+        <p class="text-muted">@SharedLocalizer["Home.WhyChooseUsSubtitle"]</p>
     </div>
 
     <div class="row mb-5">
         <div class="col-md-4 mb-4">
             <div class="card text-center p-4 h-100">
                 <div style="font-size: 3.5rem;">🍔</div>
-                <h5 class="mt-3">Великий вибір ресторанів</h5>
-                <p class="text-muted">Понад 100+ ресторанів з різними кухнями: італійська, японська, українська, американська та інші</p>
+                <h5 class="mt-3">@SharedLocalizer["Home.WideSelection"]</h5>
+                <p class="text-muted">@SharedLocalizer["Home.WideSelectionText"]</p>
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="card text-center p-4 h-100">
                 <div style="font-size: 3.5rem;">🚀</div>
-                <h5 class="mt-3">Швидка доставка</h5>
-                <p class="text-muted">Середній час доставки 30-40 хвилин. Відстежуйте ваше замовлення в реальному часі</p>
+                <h5 class="mt-3">@SharedLocalizer["Home.FastDelivery"]</h5>
+                <p class="text-muted">@SharedLocalizer["Home.FastDeliveryText"]</p>
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="card text-center p-4 h-100">
                 <div style="font-size: 3.5rem;">💳</div>
-                <h5 class="mt-3">Зручна оплата</h5>
-                <p class="text-muted">Оплата онлайн карткою або готівкою при отриманні. Безпечні транзакції</p>
+                <h5 class="mt-3">@SharedLocalizer["Home.EasyPayment"]</h5>
+                <p class="text-muted">@SharedLocalizer["Home.EasyPaymentText"]</p>
             </div>
         </div>
     </div>
 
     <!-- How It Works -->
     <div class="section-title text-center mb-4">
-        <h2>📱 Як це працює</h2>
-        <p class="text-muted">Замовити їжу легко — всього за 4 простих кроки</p>
+        <h2>📱 @SharedLocalizer["Home.HowItWorks"]</h2>
+        <p class="text-muted">@SharedLocalizer["Home.HowItWorksSubtitle"]</p>
     </div>
 
     <div class="row mb-5">
@@ -77,8 +77,8 @@
                 <div class="bg-primary text-white rounded-circle mx-auto mb-3" style="width: 50px; height: 50px; line-height: 50px; font-size: 1.5rem;">
                     1
                 </div>
-                <h6>Оберіть ресторан</h6>
-                <small class="text-muted">Перегляньте меню та виберіть улюблені страви</small>
+                <h6>@SharedLocalizer["Home.Step1Title"]</h6>
+                <small class="text-muted">@SharedLocalizer["Home.Step1Text"]</small>
             </div>
         </div>
         <div class="col-md-3 mb-3">
@@ -86,8 +86,8 @@
                 <div class="bg-primary text-white rounded-circle mx-auto mb-3" style="width: 50px; height: 50px; line-height: 50px; font-size: 1.5rem;">
                     2
                 </div>
-                <h6>Додайте до кошика</h6>
-                <small class="text-muted">Налаштуйте страви за вашим смаком</small>
+                <h6>@SharedLocalizer["Home.Step2Title"]</h6>
+                <small class="text-muted">@SharedLocalizer["Home.Step2Text"]</small>
             </div>
         </div>
         <div class="col-md-3 mb-3">
@@ -95,8 +95,8 @@
                 <div class="bg-primary text-white rounded-circle mx-auto mb-3" style="width: 50px; height: 50px; line-height: 50px; font-size: 1.5rem;">
                     3
                 </div>
-                <h6>Оформіть замовлення</h6>
-                <small class="text-muted">Вкажіть адресу та спосіб оплати</small>
+                <h6>@SharedLocalizer["Home.Step3Title"]</h6>
+                <small class="text-muted">@SharedLocalizer["Home.Step3Text"]</small>
             </div>
         </div>
         <div class="col-md-3 mb-3">
@@ -104,45 +104,45 @@
                 <div class="bg-primary text-white rounded-circle mx-auto mb-3" style="width: 50px; height: 50px; line-height: 50px; font-size: 1.5rem;">
                     4
                 </div>
-                <h6>Отримайте доставку</h6>
-                <small class="text-muted">Насолоджуйтесь смачною їжею!</small>
+                <h6>@SharedLocalizer["Home.Step4Title"]</h6>
+                <small class="text-muted">@SharedLocalizer["Home.Step4Text"]</small>
             </div>
         </div>
     </div>
 
     <!-- Popular Cuisines -->
     <div class="section-title text-center mb-4">
-        <h2>🍽️ Популярні кухні</h2>
-        <p class="text-muted">Виберіть улюблену кухню</p>
+        <h2>🍽️ @SharedLocalizer["Home.PopularCuisines"]</h2>
+        <p class="text-muted">@SharedLocalizer["Home.PopularCuisinesSubtitle"]</p>
     </div>
 
     <div class="row mb-5">
         <div class="col-6 col-md-3 mb-3">
             <div class="card text-center p-3">
                 <div style="font-size: 2.5rem;">🍕</div>
-                <h6 class="mt-2">Італійська</h6>
-                <small class="text-muted">Піца, паста</small>
+                <h6 class="mt-2">@SharedLocalizer["Home.Italian"]</h6>
+                <small class="text-muted">@SharedLocalizer["Home.ItalianText"]</small>
             </div>
         </div>
         <div class="col-6 col-md-3 mb-3">
             <div class="card text-center p-3">
                 <div style="font-size: 2.5rem;">🍣</div>
-                <h6 class="mt-2">Японська</h6>
-                <small class="text-muted">Суші, роли</small>
+                <h6 class="mt-2">@SharedLocalizer["Home.Japanese"]</h6>
+                <small class="text-muted">@SharedLocalizer["Home.JapaneseText"]</small>
             </div>
         </div>
         <div class="col-6 col-md-3 mb-3">
             <div class="card text-center p-3">
                 <div style="font-size: 2.5rem;">🍔</div>
-                <h6 class="mt-2">Американська</h6>
-                <small class="text-muted">Бургери, стейки</small>
+                <h6 class="mt-2">@SharedLocalizer["Home.American"]</h6>
+                <small class="text-muted">@SharedLocalizer["Home.AmericanText"]</small>
             </div>
         </div>
         <div class="col-6 col-md-3 mb-3">
             <div class="card text-center p-3">
                 <div style="font-size: 2.5rem;">🥟</div>
-                <h6 class="mt-2">Українська</h6>
-                <small class="text-muted">Вареники, борщ</small>
+                <h6 class="mt-2">@SharedLocalizer["Home.Ukrainian"]</h6>
+                <small class="text-muted">@SharedLocalizer["Home.UkrainianText"]</small>
             </div>
         </div>
     </div>
@@ -153,19 +153,19 @@
             <div class="row text-center">
                 <div class="col-md-3 mb-3">
                     <h3 class="text-primary">500+</h3>
-                    <p class="text-muted mb-0">Ресторанів</p>
+                    <p class="text-muted mb-0">@SharedLocalizer["Home.Restaurants"]</p>
                 </div>
                 <div class="col-md-3 mb-3">
                     <h3 class="text-primary">10,000+</h3>
-                    <p class="text-muted mb-0">Активних користувачів</p>
+                    <p class="text-muted mb-0">@SharedLocalizer["Home.ActiveUsers"]</p>
                 </div>
                 <div class="col-md-3 mb-3">
                     <h3 class="text-primary">50,000+</h3>
-                    <p class="text-muted mb-0">Замовлень щомісяця</p>
+                    <p class="text-muted mb-0">@SharedLocalizer["Home.OrdersPerMonth"]</p>
                 </div>
                 <div class="col-md-3 mb-3">
                     <h3 class="text-primary">4.8⭐</h3>
-                    <p class="text-muted mb-0">Середня оцінка</p>
+                    <p class="text-muted mb-0">@SharedLocalizer["Home.AverageRating"]</p>
                 </div>
             </div>
         </div>
@@ -174,20 +174,20 @@
     <!-- Call to Action -->
     <div class="card bg-primary text-white text-center mb-5">
         <div class="card-body p-5">
-            <h3 class="mb-3">Готові замовити?</h3>
-            <p class="mb-4">Приєднуйтесь до тисяч задоволених клієнтів</p>
+            <h3 class="mb-3">@SharedLocalizer["Home.ReadyToOrder"]</h3>
+            <p class="mb-4">@SharedLocalizer["Home.JoinThousands"]</p>
             @if (!SignInManager.IsSignedIn(User))
             {
                 <a asp-area="Customer" asp-controller="Restaurants" asp-action="Index" class="btn btn-light btn-lg me-2">
-                    Переглянути ресторани
+                    @SharedLocalizer["Home.ViewRestaurants"]
                 </a>
                 <a asp-controller="Account" asp-action="Register" class="btn btn-outline-light btn-lg">
-                    Зареєструватися
+                    @SharedLocalizer["Account.RegisterButton"]
                 </a>
             } else
             {
                 <a asp-area="Customer" asp-controller="Restaurants" asp-action="Index" class="btn btn-light btn-lg">
-                    Переглянути ресторани
+                    @SharedLocalizer["Home.ViewRestaurants"]
                 </a>
             }
         </div>

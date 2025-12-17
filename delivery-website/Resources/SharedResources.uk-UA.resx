@@ -252,4 +252,406 @@
   <data name="Language.SelectLanguage" xml:space="preserve">
     <value>Мова</value>
   </data>
+
+  <!-- Home Page -->
+  <data name="Home.Title" xml:space="preserve">
+    <value>Головна</value>
+  </data>
+  <data name="Home.HeroTitle" xml:space="preserve">
+    <value>Платформа замовлення та доставки їжі</value>
+  </data>
+  <data name="Home.HeroSubtitle" xml:space="preserve">
+    <value>Замовте їжу з найкращих ресторанів вашого міста швидко та зручно</value>
+  </data>
+  <data name="Home.ViewRestaurants" xml:space="preserve">
+    <value>Переглянути ресторани</value>
+  </data>
+  <data name="Home.AdminAccess" xml:space="preserve">
+    <value>Доступ адміністратора</value>
+  </data>
+  <data name="Home.AdminAccessText" xml:space="preserve">
+    <value>У вас є права адміністратора. Перейдіть до панелі керування.</value>
+  </data>
+  <data name="Home.OpenAdminPanel" xml:space="preserve">
+    <value>Відкрити адмін-панель</value>
+  </data>
+  <data name="Home.WhyChooseUs" xml:space="preserve">
+    <value>Чому обирають нас</value>
+  </data>
+  <data name="Home.WhyChooseUsSubtitle" xml:space="preserve">
+    <value>Найкраща платформа для замовлення їжі онлайн</value>
+  </data>
+  <data name="Home.WideSelection" xml:space="preserve">
+    <value>Великий вибір ресторанів</value>
+  </data>
+  <data name="Home.WideSelectionText" xml:space="preserve">
+    <value>Понад 100+ ресторанів з різними кухнями: італійська, японська, українська, американська та інші</value>
+  </data>
+  <data name="Home.FastDelivery" xml:space="preserve">
+    <value>Швидка доставка</value>
+  </data>
+  <data name="Home.FastDeliveryText" xml:space="preserve">
+    <value>Середній час доставки 30-40 хвилин. Відстежуйте ваше замовлення в реальному часі</value>
+  </data>
+  <data name="Home.EasyPayment" xml:space="preserve">
+    <value>Зручна оплата</value>
+  </data>
+  <data name="Home.EasyPaymentText" xml:space="preserve">
+    <value>Оплата онлайн карткою або готівкою при отриманні. Безпечні транзакції</value>
+  </data>
+  <data name="Home.HowItWorks" xml:space="preserve">
+    <value>Як це працює</value>
+  </data>
+  <data name="Home.HowItWorksSubtitle" xml:space="preserve">
+    <value>Замовити їжу легко — всього за 4 простих кроки</value>
+  </data>
+  <data name="Home.Step1Title" xml:space="preserve">
+    <value>Оберіть ресторан</value>
+  </data>
+  <data name="Home.Step1Text" xml:space="preserve">
+    <value>Перегляньте меню та виберіть улюблені страви</value>
+  </data>
+  <data name="Home.Step2Title" xml:space="preserve">
+    <value>Додайте до кошика</value>
+  </data>
+  <data name="Home.Step2Text" xml:space="preserve">
+    <value>Налаштуйте страви за вашим смаком</value>
+  </data>
+  <data name="Home.Step3Title" xml:space="preserve">
+    <value>Оформіть замовлення</value>
+  </data>
+  <data name="Home.Step3Text" xml:space="preserve">
+    <value>Вкажіть адресу та спосіб оплати</value>
+  </data>
+  <data name="Home.Step4Title" xml:space="preserve">
+    <value>Отримайте доставку</value>
+  </data>
+  <data name="Home.Step4Text" xml:space="preserve">
+    <value>Насолоджуйтесь смачною їжею!</value>
+  </data>
+  <data name="Home.PopularCuisines" xml:space="preserve">
+    <value>Популярні кухні</value>
+  </data>
+  <data name="Home.PopularCuisinesSubtitle" xml:space="preserve">
+    <value>Виберіть улюблену кухню</value>
+  </data>
+  <data name="Home.Italian" xml:space="preserve">
+    <value>Італійська</value>
+  </data>
+  <data name="Home.ItalianText" xml:space="preserve">
+    <value>Піца, паста</value>
+  </data>
+  <data name="Home.Japanese" xml:space="preserve">
+    <value>Японська</value>
+  </data>
+  <data name="Home.JapaneseText" xml:space="preserve">
+    <value>Суші, роли</value>
+  </data>
+  <data name="Home.American" xml:space="preserve">
+    <value>Американська</value>
+  </data>
+  <data name="Home.AmericanText" xml:space="preserve">
+    <value>Бургери, стейки</value>
+  </data>
+  <data name="Home.Ukrainian" xml:space="preserve">
+    <value>Українська</value>
+  </data>
+  <data name="Home.UkrainianText" xml:space="preserve">
+    <value>Вареники, борщ</value>
+  </data>
+  <data name="Home.Restaurants" xml:space="preserve">
+    <value>Ресторанів</value>
+  </data>
+  <data name="Home.ActiveUsers" xml:space="preserve">
+    <value>Активних користувачів</value>
+  </data>
+  <data name="Home.OrdersPerMonth" xml:space="preserve">
+    <value>Замовлень щомісяця</value>
+  </data>
+  <data name="Home.AverageRating" xml:space="preserve">
+    <value>Середня оцінка</value>
+  </data>
+  <data name="Home.ReadyToOrder" xml:space="preserve">
+    <value>Готові замовити?</value>
+  </data>
+  <data name="Home.JoinThousands" xml:space="preserve">
+    <value>Приєднуйтесь до тисяч задоволених клієнтів</value>
+  </data>
+
+  <!-- Restaurant Pages -->
+  <data name="Restaurant.Title" xml:space="preserve">
+    <value>Ресторани</value>
+  </data>
+  <data name="Restaurant.OurRestaurants" xml:space="preserve">
+    <value>Наші ресторани</value>
+  </data>
+  <data name="Restaurant.Found" xml:space="preserve">
+    <value>Знайдено</value>
+  </data>
+  <data name="Restaurant.Restaurants" xml:space="preserve">
+    <value>ресторанів</value>
+  </data>
+  <data name="Restaurant.SearchPlaceholder" xml:space="preserve">
+    <value>Назва ресторану або кухня...</value>
+  </data>
+  <data name="Restaurant.CuisineType" xml:space="preserve">
+    <value>Тип кухні</value>
+  </data>
+  <data name="Restaurant.AllCuisines" xml:space="preserve">
+    <value>Всі кухні</value>
+  </data>
+  <data name="Restaurant.MinRating" xml:space="preserve">
+    <value>Мін. рейтинг</value>
+  </data>
+  <data name="Restaurant.Any" xml:space="preserve">
+    <value>Будь-який</value>
+  </data>
+  <data name="Restaurant.DeliveryTime" xml:space="preserve">
+    <value>Час доставки</value>
+  </data>
+  <data name="Restaurant.UpTo30Min" xml:space="preserve">
+    <value>До 30 хв</value>
+  </data>
+  <data name="Restaurant.UpTo45Min" xml:space="preserve">
+    <value>До 45 хв</value>
+  </data>
+  <data name="Restaurant.UpTo60Min" xml:space="preserve">
+    <value>До 60 хв</value>
+  </data>
+  <data name="Restaurant.SortBy" xml:space="preserve">
+    <value>Сортування</value>
+  </data>
+  <data name="Restaurant.Rating" xml:space="preserve">
+    <value>Рейтинг</value>
+  </data>
+  <data name="Restaurant.Name" xml:space="preserve">
+    <value>Назва</value>
+  </data>
+  <data name="Restaurant.Time" xml:space="preserve">
+    <value>Час</value>
+  </data>
+  <data name="Restaurant.Cost" xml:space="preserve">
+    <value>Вартість</value>
+  </data>
+  <data name="Restaurant.ApplyFilters" xml:space="preserve">
+    <value>Застосувати фільтри</value>
+  </data>
+  <data name="Restaurant.Reset" xml:space="preserve">
+    <value>Скинути</value>
+  </data>
+  <data name="Restaurant.MinOrder" xml:space="preserve">
+    <value>Мін. замовлення</value>
+  </data>
+  <data name="Restaurant.Delivery" xml:space="preserve">
+    <value>Доставка</value>
+  </data>
+  <data name="Restaurant.ViewMenu" xml:space="preserve">
+    <value>Переглянути меню</value>
+  </data>
+  <data name="Restaurant.NotFound" xml:space="preserve">
+    <value>Ресторани не знайдено</value>
+  </data>
+  <data name="Restaurant.NotFoundText" xml:space="preserve">
+    <value>Спробуйте змінити параметри пошуку або скинути фільтри</value>
+  </data>
+  <data name="Restaurant.Restaurant" xml:space="preserve">
+    <value>Ресторан</value>
+  </data>
+
+  <!-- Cart Page -->
+  <data name="Cart.Title" xml:space="preserve">
+    <value>Кошик</value>
+  </data>
+  <data name="Cart.YourCart" xml:space="preserve">
+    <value>Ваш кошик</value>
+  </data>
+  <data name="Cart.ClearCart" xml:space="preserve">
+    <value>Очистити кошик</value>
+  </data>
+  <data name="Cart.Empty" xml:space="preserve">
+    <value>Ваш кошик порожній</value>
+  </data>
+  <data name="Cart.EmptyText" xml:space="preserve">
+    <value>Додайте страви з меню ресторанів</value>
+  </data>
+  <data name="Cart.PerPiece" xml:space="preserve">
+    <value>за штуку</value>
+  </data>
+  <data name="Cart.Customizations" xml:space="preserve">
+    <value>Доповнення</value>
+  </data>
+  <data name="Cart.Remove" xml:space="preserve">
+    <value>Видалити</value>
+  </data>
+  <data name="Cart.OrderSummary" xml:space="preserve">
+    <value>Підсумок замовлення</value>
+  </data>
+  <data name="Cart.ItemsCost" xml:space="preserve">
+    <value>Вартість страв</value>
+  </data>
+  <data name="Cart.DeliveryFee" xml:space="preserve">
+    <value>Доставка</value>
+  </data>
+  <data name="Cart.Total" xml:space="preserve">
+    <value>Разом</value>
+  </data>
+  <data name="Cart.Checkout" xml:space="preserve">
+    <value>Оформити замовлення</value>
+  </data>
+  <data name="Cart.ContinueShopping" xml:space="preserve">
+    <value>Продовжити покупки</value>
+  </data>
+  <data name="Cart.RemoveItemConfirm" xml:space="preserve">
+    <value>Видалити цю страву з кошика?</value>
+  </data>
+  <data name="Cart.ClearCartConfirm" xml:space="preserve">
+    <value>Очистити весь кошик?</value>
+  </data>
+  <data name="Cart.QuantityUpdated" xml:space="preserve">
+    <value>Кількість оновлено</value>
+  </data>
+  <data name="Cart.ItemRemoved" xml:space="preserve">
+    <value>Товар видалено з кошика</value>
+  </data>
+  <data name="Cart.CartCleared" xml:space="preserve">
+    <value>Кошик очищено</value>
+  </data>
+  <data name="Cart.UpdateError" xml:space="preserve">
+    <value>Помилка при оновленні кількості</value>
+  </data>
+  <data name="Cart.RemoveError" xml:space="preserve">
+    <value>Помилка при видаленні товару</value>
+  </data>
+  <data name="Cart.ClearError" xml:space="preserve">
+    <value>Помилка при очищенні кошика</value>
+  </data>
+
+  <!-- Account Pages -->
+  <data name="Account.ForgotPasswordTitle" xml:space="preserve">
+    <value>Забули пароль?</value>
+  </data>
+  <data name="Account.ForgotPasswordText" xml:space="preserve">
+    <value>Не хвилюйтесь! Введіть вашу email адресу, і ми надішлемо вам посилання для відновлення паролю.</value>
+  </data>
+  <data name="Account.SendLink" xml:space="preserve">
+    <value>Надіслати посилання</value>
+  </data>
+  <data name="Account.BackToLogin" xml:space="preserve">
+    <value>Повернутися до входу</value>
+  </data>
+
+  <!-- Admin Dashboard -->
+  <data name="Admin.Dashboard" xml:space="preserve">
+    <value>Панель керування</value>
+  </data>
+  <data name="Admin.SystemOverview" xml:space="preserve">
+    <value>Огляд системи та статистика</value>
+  </data>
+  <data name="Admin.Users" xml:space="preserve">
+    <value>Користувачів</value>
+  </data>
+  <data name="Admin.NewToday" xml:space="preserve">
+    <value>нових сьогодні</value>
+  </data>
+  <data name="Admin.Restaurants" xml:space="preserve">
+    <value>Ресторанів</value>
+  </data>
+  <data name="Admin.OnModeration" xml:space="preserve">
+    <value>на модерації</value>
+  </data>
+  <data name="Admin.AllVerified" xml:space="preserve">
+    <value>всі перевірені</value>
+  </data>
+  <data name="Admin.Orders" xml:space="preserve">
+    <value>Замовлень</value>
+  </data>
+  <data name="Admin.Pending" xml:space="preserve">
+    <value>очікують</value>
+  </data>
+  <data name="Admin.Revenue" xml:space="preserve">
+    <value>Дохід</value>
+  </data>
+  <data name="Admin.Today" xml:space="preserve">
+    <value>сьогодні</value>
+  </data>
+  <data name="Admin.OrdersToday" xml:space="preserve">
+    <value>Замовлень сьогодні</value>
+  </data>
+  <data name="Admin.CompletedToday" xml:space="preserve">
+    <value>Виконано сьогодні</value>
+  </data>
+  <data name="Admin.ReviewsOnModeration" xml:space="preserve">
+    <value>Відгуків на модерації</value>
+  </data>
+  <data name="Admin.AverageRating" xml:space="preserve">
+    <value>Середній рейтинг</value>
+  </data>
+  <data name="Admin.RecentOrders" xml:space="preserve">
+    <value>Останні замовлення</value>
+  </data>
+  <data name="Admin.AllOrders" xml:space="preserve">
+    <value>Всі замовлення</value>
+  </data>
+  <data name="Admin.OrderNumber" xml:space="preserve">
+    <value>№ Замовлення</value>
+  </data>
+  <data name="Admin.Customer" xml:space="preserve">
+    <value>Клієнт</value>
+  </data>
+  <data name="Admin.Restaurant" xml:space="preserve">
+    <value>Ресторан</value>
+  </data>
+  <data name="Admin.Amount" xml:space="preserve">
+    <value>Сума</value>
+  </data>
+  <data name="Admin.Status" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="Admin.Date" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="Admin.NoOrders" xml:space="preserve">
+    <value>Немає замовлень</value>
+  </data>
+  <data name="Admin.NewUsers" xml:space="preserve">
+    <value>Нові користувачі</value>
+  </data>
+  <data name="Admin.All" xml:space="preserve">
+    <value>Всі</value>
+  </data>
+  <data name="Admin.NoNewUsers" xml:space="preserve">
+    <value>Немає нових користувачів</value>
+  </data>
+  <data name="Admin.RecentReviews" xml:space="preserve">
+    <value>Останні відгуки</value>
+  </data>
+  <data name="Admin.OnModerationReviews" xml:space="preserve">
+    <value>На модерації</value>
+  </data>
+  <data name="Admin.NoReviews" xml:space="preserve">
+    <value>Немає відгуків</value>
+  </data>
+
+  <!-- Order Status -->
+  <data name="OrderStatus.Pending" xml:space="preserve">
+    <value>Очікує</value>
+  </data>
+  <data name="OrderStatus.Confirmed" xml:space="preserve">
+    <value>Підтверджено</value>
+  </data>
+  <data name="OrderStatus.Preparing" xml:space="preserve">
+    <value>Готується</value>
+  </data>
+  <data name="OrderStatus.Ready" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+  <data name="OrderStatus.OutForDelivery" xml:space="preserve">
+    <value>Доставляється</value>
+  </data>
+  <data name="OrderStatus.Delivered" xml:space="preserve">
+    <value>Доставлено</value>
+  </data>
+  <data name="OrderStatus.Cancelled" xml:space="preserve">
+    <value>Скасовано</value>
+  </data>
 </root>
