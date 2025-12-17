@@ -44,12 +44,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Update="Resources\**\*.resx">
-			<Generator>ResXFileCodeGenerator</Generator>
-		</EmbeddedResource>
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Compile Update="Resources\SharedResources.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
