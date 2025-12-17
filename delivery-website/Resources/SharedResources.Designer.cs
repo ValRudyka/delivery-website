@@ -22,21 +22,21 @@ namespace delivery_website.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class SharedResources {
+    public class SharedResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SharedResources() {
+        public SharedResources() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("delivery_website.Resources.SharedResources", typeof(SharedResources).Assembly);
@@ -51,7 +51,7 @@ namespace delivery_website.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to I agree to the terms of service and privacy policy.
         /// </summary>
-        internal static string Account_AgreeToTerms {
+        public static string Account_AgreeToTerms {
             get {
                 return ResourceManager.GetString("Account.AgreeToTerms", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to I agree to the.
         /// </summary>
-        internal static string Account_AgreeToTermsPart1 {
+        public static string Account_AgreeToTermsPart1 {
             get {
                 return ResourceManager.GetString("Account.AgreeToTermsPart1", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to and.
         /// </summary>
-        internal static string Account_And {
+        public static string Account_And {
             get {
                 return ResourceManager.GetString("Account.And", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Back to Login.
         /// </summary>
-        internal static string Account_BackToLogin {
+        public static string Account_BackToLogin {
             get {
                 return ResourceManager.GetString("Account.BackToLogin", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Confirm Password.
         /// </summary>
-        internal static string Account_ConfirmPassword {
+        public static string Account_ConfirmPassword {
             get {
                 return ResourceManager.GetString("Account.ConfirmPassword", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Repeat password.
         /// </summary>
-        internal static string Account_ConfirmPasswordPlaceholder {
+        public static string Account_ConfirmPasswordPlaceholder {
             get {
                 return ResourceManager.GetString("Account.ConfirmPasswordPlaceholder", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Email Address.
         /// </summary>
-        internal static string Account_Email {
+        public static string Account_Email {
             get {
                 return ResourceManager.GetString("Account.Email", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to your@email.com.
         /// </summary>
-        internal static string Account_EmailPlaceholder {
+        public static string Account_EmailPlaceholder {
             get {
                 return ResourceManager.GetString("Account.EmailPlaceholder", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to First Name.
         /// </summary>
-        internal static string Account_FirstName {
+        public static string Account_FirstName {
             get {
                 return ResourceManager.GetString("Account.FirstName", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to John.
         /// </summary>
-        internal static string Account_FirstNamePlaceholder {
+        public static string Account_FirstNamePlaceholder {
             get {
                 return ResourceManager.GetString("Account.FirstNamePlaceholder", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Forgot your password?.
         /// </summary>
-        internal static string Account_ForgotPassword {
+        public static string Account_ForgotPassword {
             get {
                 return ResourceManager.GetString("Account.ForgotPassword", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Don&apos;t worry! Enter your email address and we&apos;ll send you a link to reset your password..
         /// </summary>
-        internal static string Account_ForgotPasswordText {
+        public static string Account_ForgotPasswordText {
             get {
                 return ResourceManager.GetString("Account.ForgotPasswordText", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Forgot Password?.
         /// </summary>
-        internal static string Account_ForgotPasswordTitle {
+        public static string Account_ForgotPasswordTitle {
             get {
                 return ResourceManager.GetString("Account.ForgotPasswordTitle", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Already have an account?.
         /// </summary>
-        internal static string Account_HaveAccount {
+        public static string Account_HaveAccount {
             get {
                 return ResourceManager.GetString("Account.HaveAccount", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Last Name.
         /// </summary>
-        internal static string Account_LastName {
+        public static string Account_LastName {
             get {
                 return ResourceManager.GetString("Account.LastName", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Doe.
         /// </summary>
-        internal static string Account_LastNamePlaceholder {
+        public static string Account_LastNamePlaceholder {
             get {
                 return ResourceManager.GetString("Account.LastNamePlaceholder", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
-        internal static string Account_Login {
+        public static string Account_Login {
             get {
                 return ResourceManager.GetString("Account.Login", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Sign In.
         /// </summary>
-        internal static string Account_LoginButton {
+        public static string Account_LoginButton {
             get {
                 return ResourceManager.GetString("Account.LoginButton", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Sign in to your account.
         /// </summary>
-        internal static string Account_LoginSubtitle {
+        public static string Account_LoginSubtitle {
             get {
                 return ResourceManager.GetString("Account.LoginSubtitle", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Login to System.
         /// </summary>
-        internal static string Account_LoginTitle {
+        public static string Account_LoginTitle {
             get {
                 return ResourceManager.GetString("Account.LoginTitle", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to New Password.
         /// </summary>
-        internal static string Account_NewPassword {
+        public static string Account_NewPassword {
             get {
                 return ResourceManager.GetString("Account.NewPassword", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Don&apos;t have an account?.
         /// </summary>
-        internal static string Account_NoAccount {
+        public static string Account_NoAccount {
             get {
                 return ResourceManager.GetString("Account.NoAccount", resourceCulture);
             }
@@ -261,7 +261,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
-        internal static string Account_Password {
+        public static string Account_Password {
             get {
                 return ResourceManager.GetString("Account.Password", resourceCulture);
             }
@@ -270,7 +270,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Password must be at least 6 characters.
         /// </summary>
-        internal static string Account_PasswordHint {
+        public static string Account_PasswordHint {
             get {
                 return ResourceManager.GetString("Account.PasswordHint", resourceCulture);
             }
@@ -279,7 +279,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Minimum 6 characters.
         /// </summary>
-        internal static string Account_PasswordMinLength {
+        public static string Account_PasswordMinLength {
             get {
                 return ResourceManager.GetString("Account.PasswordMinLength", resourceCulture);
             }
@@ -288,7 +288,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Enter password.
         /// </summary>
-        internal static string Account_PasswordPlaceholder {
+        public static string Account_PasswordPlaceholder {
             get {
                 return ResourceManager.GetString("Account.PasswordPlaceholder", resourceCulture);
             }
@@ -297,7 +297,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Phone Number.
         /// </summary>
-        internal static string Account_PhoneNumber {
+        public static string Account_PhoneNumber {
             get {
                 return ResourceManager.GetString("Account.PhoneNumber", resourceCulture);
             }
@@ -306,7 +306,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to +1XXXXXXXXXX.
         /// </summary>
-        internal static string Account_PhoneNumberPlaceholder {
+        public static string Account_PhoneNumberPlaceholder {
             get {
                 return ResourceManager.GetString("Account.PhoneNumberPlaceholder", resourceCulture);
             }
@@ -315,7 +315,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to privacy policy.
         /// </summary>
-        internal static string Account_PrivacyPolicy {
+        public static string Account_PrivacyPolicy {
             get {
                 return ResourceManager.GetString("Account.PrivacyPolicy", resourceCulture);
             }
@@ -324,7 +324,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
-        internal static string Account_Register {
+        public static string Account_Register {
             get {
                 return ResourceManager.GetString("Account.Register", resourceCulture);
             }
@@ -333,7 +333,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
-        internal static string Account_RegisterButton {
+        public static string Account_RegisterButton {
             get {
                 return ResourceManager.GetString("Account.RegisterButton", resourceCulture);
             }
@@ -342,7 +342,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Create your account.
         /// </summary>
-        internal static string Account_RegisterSubtitle {
+        public static string Account_RegisterSubtitle {
             get {
                 return ResourceManager.GetString("Account.RegisterSubtitle", resourceCulture);
             }
@@ -351,7 +351,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Registration.
         /// </summary>
-        internal static string Account_RegisterTitle {
+        public static string Account_RegisterTitle {
             get {
                 return ResourceManager.GetString("Account.RegisterTitle", resourceCulture);
             }
@@ -360,7 +360,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Remember me.
         /// </summary>
-        internal static string Account_RememberMe {
+        public static string Account_RememberMe {
             get {
                 return ResourceManager.GetString("Account.RememberMe", resourceCulture);
             }
@@ -369,7 +369,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to *.
         /// </summary>
-        internal static string Account_RequiredField {
+        public static string Account_RequiredField {
             get {
                 return ResourceManager.GetString("Account.RequiredField", resourceCulture);
             }
@@ -378,7 +378,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Reset Password.
         /// </summary>
-        internal static string Account_ResetPassword {
+        public static string Account_ResetPassword {
             get {
                 return ResourceManager.GetString("Account.ResetPassword", resourceCulture);
             }
@@ -387,7 +387,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Send Link.
         /// </summary>
-        internal static string Account_SendLink {
+        public static string Account_SendLink {
             get {
                 return ResourceManager.GetString("Account.SendLink", resourceCulture);
             }
@@ -396,7 +396,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to terms of service.
         /// </summary>
-        internal static string Account_TermsOfService {
+        public static string Account_TermsOfService {
             get {
                 return ResourceManager.GetString("Account.TermsOfService", resourceCulture);
             }
@@ -405,7 +405,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to All.
         /// </summary>
-        internal static string Admin_All {
+        public static string Admin_All {
             get {
                 return ResourceManager.GetString("Admin.All", resourceCulture);
             }
@@ -414,7 +414,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to All Orders.
         /// </summary>
-        internal static string Admin_AllOrders {
+        public static string Admin_AllOrders {
             get {
                 return ResourceManager.GetString("Admin.AllOrders", resourceCulture);
             }
@@ -423,7 +423,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to all verified.
         /// </summary>
-        internal static string Admin_AllVerified {
+        public static string Admin_AllVerified {
             get {
                 return ResourceManager.GetString("Admin.AllVerified", resourceCulture);
             }
@@ -432,7 +432,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Amount.
         /// </summary>
-        internal static string Admin_Amount {
+        public static string Admin_Amount {
             get {
                 return ResourceManager.GetString("Admin.Amount", resourceCulture);
             }
@@ -441,7 +441,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Average Rating.
         /// </summary>
-        internal static string Admin_AverageRating {
+        public static string Admin_AverageRating {
             get {
                 return ResourceManager.GetString("Admin.AverageRating", resourceCulture);
             }
@@ -450,7 +450,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Completed Today.
         /// </summary>
-        internal static string Admin_CompletedToday {
+        public static string Admin_CompletedToday {
             get {
                 return ResourceManager.GetString("Admin.CompletedToday", resourceCulture);
             }
@@ -459,7 +459,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Customer.
         /// </summary>
-        internal static string Admin_Customer {
+        public static string Admin_Customer {
             get {
                 return ResourceManager.GetString("Admin.Customer", resourceCulture);
             }
@@ -468,7 +468,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Dashboard.
         /// </summary>
-        internal static string Admin_Dashboard {
+        public static string Admin_Dashboard {
             get {
                 return ResourceManager.GetString("Admin.Dashboard", resourceCulture);
             }
@@ -477,7 +477,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
-        internal static string Admin_Date {
+        public static string Admin_Date {
             get {
                 return ResourceManager.GetString("Admin.Date", resourceCulture);
             }
@@ -486,7 +486,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to new today.
         /// </summary>
-        internal static string Admin_NewToday {
+        public static string Admin_NewToday {
             get {
                 return ResourceManager.GetString("Admin.NewToday", resourceCulture);
             }
@@ -495,7 +495,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to New Users.
         /// </summary>
-        internal static string Admin_NewUsers {
+        public static string Admin_NewUsers {
             get {
                 return ResourceManager.GetString("Admin.NewUsers", resourceCulture);
             }
@@ -504,7 +504,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No new users.
         /// </summary>
-        internal static string Admin_NoNewUsers {
+        public static string Admin_NoNewUsers {
             get {
                 return ResourceManager.GetString("Admin.NoNewUsers", resourceCulture);
             }
@@ -513,7 +513,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No orders.
         /// </summary>
-        internal static string Admin_NoOrders {
+        public static string Admin_NoOrders {
             get {
                 return ResourceManager.GetString("Admin.NoOrders", resourceCulture);
             }
@@ -522,7 +522,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No reviews.
         /// </summary>
-        internal static string Admin_NoReviews {
+        public static string Admin_NoReviews {
             get {
                 return ResourceManager.GetString("Admin.NoReviews", resourceCulture);
             }
@@ -531,7 +531,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to pending approval.
         /// </summary>
-        internal static string Admin_OnModeration {
+        public static string Admin_OnModeration {
             get {
                 return ResourceManager.GetString("Admin.OnModeration", resourceCulture);
             }
@@ -540,7 +540,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Pending Approval.
         /// </summary>
-        internal static string Admin_OnModerationReviews {
+        public static string Admin_OnModerationReviews {
             get {
                 return ResourceManager.GetString("Admin.OnModerationReviews", resourceCulture);
             }
@@ -549,7 +549,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Order #.
         /// </summary>
-        internal static string Admin_OrderNumber {
+        public static string Admin_OrderNumber {
             get {
                 return ResourceManager.GetString("Admin.OrderNumber", resourceCulture);
             }
@@ -558,7 +558,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Orders.
         /// </summary>
-        internal static string Admin_Orders {
+        public static string Admin_Orders {
             get {
                 return ResourceManager.GetString("Admin.Orders", resourceCulture);
             }
@@ -567,7 +567,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Orders Today.
         /// </summary>
-        internal static string Admin_OrdersToday {
+        public static string Admin_OrdersToday {
             get {
                 return ResourceManager.GetString("Admin.OrdersToday", resourceCulture);
             }
@@ -576,7 +576,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to pending.
         /// </summary>
-        internal static string Admin_Pending {
+        public static string Admin_Pending {
             get {
                 return ResourceManager.GetString("Admin.Pending", resourceCulture);
             }
@@ -585,7 +585,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Recent Orders.
         /// </summary>
-        internal static string Admin_RecentOrders {
+        public static string Admin_RecentOrders {
             get {
                 return ResourceManager.GetString("Admin.RecentOrders", resourceCulture);
             }
@@ -594,7 +594,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Recent Reviews.
         /// </summary>
-        internal static string Admin_RecentReviews {
+        public static string Admin_RecentReviews {
             get {
                 return ResourceManager.GetString("Admin.RecentReviews", resourceCulture);
             }
@@ -603,7 +603,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Restaurant.
         /// </summary>
-        internal static string Admin_Restaurant {
+        public static string Admin_Restaurant {
             get {
                 return ResourceManager.GetString("Admin.Restaurant", resourceCulture);
             }
@@ -612,7 +612,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Restaurants.
         /// </summary>
-        internal static string Admin_Restaurants {
+        public static string Admin_Restaurants {
             get {
                 return ResourceManager.GetString("Admin.Restaurants", resourceCulture);
             }
@@ -621,7 +621,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Revenue.
         /// </summary>
-        internal static string Admin_Revenue {
+        public static string Admin_Revenue {
             get {
                 return ResourceManager.GetString("Admin.Revenue", resourceCulture);
             }
@@ -630,7 +630,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Reviews Pending Approval.
         /// </summary>
-        internal static string Admin_ReviewsOnModeration {
+        public static string Admin_ReviewsOnModeration {
             get {
                 return ResourceManager.GetString("Admin.ReviewsOnModeration", resourceCulture);
             }
@@ -639,7 +639,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
-        internal static string Admin_Status {
+        public static string Admin_Status {
             get {
                 return ResourceManager.GetString("Admin.Status", resourceCulture);
             }
@@ -648,7 +648,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to System overview and statistics.
         /// </summary>
-        internal static string Admin_SystemOverview {
+        public static string Admin_SystemOverview {
             get {
                 return ResourceManager.GetString("Admin.SystemOverview", resourceCulture);
             }
@@ -657,7 +657,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to today.
         /// </summary>
-        internal static string Admin_Today {
+        public static string Admin_Today {
             get {
                 return ResourceManager.GetString("Admin.Today", resourceCulture);
             }
@@ -666,7 +666,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Users.
         /// </summary>
-        internal static string Admin_Users {
+        public static string Admin_Users {
             get {
                 return ResourceManager.GetString("Admin.Users", resourceCulture);
             }
@@ -675,7 +675,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Cart cleared.
         /// </summary>
-        internal static string Cart_CartCleared {
+        public static string Cart_CartCleared {
             get {
                 return ResourceManager.GetString("Cart.CartCleared", resourceCulture);
             }
@@ -684,7 +684,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Checkout.
         /// </summary>
-        internal static string Cart_Checkout {
+        public static string Cart_Checkout {
             get {
                 return ResourceManager.GetString("Cart.Checkout", resourceCulture);
             }
@@ -693,7 +693,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Clear Cart.
         /// </summary>
-        internal static string Cart_ClearCart {
+        public static string Cart_ClearCart {
             get {
                 return ResourceManager.GetString("Cart.ClearCart", resourceCulture);
             }
@@ -702,7 +702,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Clear entire cart?.
         /// </summary>
-        internal static string Cart_ClearCartConfirm {
+        public static string Cart_ClearCartConfirm {
             get {
                 return ResourceManager.GetString("Cart.ClearCartConfirm", resourceCulture);
             }
@@ -711,7 +711,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Error clearing cart.
         /// </summary>
-        internal static string Cart_ClearError {
+        public static string Cart_ClearError {
             get {
                 return ResourceManager.GetString("Cart.ClearError", resourceCulture);
             }
@@ -720,7 +720,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Continue Shopping.
         /// </summary>
-        internal static string Cart_ContinueShopping {
+        public static string Cart_ContinueShopping {
             get {
                 return ResourceManager.GetString("Cart.ContinueShopping", resourceCulture);
             }
@@ -729,7 +729,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Customizations.
         /// </summary>
-        internal static string Cart_Customizations {
+        public static string Cart_Customizations {
             get {
                 return ResourceManager.GetString("Cart.Customizations", resourceCulture);
             }
@@ -738,7 +738,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Delivery.
         /// </summary>
-        internal static string Cart_DeliveryFee {
+        public static string Cart_DeliveryFee {
             get {
                 return ResourceManager.GetString("Cart.DeliveryFee", resourceCulture);
             }
@@ -747,7 +747,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Your cart is empty.
         /// </summary>
-        internal static string Cart_Empty {
+        public static string Cart_Empty {
             get {
                 return ResourceManager.GetString("Cart.Empty", resourceCulture);
             }
@@ -756,7 +756,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Add dishes from restaurant menus.
         /// </summary>
-        internal static string Cart_EmptyText {
+        public static string Cart_EmptyText {
             get {
                 return ResourceManager.GetString("Cart.EmptyText", resourceCulture);
             }
@@ -765,7 +765,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Item removed from cart.
         /// </summary>
-        internal static string Cart_ItemRemoved {
+        public static string Cart_ItemRemoved {
             get {
                 return ResourceManager.GetString("Cart.ItemRemoved", resourceCulture);
             }
@@ -774,7 +774,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Items Cost.
         /// </summary>
-        internal static string Cart_ItemsCost {
+        public static string Cart_ItemsCost {
             get {
                 return ResourceManager.GetString("Cart.ItemsCost", resourceCulture);
             }
@@ -783,7 +783,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Order Summary.
         /// </summary>
-        internal static string Cart_OrderSummary {
+        public static string Cart_OrderSummary {
             get {
                 return ResourceManager.GetString("Cart.OrderSummary", resourceCulture);
             }
@@ -792,7 +792,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to per piece.
         /// </summary>
-        internal static string Cart_PerPiece {
+        public static string Cart_PerPiece {
             get {
                 return ResourceManager.GetString("Cart.PerPiece", resourceCulture);
             }
@@ -801,7 +801,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Quantity updated.
         /// </summary>
-        internal static string Cart_QuantityUpdated {
+        public static string Cart_QuantityUpdated {
             get {
                 return ResourceManager.GetString("Cart.QuantityUpdated", resourceCulture);
             }
@@ -810,7 +810,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Remove.
         /// </summary>
-        internal static string Cart_Remove {
+        public static string Cart_Remove {
             get {
                 return ResourceManager.GetString("Cart.Remove", resourceCulture);
             }
@@ -819,7 +819,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Error removing item.
         /// </summary>
-        internal static string Cart_RemoveError {
+        public static string Cart_RemoveError {
             get {
                 return ResourceManager.GetString("Cart.RemoveError", resourceCulture);
             }
@@ -828,7 +828,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Remove this item from cart?.
         /// </summary>
-        internal static string Cart_RemoveItemConfirm {
+        public static string Cart_RemoveItemConfirm {
             get {
                 return ResourceManager.GetString("Cart.RemoveItemConfirm", resourceCulture);
             }
@@ -837,7 +837,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Cart.
         /// </summary>
-        internal static string Cart_Title {
+        public static string Cart_Title {
             get {
                 return ResourceManager.GetString("Cart.Title", resourceCulture);
             }
@@ -846,7 +846,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Total.
         /// </summary>
-        internal static string Cart_Total {
+        public static string Cart_Total {
             get {
                 return ResourceManager.GetString("Cart.Total", resourceCulture);
             }
@@ -855,7 +855,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Error updating quantity.
         /// </summary>
-        internal static string Cart_UpdateError {
+        public static string Cart_UpdateError {
             get {
                 return ResourceManager.GetString("Cart.UpdateError", resourceCulture);
             }
@@ -864,7 +864,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Your Cart.
         /// </summary>
-        internal static string Cart_YourCart {
+        public static string Cart_YourCart {
             get {
                 return ResourceManager.GetString("Cart.YourCart", resourceCulture);
             }
@@ -873,7 +873,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
-        internal static string Common_Back {
+        public static string Common_Back {
             get {
                 return ResourceManager.GetString("Common.Back", resourceCulture);
             }
@@ -882,7 +882,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        internal static string Common_Cancel {
+        public static string Common_Cancel {
             get {
                 return ResourceManager.GetString("Common.Cancel", resourceCulture);
             }
@@ -891,7 +891,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 2025 - Food Delivery Platform.
         /// </summary>
-        internal static string Common_Copyright {
+        public static string Common_Copyright {
             get {
                 return ResourceManager.GetString("Common.Copyright", resourceCulture);
             }
@@ -900,7 +900,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
-        internal static string Common_Delete {
+        public static string Common_Delete {
             get {
                 return ResourceManager.GetString("Common.Delete", resourceCulture);
             }
@@ -909,7 +909,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Details.
         /// </summary>
-        internal static string Common_Details {
+        public static string Common_Details {
             get {
                 return ResourceManager.GetString("Common.Details", resourceCulture);
             }
@@ -918,7 +918,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
-        internal static string Common_Edit {
+        public static string Common_Edit {
             get {
                 return ResourceManager.GetString("Common.Edit", resourceCulture);
             }
@@ -927,7 +927,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Food Delivery.
         /// </summary>
-        internal static string Common_FoodDelivery {
+        public static string Common_FoodDelivery {
             get {
                 return ResourceManager.GetString("Common.FoodDelivery", resourceCulture);
             }
@@ -936,7 +936,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Food Delivery Platform.
         /// </summary>
-        internal static string Common_FoodDeliveryPlatform {
+        public static string Common_FoodDeliveryPlatform {
             get {
                 return ResourceManager.GetString("Common.FoodDeliveryPlatform", resourceCulture);
             }
@@ -945,7 +945,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
-        internal static string Common_No {
+        public static string Common_No {
             get {
                 return ResourceManager.GetString("Common.No", resourceCulture);
             }
@@ -954,7 +954,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
-        internal static string Common_Save {
+        public static string Common_Save {
             get {
                 return ResourceManager.GetString("Common.Save", resourceCulture);
             }
@@ -963,7 +963,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
-        internal static string Common_Search {
+        public static string Common_Search {
             get {
                 return ResourceManager.GetString("Common.Search", resourceCulture);
             }
@@ -972,7 +972,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Submit.
         /// </summary>
-        internal static string Common_Submit {
+        public static string Common_Submit {
             get {
                 return ResourceManager.GetString("Common.Submit", resourceCulture);
             }
@@ -981,7 +981,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
-        internal static string Common_Yes {
+        public static string Common_Yes {
             get {
                 return ResourceManager.GetString("Common.Yes", resourceCulture);
             }
@@ -990,7 +990,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Active Users.
         /// </summary>
-        internal static string Home_ActiveUsers {
+        public static string Home_ActiveUsers {
             get {
                 return ResourceManager.GetString("Home.ActiveUsers", resourceCulture);
             }
@@ -999,7 +999,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Administrator Access.
         /// </summary>
-        internal static string Home_AdminAccess {
+        public static string Home_AdminAccess {
             get {
                 return ResourceManager.GetString("Home.AdminAccess", resourceCulture);
             }
@@ -1008,7 +1008,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You have administrator rights. Go to the control panel..
         /// </summary>
-        internal static string Home_AdminAccessText {
+        public static string Home_AdminAccessText {
             get {
                 return ResourceManager.GetString("Home.AdminAccessText", resourceCulture);
             }
@@ -1017,7 +1017,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to American.
         /// </summary>
-        internal static string Home_American {
+        public static string Home_American {
             get {
                 return ResourceManager.GetString("Home.American", resourceCulture);
             }
@@ -1026,7 +1026,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Burgers, steaks.
         /// </summary>
-        internal static string Home_AmericanText {
+        public static string Home_AmericanText {
             get {
                 return ResourceManager.GetString("Home.AmericanText", resourceCulture);
             }
@@ -1035,7 +1035,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Average Rating.
         /// </summary>
-        internal static string Home_AverageRating {
+        public static string Home_AverageRating {
             get {
                 return ResourceManager.GetString("Home.AverageRating", resourceCulture);
             }
@@ -1044,7 +1044,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Easy Payment.
         /// </summary>
-        internal static string Home_EasyPayment {
+        public static string Home_EasyPayment {
             get {
                 return ResourceManager.GetString("Home.EasyPayment", resourceCulture);
             }
@@ -1053,7 +1053,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Pay online with card or cash on delivery. Secure transactions.
         /// </summary>
-        internal static string Home_EasyPaymentText {
+        public static string Home_EasyPaymentText {
             get {
                 return ResourceManager.GetString("Home.EasyPaymentText", resourceCulture);
             }
@@ -1062,7 +1062,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Fast Delivery.
         /// </summary>
-        internal static string Home_FastDelivery {
+        public static string Home_FastDelivery {
             get {
                 return ResourceManager.GetString("Home.FastDelivery", resourceCulture);
             }
@@ -1071,7 +1071,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Average delivery time 30-40 minutes. Track your order in real time.
         /// </summary>
-        internal static string Home_FastDeliveryText {
+        public static string Home_FastDeliveryText {
             get {
                 return ResourceManager.GetString("Home.FastDeliveryText", resourceCulture);
             }
@@ -1080,7 +1080,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Order food from the best restaurants in your city quickly and conveniently.
         /// </summary>
-        internal static string Home_HeroSubtitle {
+        public static string Home_HeroSubtitle {
             get {
                 return ResourceManager.GetString("Home.HeroSubtitle", resourceCulture);
             }
@@ -1089,7 +1089,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Food Ordering and Delivery Platform.
         /// </summary>
-        internal static string Home_HeroTitle {
+        public static string Home_HeroTitle {
             get {
                 return ResourceManager.GetString("Home.HeroTitle", resourceCulture);
             }
@@ -1098,7 +1098,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to How It Works.
         /// </summary>
-        internal static string Home_HowItWorks {
+        public static string Home_HowItWorks {
             get {
                 return ResourceManager.GetString("Home.HowItWorks", resourceCulture);
             }
@@ -1107,7 +1107,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Ordering food is easy — just 4 simple steps.
         /// </summary>
-        internal static string Home_HowItWorksSubtitle {
+        public static string Home_HowItWorksSubtitle {
             get {
                 return ResourceManager.GetString("Home.HowItWorksSubtitle", resourceCulture);
             }
@@ -1116,7 +1116,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Italian.
         /// </summary>
-        internal static string Home_Italian {
+        public static string Home_Italian {
             get {
                 return ResourceManager.GetString("Home.Italian", resourceCulture);
             }
@@ -1125,7 +1125,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Pizza, pasta.
         /// </summary>
-        internal static string Home_ItalianText {
+        public static string Home_ItalianText {
             get {
                 return ResourceManager.GetString("Home.ItalianText", resourceCulture);
             }
@@ -1134,7 +1134,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Japanese.
         /// </summary>
-        internal static string Home_Japanese {
+        public static string Home_Japanese {
             get {
                 return ResourceManager.GetString("Home.Japanese", resourceCulture);
             }
@@ -1143,7 +1143,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Sushi, rolls.
         /// </summary>
-        internal static string Home_JapaneseText {
+        public static string Home_JapaneseText {
             get {
                 return ResourceManager.GetString("Home.JapaneseText", resourceCulture);
             }
@@ -1152,7 +1152,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Join thousands of satisfied customers.
         /// </summary>
-        internal static string Home_JoinThousands {
+        public static string Home_JoinThousands {
             get {
                 return ResourceManager.GetString("Home.JoinThousands", resourceCulture);
             }
@@ -1161,7 +1161,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Open Admin Panel.
         /// </summary>
-        internal static string Home_OpenAdminPanel {
+        public static string Home_OpenAdminPanel {
             get {
                 return ResourceManager.GetString("Home.OpenAdminPanel", resourceCulture);
             }
@@ -1170,7 +1170,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Orders Per Month.
         /// </summary>
-        internal static string Home_OrdersPerMonth {
+        public static string Home_OrdersPerMonth {
             get {
                 return ResourceManager.GetString("Home.OrdersPerMonth", resourceCulture);
             }
@@ -1179,7 +1179,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Popular Cuisines.
         /// </summary>
-        internal static string Home_PopularCuisines {
+        public static string Home_PopularCuisines {
             get {
                 return ResourceManager.GetString("Home.PopularCuisines", resourceCulture);
             }
@@ -1188,7 +1188,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Choose your favorite cuisine.
         /// </summary>
-        internal static string Home_PopularCuisinesSubtitle {
+        public static string Home_PopularCuisinesSubtitle {
             get {
                 return ResourceManager.GetString("Home.PopularCuisinesSubtitle", resourceCulture);
             }
@@ -1197,7 +1197,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Ready to Order?.
         /// </summary>
-        internal static string Home_ReadyToOrder {
+        public static string Home_ReadyToOrder {
             get {
                 return ResourceManager.GetString("Home.ReadyToOrder", resourceCulture);
             }
@@ -1206,7 +1206,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Restaurants.
         /// </summary>
-        internal static string Home_Restaurants {
+        public static string Home_Restaurants {
             get {
                 return ResourceManager.GetString("Home.Restaurants", resourceCulture);
             }
@@ -1215,7 +1215,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Browse the menu and select your favorite dishes.
         /// </summary>
-        internal static string Home_Step1Text {
+        public static string Home_Step1Text {
             get {
                 return ResourceManager.GetString("Home.Step1Text", resourceCulture);
             }
@@ -1224,7 +1224,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Choose a Restaurant.
         /// </summary>
-        internal static string Home_Step1Title {
+        public static string Home_Step1Title {
             get {
                 return ResourceManager.GetString("Home.Step1Title", resourceCulture);
             }
@@ -1233,7 +1233,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Customize dishes to your taste.
         /// </summary>
-        internal static string Home_Step2Text {
+        public static string Home_Step2Text {
             get {
                 return ResourceManager.GetString("Home.Step2Text", resourceCulture);
             }
@@ -1242,7 +1242,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Add to Cart.
         /// </summary>
-        internal static string Home_Step2Title {
+        public static string Home_Step2Title {
             get {
                 return ResourceManager.GetString("Home.Step2Title", resourceCulture);
             }
@@ -1251,7 +1251,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Enter address and payment method.
         /// </summary>
-        internal static string Home_Step3Text {
+        public static string Home_Step3Text {
             get {
                 return ResourceManager.GetString("Home.Step3Text", resourceCulture);
             }
@@ -1260,7 +1260,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Place Order.
         /// </summary>
-        internal static string Home_Step3Title {
+        public static string Home_Step3Title {
             get {
                 return ResourceManager.GetString("Home.Step3Title", resourceCulture);
             }
@@ -1269,7 +1269,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Enjoy delicious food!.
         /// </summary>
-        internal static string Home_Step4Text {
+        public static string Home_Step4Text {
             get {
                 return ResourceManager.GetString("Home.Step4Text", resourceCulture);
             }
@@ -1278,7 +1278,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Get Delivery.
         /// </summary>
-        internal static string Home_Step4Title {
+        public static string Home_Step4Title {
             get {
                 return ResourceManager.GetString("Home.Step4Title", resourceCulture);
             }
@@ -1287,7 +1287,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
-        internal static string Home_Title {
+        public static string Home_Title {
             get {
                 return ResourceManager.GetString("Home.Title", resourceCulture);
             }
@@ -1296,7 +1296,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Ukrainian.
         /// </summary>
-        internal static string Home_Ukrainian {
+        public static string Home_Ukrainian {
             get {
                 return ResourceManager.GetString("Home.Ukrainian", resourceCulture);
             }
@@ -1305,7 +1305,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Dumplings, borsch.
         /// </summary>
-        internal static string Home_UkrainianText {
+        public static string Home_UkrainianText {
             get {
                 return ResourceManager.GetString("Home.UkrainianText", resourceCulture);
             }
@@ -1314,7 +1314,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to View Restaurants.
         /// </summary>
-        internal static string Home_ViewRestaurants {
+        public static string Home_ViewRestaurants {
             get {
                 return ResourceManager.GetString("Home.ViewRestaurants", resourceCulture);
             }
@@ -1323,7 +1323,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Why Choose Us.
         /// </summary>
-        internal static string Home_WhyChooseUs {
+        public static string Home_WhyChooseUs {
             get {
                 return ResourceManager.GetString("Home.WhyChooseUs", resourceCulture);
             }
@@ -1332,7 +1332,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The best platform for ordering food online.
         /// </summary>
-        internal static string Home_WhyChooseUsSubtitle {
+        public static string Home_WhyChooseUsSubtitle {
             get {
                 return ResourceManager.GetString("Home.WhyChooseUsSubtitle", resourceCulture);
             }
@@ -1341,7 +1341,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Wide Selection of Restaurants.
         /// </summary>
-        internal static string Home_WideSelection {
+        public static string Home_WideSelection {
             get {
                 return ResourceManager.GetString("Home.WideSelection", resourceCulture);
             }
@@ -1350,7 +1350,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Over 100+ restaurants with various cuisines: Italian, Japanese, Ukrainian, American and more.
         /// </summary>
-        internal static string Home_WideSelectionText {
+        public static string Home_WideSelectionText {
             get {
                 return ResourceManager.GetString("Home.WideSelectionText", resourceCulture);
             }
@@ -1359,7 +1359,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
-        internal static string Language_English {
+        public static string Language_English {
             get {
                 return ResourceManager.GetString("Language.English", resourceCulture);
             }
@@ -1368,7 +1368,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Deutsch.
         /// </summary>
-        internal static string Language_German {
+        public static string Language_German {
             get {
                 return ResourceManager.GetString("Language.German", resourceCulture);
             }
@@ -1377,7 +1377,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
-        internal static string Language_SelectLanguage {
+        public static string Language_SelectLanguage {
             get {
                 return ResourceManager.GetString("Language.SelectLanguage", resourceCulture);
             }
@@ -1386,7 +1386,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Українська.
         /// </summary>
-        internal static string Language_Ukrainian {
+        public static string Language_Ukrainian {
             get {
                 return ResourceManager.GetString("Language.Ukrainian", resourceCulture);
             }
@@ -1395,7 +1395,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Admin Panel.
         /// </summary>
-        internal static string Nav_AdminPanel {
+        public static string Nav_AdminPanel {
             get {
                 return ResourceManager.GetString("Nav.AdminPanel", resourceCulture);
             }
@@ -1404,7 +1404,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Cart.
         /// </summary>
-        internal static string Nav_Cart {
+        public static string Nav_Cart {
             get {
                 return ResourceManager.GetString("Nav.Cart", resourceCulture);
             }
@@ -1413,7 +1413,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
-        internal static string Nav_Home {
+        public static string Nav_Home {
             get {
                 return ResourceManager.GetString("Nav.Home", resourceCulture);
             }
@@ -1422,7 +1422,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
-        internal static string Nav_Login {
+        public static string Nav_Login {
             get {
                 return ResourceManager.GetString("Nav.Login", resourceCulture);
             }
@@ -1431,7 +1431,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Logout.
         /// </summary>
-        internal static string Nav_Logout {
+        public static string Nav_Logout {
             get {
                 return ResourceManager.GetString("Nav.Logout", resourceCulture);
             }
@@ -1440,7 +1440,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to My Addresses.
         /// </summary>
-        internal static string Nav_MyAddresses {
+        public static string Nav_MyAddresses {
             get {
                 return ResourceManager.GetString("Nav.MyAddresses", resourceCulture);
             }
@@ -1449,7 +1449,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to My Orders.
         /// </summary>
-        internal static string Nav_MyOrders {
+        public static string Nav_MyOrders {
             get {
                 return ResourceManager.GetString("Nav.MyOrders", resourceCulture);
             }
@@ -1458,7 +1458,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to My Profile.
         /// </summary>
-        internal static string Nav_MyProfile {
+        public static string Nav_MyProfile {
             get {
                 return ResourceManager.GetString("Nav.MyProfile", resourceCulture);
             }
@@ -1467,7 +1467,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to My Reviews.
         /// </summary>
-        internal static string Nav_MyReviews {
+        public static string Nav_MyReviews {
             get {
                 return ResourceManager.GetString("Nav.MyReviews", resourceCulture);
             }
@@ -1476,7 +1476,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
-        internal static string Nav_Register {
+        public static string Nav_Register {
             get {
                 return ResourceManager.GetString("Nav.Register", resourceCulture);
             }
@@ -1485,7 +1485,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Restaurants.
         /// </summary>
-        internal static string Nav_Restaurants {
+        public static string Nav_Restaurants {
             get {
                 return ResourceManager.GetString("Nav.Restaurants", resourceCulture);
             }
@@ -1494,7 +1494,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Cancelled.
         /// </summary>
-        internal static string OrderStatus_Cancelled {
+        public static string OrderStatus_Cancelled {
             get {
                 return ResourceManager.GetString("OrderStatus.Cancelled", resourceCulture);
             }
@@ -1503,7 +1503,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Confirmed.
         /// </summary>
-        internal static string OrderStatus_Confirmed {
+        public static string OrderStatus_Confirmed {
             get {
                 return ResourceManager.GetString("OrderStatus.Confirmed", resourceCulture);
             }
@@ -1512,7 +1512,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Delivered.
         /// </summary>
-        internal static string OrderStatus_Delivered {
+        public static string OrderStatus_Delivered {
             get {
                 return ResourceManager.GetString("OrderStatus.Delivered", resourceCulture);
             }
@@ -1521,7 +1521,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Out for Delivery.
         /// </summary>
-        internal static string OrderStatus_OutForDelivery {
+        public static string OrderStatus_OutForDelivery {
             get {
                 return ResourceManager.GetString("OrderStatus.OutForDelivery", resourceCulture);
             }
@@ -1530,7 +1530,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Pending.
         /// </summary>
-        internal static string OrderStatus_Pending {
+        public static string OrderStatus_Pending {
             get {
                 return ResourceManager.GetString("OrderStatus.Pending", resourceCulture);
             }
@@ -1539,7 +1539,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Preparing.
         /// </summary>
-        internal static string OrderStatus_Preparing {
+        public static string OrderStatus_Preparing {
             get {
                 return ResourceManager.GetString("OrderStatus.Preparing", resourceCulture);
             }
@@ -1548,7 +1548,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Ready.
         /// </summary>
-        internal static string OrderStatus_Ready {
+        public static string OrderStatus_Ready {
             get {
                 return ResourceManager.GetString("OrderStatus.Ready", resourceCulture);
             }
@@ -1557,7 +1557,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to All Cuisines.
         /// </summary>
-        internal static string Restaurant_AllCuisines {
+        public static string Restaurant_AllCuisines {
             get {
                 return ResourceManager.GetString("Restaurant.AllCuisines", resourceCulture);
             }
@@ -1566,7 +1566,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Any.
         /// </summary>
-        internal static string Restaurant_Any {
+        public static string Restaurant_Any {
             get {
                 return ResourceManager.GetString("Restaurant.Any", resourceCulture);
             }
@@ -1575,7 +1575,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Apply Filters.
         /// </summary>
-        internal static string Restaurant_ApplyFilters {
+        public static string Restaurant_ApplyFilters {
             get {
                 return ResourceManager.GetString("Restaurant.ApplyFilters", resourceCulture);
             }
@@ -1584,7 +1584,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Cost.
         /// </summary>
-        internal static string Restaurant_Cost {
+        public static string Restaurant_Cost {
             get {
                 return ResourceManager.GetString("Restaurant.Cost", resourceCulture);
             }
@@ -1593,7 +1593,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Cuisine Type.
         /// </summary>
-        internal static string Restaurant_CuisineType {
+        public static string Restaurant_CuisineType {
             get {
                 return ResourceManager.GetString("Restaurant.CuisineType", resourceCulture);
             }
@@ -1602,7 +1602,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Delivery.
         /// </summary>
-        internal static string Restaurant_Delivery {
+        public static string Restaurant_Delivery {
             get {
                 return ResourceManager.GetString("Restaurant.Delivery", resourceCulture);
             }
@@ -1611,7 +1611,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Delivery Time.
         /// </summary>
-        internal static string Restaurant_DeliveryTime {
+        public static string Restaurant_DeliveryTime {
             get {
                 return ResourceManager.GetString("Restaurant.DeliveryTime", resourceCulture);
             }
@@ -1620,7 +1620,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Found.
         /// </summary>
-        internal static string Restaurant_Found {
+        public static string Restaurant_Found {
             get {
                 return ResourceManager.GetString("Restaurant.Found", resourceCulture);
             }
@@ -1629,7 +1629,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Min. Order.
         /// </summary>
-        internal static string Restaurant_MinOrder {
+        public static string Restaurant_MinOrder {
             get {
                 return ResourceManager.GetString("Restaurant.MinOrder", resourceCulture);
             }
@@ -1638,7 +1638,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Min. Rating.
         /// </summary>
-        internal static string Restaurant_MinRating {
+        public static string Restaurant_MinRating {
             get {
                 return ResourceManager.GetString("Restaurant.MinRating", resourceCulture);
             }
@@ -1647,7 +1647,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
-        internal static string Restaurant_Name {
+        public static string Restaurant_Name {
             get {
                 return ResourceManager.GetString("Restaurant.Name", resourceCulture);
             }
@@ -1656,7 +1656,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No Restaurants Found.
         /// </summary>
-        internal static string Restaurant_NotFound {
+        public static string Restaurant_NotFound {
             get {
                 return ResourceManager.GetString("Restaurant.NotFound", resourceCulture);
             }
@@ -1665,7 +1665,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Try changing search parameters or reset filters.
         /// </summary>
-        internal static string Restaurant_NotFoundText {
+        public static string Restaurant_NotFoundText {
             get {
                 return ResourceManager.GetString("Restaurant.NotFoundText", resourceCulture);
             }
@@ -1674,7 +1674,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Our Restaurants.
         /// </summary>
-        internal static string Restaurant_OurRestaurants {
+        public static string Restaurant_OurRestaurants {
             get {
                 return ResourceManager.GetString("Restaurant.OurRestaurants", resourceCulture);
             }
@@ -1683,7 +1683,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Rating.
         /// </summary>
-        internal static string Restaurant_Rating {
+        public static string Restaurant_Rating {
             get {
                 return ResourceManager.GetString("Restaurant.Rating", resourceCulture);
             }
@@ -1692,7 +1692,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Reset.
         /// </summary>
-        internal static string Restaurant_Reset {
+        public static string Restaurant_Reset {
             get {
                 return ResourceManager.GetString("Restaurant.Reset", resourceCulture);
             }
@@ -1701,7 +1701,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Restaurant.
         /// </summary>
-        internal static string Restaurant_Restaurant {
+        public static string Restaurant_Restaurant {
             get {
                 return ResourceManager.GetString("Restaurant.Restaurant", resourceCulture);
             }
@@ -1710,7 +1710,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to restaurants.
         /// </summary>
-        internal static string Restaurant_Restaurants {
+        public static string Restaurant_Restaurants {
             get {
                 return ResourceManager.GetString("Restaurant.Restaurants", resourceCulture);
             }
@@ -1719,7 +1719,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Restaurant name or cuisine....
         /// </summary>
-        internal static string Restaurant_SearchPlaceholder {
+        public static string Restaurant_SearchPlaceholder {
             get {
                 return ResourceManager.GetString("Restaurant.SearchPlaceholder", resourceCulture);
             }
@@ -1728,7 +1728,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Sort By.
         /// </summary>
-        internal static string Restaurant_SortBy {
+        public static string Restaurant_SortBy {
             get {
                 return ResourceManager.GetString("Restaurant.SortBy", resourceCulture);
             }
@@ -1737,7 +1737,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Time.
         /// </summary>
-        internal static string Restaurant_Time {
+        public static string Restaurant_Time {
             get {
                 return ResourceManager.GetString("Restaurant.Time", resourceCulture);
             }
@@ -1746,7 +1746,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Restaurants.
         /// </summary>
-        internal static string Restaurant_Title {
+        public static string Restaurant_Title {
             get {
                 return ResourceManager.GetString("Restaurant.Title", resourceCulture);
             }
@@ -1755,7 +1755,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Up to 30 min.
         /// </summary>
-        internal static string Restaurant_UpTo30Min {
+        public static string Restaurant_UpTo30Min {
             get {
                 return ResourceManager.GetString("Restaurant.UpTo30Min", resourceCulture);
             }
@@ -1764,7 +1764,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Up to 45 min.
         /// </summary>
-        internal static string Restaurant_UpTo45Min {
+        public static string Restaurant_UpTo45Min {
             get {
                 return ResourceManager.GetString("Restaurant.UpTo45Min", resourceCulture);
             }
@@ -1773,7 +1773,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Up to 60 min.
         /// </summary>
-        internal static string Restaurant_UpTo60Min {
+        public static string Restaurant_UpTo60Min {
             get {
                 return ResourceManager.GetString("Restaurant.UpTo60Min", resourceCulture);
             }
@@ -1782,7 +1782,7 @@ namespace delivery_website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to View Menu.
         /// </summary>
-        internal static string Restaurant_ViewMenu {
+        public static string Restaurant_ViewMenu {
             get {
                 return ResourceManager.GetString("Restaurant.ViewMenu", resourceCulture);
             }
