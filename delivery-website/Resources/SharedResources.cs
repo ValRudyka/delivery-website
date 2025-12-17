@@ -4,7 +4,7 @@ namespace delivery_website.Resources
     /// Marker class for shared resources localization.
     /// This class is intentionally empty and serves as a type reference for IStringLocalizer.
     /// </summary>
-    public class SharedResources
+    public partial class SharedResources
     {
     }
 }
