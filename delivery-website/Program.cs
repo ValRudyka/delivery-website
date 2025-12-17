@@ -155,7 +155,18 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 // Enable request localization
-app.UseRequestLocalization();
+var localizationOptions = new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("uk-UA"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures,
+    RequestCultureProviders = new List<IRequestCultureProvider>
+    {
+        new CookieRequestCultureProvider(),
+        new AcceptLanguageHeaderRequestCultureProvider()
+    }
+};
+app.UseRequestLocalization(localizationOptions);
 
 app.UseRouting();
 app.UseSession();
