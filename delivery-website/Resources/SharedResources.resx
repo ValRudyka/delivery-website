@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" msdata:Ordinal="5" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Navigation -->
+  <data name="Nav.Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Nav.Restaurants" xml:space="preserve">
+    <value>Restaurants</value>
+  </data>
+  <data name="Nav.Cart" xml:space="preserve">
+    <value>Cart</value>
+  </data>
+  <data name="Nav.Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Nav.Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Nav.Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="Nav.AdminPanel" xml:space="preserve">
+    <value>Admin Panel</value>
+  </data>
+  <data name="Nav.MyProfile" xml:space="preserve">
+    <value>My Profile</value>
+  </data>
+  <data name="Nav.MyAddresses" xml:space="preserve">
+    <value>My Addresses</value>
+  </data>
+  <data name="Nav.MyOrders" xml:space="preserve">
+    <value>My Orders</value>
+  </data>
+  <data name="Nav.MyReviews" xml:space="preserve">
+    <value>My Reviews</value>
+  </data>
+
+  <!-- Common -->
+  <data name="Common.FoodDelivery" xml:space="preserve">
+    <value>Food Delivery</value>
+  </data>
+  <data name="Common.FoodDeliveryPlatform" xml:space="preserve">
+    <value>Food Delivery Platform</value>
+  </data>
+  <data name="Common.Copyright" xml:space="preserve">
+    <value>2025 - Food Delivery Platform</value>
+  </data>
+  <data name="Common.Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Common.Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Common.Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Common.Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Common.Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Common.Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Common.Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Common.Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Common.Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Common.No" xml:space="preserve">
+    <value>No</value>
+  </data>
+
+  <!-- Account -->
+  <data name="Account.Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Account.LoginTitle" xml:space="preserve">
+    <value>Login to System</value>
+  </data>
+  <data name="Account.LoginSubtitle" xml:space="preserve">
+    <value>Sign in to your account</value>
+  </data>
+  <data name="Account.LoginButton" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="Account.Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Account.RegisterTitle" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="Account.RegisterSubtitle" xml:space="preserve">
+    <value>Create your account</value>
+  </data>
+  <data name="Account.RegisterButton" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Account.Email" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+  <data name="Account.EmailPlaceholder" xml:space="preserve">
+    <value>your@email.com</value>
+  </data>
+  <data name="Account.Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Account.PasswordPlaceholder" xml:space="preserve">
+    <value>Enter password</value>
+  </data>
+  <data name="Account.PasswordMinLength" xml:space="preserve">
+    <value>Minimum 6 characters</value>
+  </data>
+  <data name="Account.PasswordHint" xml:space="preserve">
+    <value>Password must be at least 6 characters</value>
+  </data>
+  <data name="Account.ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="Account.ConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>Repeat password</value>
+  </data>
+  <data name="Account.RememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="Account.ForgotPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="Account.ResetPassword" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="Account.NewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="Account.FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="Account.FirstNamePlaceholder" xml:space="preserve">
+    <value>John</value>
+  </data>
+  <data name="Account.LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="Account.LastNamePlaceholder" xml:space="preserve">
+    <value>Doe</value>
+  </data>
+  <data name="Account.PhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="Account.PhoneNumberPlaceholder" xml:space="preserve">
+    <value>+1XXXXXXXXXX</value>
+  </data>
+  <data name="Account.AgreeToTerms" xml:space="preserve">
+    <value>I agree to the terms of service and privacy policy</value>
+  </data>
+  <data name="Account.AgreeToTermsPart1" xml:space="preserve">
+    <value>I agree to the</value>
+  </data>
+  <data name="Account.TermsOfService" xml:space="preserve">
+    <value>terms of service</value>
+  </data>
+  <data name="Account.And" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="Account.PrivacyPolicy" xml:space="preserve">
+    <value>privacy policy</value>
+  </data>
+  <data name="Account.NoAccount" xml:space="preserve">
+    <value>Don't have an account?</value>
+  </data>
+  <data name="Account.HaveAccount" xml:space="preserve">
+    <value>Already have an account?</value>
+  </data>
+  <data name="Account.RequiredField" xml:space="preserve">
+    <value>*</value>
+  </data>
+
+  <!-- Language -->
+  <data name="Language.Ukrainian" xml:space="preserve">
+    <value>Українська</value>
+  </data>
+  <data name="Language.English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Language.German" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="Language.SelectLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+
+  <!-- Home Page -->
+  <data name="Home.Title" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Home.HeroTitle" xml:space="preserve">
+    <value>Food Ordering and Delivery Platform</value>
+  </data>
+  <data name="Home.HeroSubtitle" xml:space="preserve">
+    <value>Order food from the best restaurants in your city quickly and conveniently</value>
+  </data>
+  <data name="Home.ViewRestaurants" xml:space="preserve">
+    <value>View Restaurants</value>
+  </data>
+  <data name="Home.AdminAccess" xml:space="preserve">
+    <value>Administrator Access</value>
+  </data>
+  <data name="Home.AdminAccessText" xml:space="preserve">
+    <value>You have administrator rights. Go to the control panel.</value>
+  </data>
+  <data name="Home.OpenAdminPanel" xml:space="preserve">
+    <value>Open Admin Panel</value>
+  </data>
+  <data name="Home.WhyChooseUs" xml:space="preserve">
+    <value>Why Choose Us</value>
+  </data>
+  <data name="Home.WhyChooseUsSubtitle" xml:space="preserve">
+    <value>The best platform for ordering food online</value>
+  </data>
+  <data name="Home.WideSelection" xml:space="preserve">
+    <value>Wide Selection of Restaurants</value>
+  </data>
+  <data name="Home.WideSelectionText" xml:space="preserve">
+    <value>Over 100+ restaurants with various cuisines: Italian, Japanese, Ukrainian, American and more</value>
+  </data>
+  <data name="Home.FastDelivery" xml:space="preserve">
+    <value>Fast Delivery</value>
+  </data>
+  <data name="Home.FastDeliveryText" xml:space="preserve">
+    <value>Average delivery time 30-40 minutes. Track your order in real time</value>
+  </data>
+  <data name="Home.EasyPayment" xml:space="preserve">
+    <value>Easy Payment</value>
+  </data>
+  <data name="Home.EasyPaymentText" xml:space="preserve">
+    <value>Pay online with card or cash on delivery. Secure transactions</value>
+  </data>
+  <data name="Home.HowItWorks" xml:space="preserve">
+    <value>How It Works</value>
+  </data>
+  <data name="Home.HowItWorksSubtitle" xml:space="preserve">
+    <value>Ordering food is easy — just 4 simple steps</value>
+  </data>
+  <data name="Home.Step1Title" xml:space="preserve">
+    <value>Choose a Restaurant</value>
+  </data>
+  <data name="Home.Step1Text" xml:space="preserve">
+    <value>Browse the menu and select your favorite dishes</value>
+  </data>
+  <data name="Home.Step2Title" xml:space="preserve">
+    <value>Add to Cart</value>
+  </data>
+  <data name="Home.Step2Text" xml:space="preserve">
+    <value>Customize dishes to your taste</value>
+  </data>
+  <data name="Home.Step3Title" xml:space="preserve">
+    <value>Place Order</value>
+  </data>
+  <data name="Home.Step3Text" xml:space="preserve">
+    <value>Enter address and payment method</value>
+  </data>
+  <data name="Home.Step4Title" xml:space="preserve">
+    <value>Get Delivery</value>
+  </data>
+  <data name="Home.Step4Text" xml:space="preserve">
+    <value>Enjoy delicious food!</value>
+  </data>
+  <data name="Home.PopularCuisines" xml:space="preserve">
+    <value>Popular Cuisines</value>
+  </data>
+  <data name="Home.PopularCuisinesSubtitle" xml:space="preserve">
+    <value>Choose your favorite cuisine</value>
+  </data>
+  <data name="Home.Italian" xml:space="preserve">
+    <value>Italian</value>
+  </data>
+  <data name="Home.ItalianText" xml:space="preserve">
+    <value>Pizza, pasta</value>
+  </data>
+  <data name="Home.Japanese" xml:space="preserve">
+    <value>Japanese</value>
+  </data>
+  <data name="Home.JapaneseText" xml:space="preserve">
+    <value>Sushi, rolls</value>
+  </data>
+  <data name="Home.American" xml:space="preserve">
+    <value>American</value>
+  </data>
+  <data name="Home.AmericanText" xml:space="preserve">
+    <value>Burgers, steaks</value>
+  </data>
+  <data name="Home.Ukrainian" xml:space="preserve">
+    <value>Ukrainian</value>
+  </data>
+  <data name="Home.UkrainianText" xml:space="preserve">
+    <value>Dumplings, borsch</value>
+  </data>
+  <data name="Home.Restaurants" xml:space="preserve">
+    <value>Restaurants</value>
+  </data>
+  <data name="Home.ActiveUsers" xml:space="preserve">
+    <value>Active Users</value>
+  </data>
+  <data name="Home.OrdersPerMonth" xml:space="preserve">
+    <value>Orders Per Month</value>
+  </data>
+  <data name="Home.AverageRating" xml:space="preserve">
+    <value>Average Rating</value>
+  </data>
+  <data name="Home.ReadyToOrder" xml:space="preserve">
+    <value>Ready to Order?</value>
+  </data>
+  <data name="Home.JoinThousands" xml:space="preserve">
+    <value>Join thousands of satisfied customers</value>
+  </data>
+
+  <!-- Restaurant Pages -->
+  <data name="Restaurant.Title" xml:space="preserve">
+    <value>Restaurants</value>
+  </data>
+  <data name="Restaurant.OurRestaurants" xml:space="preserve">
+    <value>Our Restaurants</value>
+  </data>
+  <data name="Restaurant.Found" xml:space="preserve">
+    <value>Found</value>
+  </data>
+  <data name="Restaurant.Restaurants" xml:space="preserve">
+    <value>restaurants</value>
+  </data>
+  <data name="Restaurant.SearchPlaceholder" xml:space="preserve">
+    <value>Restaurant name or cuisine...</value>
+  </data>
+  <data name="Restaurant.CuisineType" xml:space="preserve">
+    <value>Cuisine Type</value>
+  </data>
+  <data name="Restaurant.AllCuisines" xml:space="preserve">
+    <value>All Cuisines</value>
+  </data>
+  <data name="Restaurant.MinRating" xml:space="preserve">
+    <value>Min. Rating</value>
+  </data>
+  <data name="Restaurant.Any" xml:space="preserve">
+    <value>Any</value>
+  </data>
+  <data name="Restaurant.DeliveryTime" xml:space="preserve">
+    <value>Delivery Time</value>
+  </data>
+  <data name="Restaurant.UpTo30Min" xml:space="preserve">
+    <value>Up to 30 min</value>
+  </data>
+  <data name="Restaurant.UpTo45Min" xml:space="preserve">
+    <value>Up to 45 min</value>
+  </data>
+  <data name="Restaurant.UpTo60Min" xml:space="preserve">
+    <value>Up to 60 min</value>
+  </data>
+  <data name="Restaurant.SortBy" xml:space="preserve">
+    <value>Sort By</value>
+  </data>
+  <data name="Restaurant.Rating" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="Restaurant.Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Restaurant.Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="Restaurant.Cost" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="Restaurant.ApplyFilters" xml:space="preserve">
+    <value>Apply Filters</value>
+  </data>
+  <data name="Restaurant.Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Restaurant.MinOrder" xml:space="preserve">
+    <value>Min. Order</value>
+  </data>
+  <data name="Restaurant.Delivery" xml:space="preserve">
+    <value>Delivery</value>
+  </data>
+  <data name="Restaurant.ViewMenu" xml:space="preserve">
+    <value>View Menu</value>
+  </data>
+  <data name="Restaurant.NotFound" xml:space="preserve">
+    <value>No Restaurants Found</value>
+  </data>
+  <data name="Restaurant.NotFoundText" xml:space="preserve">
+    <value>Try changing search parameters or reset filters</value>
+  </data>
+  <data name="Restaurant.Restaurant" xml:space="preserve">
+    <value>Restaurant</value>
+  </data>
+
+  <!-- Cart Page -->
+  <data name="Cart.Title" xml:space="preserve">
+    <value>Cart</value>
+  </data>
+  <data name="Cart.YourCart" xml:space="preserve">
+    <value>Your Cart</value>
+  </data>
+  <data name="Cart.ClearCart" xml:space="preserve">
+    <value>Clear Cart</value>
+  </data>
+  <data name="Cart.Empty" xml:space="preserve">
+    <value>Your cart is empty</value>
+  </data>
+  <data name="Cart.EmptyText" xml:space="preserve">
+    <value>Add dishes from restaurant menus</value>
+  </data>
+  <data name="Cart.PerPiece" xml:space="preserve">
+    <value>per piece</value>
+  </data>
+  <data name="Cart.Customizations" xml:space="preserve">
+    <value>Customizations</value>
+  </data>
+  <data name="Cart.Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Cart.OrderSummary" xml:space="preserve">
+    <value>Order Summary</value>
+  </data>
+  <data name="Cart.ItemsCost" xml:space="preserve">
+    <value>Items Cost</value>
+  </data>
+  <data name="Cart.DeliveryFee" xml:space="preserve">
+    <value>Delivery</value>
+  </data>
+  <data name="Cart.Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Cart.Checkout" xml:space="preserve">
+    <value>Checkout</value>
+  </data>
+  <data name="Cart.ContinueShopping" xml:space="preserve">
+    <value>Continue Shopping</value>
+  </data>
+  <data name="Cart.RemoveItemConfirm" xml:space="preserve">
+    <value>Remove this item from cart?</value>
+  </data>
+  <data name="Cart.ClearCartConfirm" xml:space="preserve">
+    <value>Clear entire cart?</value>
+  </data>
+  <data name="Cart.QuantityUpdated" xml:space="preserve">
+    <value>Quantity updated</value>
+  </data>
+  <data name="Cart.ItemRemoved" xml:space="preserve">
+    <value>Item removed from cart</value>
+  </data>
+  <data name="Cart.CartCleared" xml:space="preserve">
+    <value>Cart cleared</value>
+  </data>
+  <data name="Cart.UpdateError" xml:space="preserve">
+    <value>Error updating quantity</value>
+  </data>
+  <data name="Cart.RemoveError" xml:space="preserve">
+    <value>Error removing item</value>
+  </data>
+  <data name="Cart.ClearError" xml:space="preserve">
+    <value>Error clearing cart</value>
+  </data>
+
+  <!-- Account Pages -->
+  <data name="Account.ForgotPasswordTitle" xml:space="preserve">
+    <value>Forgot Password?</value>
+  </data>
+  <data name="Account.ForgotPasswordText" xml:space="preserve">
+    <value>Don't worry! Enter your email address and we'll send you a link to reset your password.</value>
+  </data>
+  <data name="Account.SendLink" xml:space="preserve">
+    <value>Send Link</value>
+  </data>
+  <data name="Account.BackToLogin" xml:space="preserve">
+    <value>Back to Login</value>
+  </data>
+
+  <!-- Admin Dashboard -->
+  <data name="Admin.Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Admin.SystemOverview" xml:space="preserve">
+    <value>System overview and statistics</value>
+  </data>
+  <data name="Admin.Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="Admin.NewToday" xml:space="preserve">
+    <value>new today</value>
+  </data>
+  <data name="Admin.Restaurants" xml:space="preserve">
+    <value>Restaurants</value>
+  </data>
+  <data name="Admin.OnModeration" xml:space="preserve">
+    <value>pending approval</value>
+  </data>
+  <data name="Admin.AllVerified" xml:space="preserve">
+    <value>all verified</value>
+  </data>
+  <data name="Admin.Orders" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="Admin.Pending" xml:space="preserve">
+    <value>pending</value>
+  </data>
+  <data name="Admin.Revenue" xml:space="preserve">
+    <value>Revenue</value>
+  </data>
+  <data name="Admin.Today" xml:space="preserve">
+    <value>today</value>
+  </data>
+  <data name="Admin.OrdersToday" xml:space="preserve">
+    <value>Orders Today</value>
+  </data>
+  <data name="Admin.CompletedToday" xml:space="preserve">
+    <value>Completed Today</value>
+  </data>
+  <data name="Admin.ReviewsOnModeration" xml:space="preserve">
+    <value>Reviews Pending Approval</value>
+  </data>
+  <data name="Admin.AverageRating" xml:space="preserve">
+    <value>Average Rating</value>
+  </data>
+  <data name="Admin.RecentOrders" xml:space="preserve">
+    <value>Recent Orders</value>
+  </data>
+  <data name="Admin.AllOrders" xml:space="preserve">
+    <value>All Orders</value>
+  </data>
+  <data name="Admin.OrderNumber" xml:space="preserve">
+    <value>Order #</value>
+  </data>
+  <data name="Admin.Customer" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="Admin.Restaurant" xml:space="preserve">
+    <value>Restaurant</value>
+  </data>
+  <data name="Admin.Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="Admin.Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Admin.Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Admin.NoOrders" xml:space="preserve">
+    <value>No orders</value>
+  </data>
+  <data name="Admin.NewUsers" xml:space="preserve">
+    <value>New Users</value>
+  </data>
+  <data name="Admin.All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Admin.NoNewUsers" xml:space="preserve">
+    <value>No new users</value>
+  </data>
+  <data name="Admin.RecentReviews" xml:space="preserve">
+    <value>Recent Reviews</value>
+  </data>
+  <data name="Admin.OnModerationReviews" xml:space="preserve">
+    <value>Pending Approval</value>
+  </data>
+  <data name="Admin.NoReviews" xml:space="preserve">
+    <value>No reviews</value>
+  </data>
+
+  <!-- Order Status -->
+  <data name="OrderStatus.Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="OrderStatus.Confirmed" xml:space="preserve">
+    <value>Confirmed</value>
+  </data>
+  <data name="OrderStatus.Preparing" xml:space="preserve">
+    <value>Preparing</value>
+  </data>
+  <data name="OrderStatus.Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="OrderStatus.OutForDelivery" xml:space="preserve">
+    <value>Out for Delivery</value>
+  </data>
+  <data name="OrderStatus.Delivered" xml:space="preserve">
+    <value>Delivered</value>
+  </data>
+  <data name="OrderStatus.Cancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+</root>
