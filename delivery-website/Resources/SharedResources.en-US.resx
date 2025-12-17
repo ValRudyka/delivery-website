@@ -239,6 +239,242 @@
     <value>*</value>
   </data>
 
+  <!-- Account - Extended -->
+  <data name="Account.ForgotPasswordTitle" xml:space="preserve">
+    <value>Forgot Password?</value>
+  </data>
+  <data name="Account.ForgotPasswordSubtitle" xml:space="preserve">
+    <value>Don't worry! Enter your email address and we'll send you a link to reset your password.</value>
+  </data>
+  <data name="Account.SendLink" xml:space="preserve">
+    <value>Send Link</value>
+  </data>
+  <data name="Account.BackToLogin" xml:space="preserve">
+    <value>← Back to Login</value>
+  </data>
+  <data name="Account.ResetPasswordTitle" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="Account.ResetPasswordSubtitle" xml:space="preserve">
+    <value>Enter a new password for your account</value>
+  </data>
+  <data name="Account.ResetPasswordButton" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="Account.NewPasswordPlaceholder" xml:space="preserve">
+    <value>Enter new password</value>
+  </data>
+  <data name="Account.ConfirmNewPasswordPlaceholder" xml:space="preserve">
+    <value>Repeat new password</value>
+  </data>
+  <data name="Account.AccessDenied" xml:space="preserve">
+    <value>Access Denied</value>
+  </data>
+  <data name="Account.AccessDeniedMessage" xml:space="preserve">
+    <value>You do not have access to this page.</value>
+  </data>
+
+  <!-- Home Page -->
+  <data name="Home.Title" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Home.HeroTitle" xml:space="preserve">
+    <value>Food Ordering and Delivery Platform</value>
+  </data>
+  <data name="Home.HeroSubtitle" xml:space="preserve">
+    <value>Order food from the best restaurants in your city quickly and conveniently</value>
+  </data>
+  <data name="Home.ViewRestaurants" xml:space="preserve">
+    <value>View Restaurants</value>
+  </data>
+  <data name="Home.AdminAccess" xml:space="preserve">
+    <value>Administrator Access</value>
+  </data>
+  <data name="Home.AdminMessage" xml:space="preserve">
+    <value>You have administrator privileges. Go to the control panel.</value>
+  </data>
+  <data name="Home.OpenAdminPanel" xml:space="preserve">
+    <value>Open Admin Panel</value>
+  </data>
+  <data name="Home.WhyChooseUs" xml:space="preserve">
+    <value>Why Choose Us</value>
+  </data>
+  <data name="Home.BestPlatform" xml:space="preserve">
+    <value>The best platform for ordering food online</value>
+  </data>
+  <data name="Home.WideSelection" xml:space="preserve">
+    <value>Wide Selection of Restaurants</value>
+  </data>
+  <data name="Home.WideSelectionDesc" xml:space="preserve">
+    <value>Over 100+ restaurants with various cuisines: Italian, Japanese, Ukrainian, American, and more</value>
+  </data>
+  <data name="Home.FastDelivery" xml:space="preserve">
+    <value>Fast Delivery</value>
+  </data>
+  <data name="Home.FastDeliveryDesc" xml:space="preserve">
+    <value>Average delivery time 30-40 minutes. Track your order in real-time</value>
+  </data>
+  <data name="Home.EasyPayment" xml:space="preserve">
+    <value>Easy Payment</value>
+  </data>
+  <data name="Home.EasyPaymentDesc" xml:space="preserve">
+    <value>Pay online by card or cash on delivery. Secure transactions</value>
+  </data>
+  <data name="Home.HowItWorks" xml:space="preserve">
+    <value>How It Works</value>
+  </data>
+  <data name="Home.HowItWorksDesc" xml:space="preserve">
+    <value>Ordering food is easy — just 4 simple steps</value>
+  </data>
+  <data name="Home.Step1" xml:space="preserve">
+    <value>Choose a Restaurant</value>
+  </data>
+  <data name="Home.Step1Desc" xml:space="preserve">
+    <value>Browse the menu and select your favorite dishes</value>
+  </data>
+  <data name="Home.Step2" xml:space="preserve">
+    <value>Add to Cart</value>
+  </data>
+  <data name="Home.Step2Desc" xml:space="preserve">
+    <value>Customize dishes to your taste</value>
+  </data>
+  <data name="Home.Step3" xml:space="preserve">
+    <value>Place Your Order</value>
+  </data>
+  <data name="Home.Step3Desc" xml:space="preserve">
+    <value>Specify address and payment method</value>
+  </data>
+  <data name="Home.Step4" xml:space="preserve">
+    <value>Get Delivery</value>
+  </data>
+  <data name="Home.Step4Desc" xml:space="preserve">
+    <value>Enjoy delicious food!</value>
+  </data>
+  <data name="Home.PopularCuisines" xml:space="preserve">
+    <value>Popular Cuisines</value>
+  </data>
+  <data name="Home.ChooseCuisine" xml:space="preserve">
+    <value>Choose your favorite cuisine</value>
+  </data>
+  <data name="Home.Italian" xml:space="preserve">
+    <value>Italian</value>
+  </data>
+  <data name="Home.ItalianDesc" xml:space="preserve">
+    <value>Pizza, Pasta</value>
+  </data>
+  <data name="Home.Japanese" xml:space="preserve">
+    <value>Japanese</value>
+  </data>
+  <data name="Home.JapaneseDesc" xml:space="preserve">
+    <value>Sushi, Rolls</value>
+  </data>
+  <data name="Home.American" xml:space="preserve">
+    <value>American</value>
+  </data>
+  <data name="Home.AmericanDesc" xml:space="preserve">
+    <value>Burgers, Steaks</value>
+  </data>
+  <data name="Home.Ukrainian" xml:space="preserve">
+    <value>Ukrainian</value>
+  </data>
+  <data name="Home.UkrainianDesc" xml:space="preserve">
+    <value>Dumplings, Borscht</value>
+  </data>
+  <data name="Home.Restaurants" xml:space="preserve">
+    <value>Restaurants</value>
+  </data>
+  <data name="Home.ActiveUsers" xml:space="preserve">
+    <value>Active Users</value>
+  </data>
+  <data name="Home.OrdersPerMonth" xml:space="preserve">
+    <value>Orders per Month</value>
+  </data>
+  <data name="Home.AverageRating" xml:space="preserve">
+    <value>Average Rating</value>
+  </data>
+  <data name="Home.ReadyToOrder" xml:space="preserve">
+    <value>Ready to Order?</value>
+  </data>
+  <data name="Home.JoinThousands" xml:space="preserve">
+    <value>Join thousands of satisfied customers</value>
+  </data>
+
+  <!-- Privacy -->
+  <data name="Privacy.Title" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="Privacy.Description" xml:space="preserve">
+    <value>Use this page to detail your site's privacy policy.</value>
+  </data>
+
+  <!-- Profile -->
+  <data name="Profile.Title" xml:space="preserve">
+    <value>My Profile</value>
+  </data>
+  <data name="Profile.PersonalInfo" xml:space="preserve">
+    <value>Personal Information</value>
+  </data>
+  <data name="Profile.EditProfile" xml:space="preserve">
+    <value>Edit Profile</value>
+  </data>
+
+  <!-- Address -->
+  <data name="Address.Title" xml:space="preserve">
+    <value>My Addresses</value>
+  </data>
+  <data name="Address.AddNew" xml:space="preserve">
+    <value>Add New Address</value>
+  </data>
+  <data name="Address.Edit" xml:space="preserve">
+    <value>Edit Address</value>
+  </data>
+  <data name="Address.Create" xml:space="preserve">
+    <value>Create Address</value>
+  </data>
+  <data name="Address.Street" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="Address.City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="Address.PostalCode" xml:space="preserve">
+    <value>Postal Code</value>
+  </data>
+  <data name="Address.Default" xml:space="preserve">
+    <value>Default Address</value>
+  </data>
+
+  <!-- Cart -->
+  <data name="Cart.Title" xml:space="preserve">
+    <value>Cart</value>
+  </data>
+  <data name="Cart.Empty" xml:space="preserve">
+    <value>Your cart is empty</value>
+  </data>
+  <data name="Cart.Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Cart.Checkout" xml:space="preserve">
+    <value>Checkout</value>
+  </data>
+  <data name="Cart.ContinueShopping" xml:space="preserve">
+    <value>Continue Shopping</value>
+  </data>
+
+  <!-- Restaurants -->
+  <data name="Restaurant.Title" xml:space="preserve">
+    <value>Restaurants</value>
+  </data>
+  <data name="Restaurant.Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="Restaurant.AddToCart" xml:space="preserve">
+    <value>Add to Cart</value>
+  </data>
+  <data name="Restaurant.Reviews" xml:space="preserve">
+    <value>Reviews</value>
+  </data>
+
   <!-- Language -->
   <data name="Language.Ukrainian" xml:space="preserve">
     <value>Українська</value>

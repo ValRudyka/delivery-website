@@ -239,6 +239,242 @@
     <value>*</value>
   </data>
 
+  <!-- Account - Extended -->
+  <data name="Account.ForgotPasswordTitle" xml:space="preserve">
+    <value>Забули пароль?</value>
+  </data>
+  <data name="Account.ForgotPasswordSubtitle" xml:space="preserve">
+    <value>Не хвилюйтесь! Введіть вашу email адресу, і ми надішлемо вам посилання для відновлення паролю.</value>
+  </data>
+  <data name="Account.SendLink" xml:space="preserve">
+    <value>Надіслати посилання</value>
+  </data>
+  <data name="Account.BackToLogin" xml:space="preserve">
+    <value>← Повернутися до входу</value>
+  </data>
+  <data name="Account.ResetPasswordTitle" xml:space="preserve">
+    <value>Скидання паролю</value>
+  </data>
+  <data name="Account.ResetPasswordSubtitle" xml:space="preserve">
+    <value>Введіть новий пароль для вашого акаунту</value>
+  </data>
+  <data name="Account.ResetPasswordButton" xml:space="preserve">
+    <value>Скинути пароль</value>
+  </data>
+  <data name="Account.NewPasswordPlaceholder" xml:space="preserve">
+    <value>Введіть новий пароль</value>
+  </data>
+  <data name="Account.ConfirmNewPasswordPlaceholder" xml:space="preserve">
+    <value>Повторіть новий пароль</value>
+  </data>
+  <data name="Account.AccessDenied" xml:space="preserve">
+    <value>Доступ заборонено</value>
+  </data>
+  <data name="Account.AccessDeniedMessage" xml:space="preserve">
+    <value>У вас немає доступу до цієї сторінки.</value>
+  </data>
+
+  <!-- Home Page -->
+  <data name="Home.Title" xml:space="preserve">
+    <value>Головна</value>
+  </data>
+  <data name="Home.HeroTitle" xml:space="preserve">
+    <value>Платформа замовлення та доставки їжі</value>
+  </data>
+  <data name="Home.HeroSubtitle" xml:space="preserve">
+    <value>Замовте їжу з найкращих ресторанів вашого міста швидко та зручно</value>
+  </data>
+  <data name="Home.ViewRestaurants" xml:space="preserve">
+    <value>Переглянути ресторани</value>
+  </data>
+  <data name="Home.AdminAccess" xml:space="preserve">
+    <value>Доступ адміністратора</value>
+  </data>
+  <data name="Home.AdminMessage" xml:space="preserve">
+    <value>У вас є права адміністратора. Перейдіть до панелі керування.</value>
+  </data>
+  <data name="Home.OpenAdminPanel" xml:space="preserve">
+    <value>Відкрити адмін-панель</value>
+  </data>
+  <data name="Home.WhyChooseUs" xml:space="preserve">
+    <value>Чому обирають нас</value>
+  </data>
+  <data name="Home.BestPlatform" xml:space="preserve">
+    <value>Найкраща платформа для замовлення їжі онлайн</value>
+  </data>
+  <data name="Home.WideSelection" xml:space="preserve">
+    <value>Великий вибір ресторанів</value>
+  </data>
+  <data name="Home.WideSelectionDesc" xml:space="preserve">
+    <value>Понад 100+ ресторанів з різними кухнями: італійська, японська, українська, американська та інші</value>
+  </data>
+  <data name="Home.FastDelivery" xml:space="preserve">
+    <value>Швидка доставка</value>
+  </data>
+  <data name="Home.FastDeliveryDesc" xml:space="preserve">
+    <value>Середній час доставки 30-40 хвилин. Відстежуйте ваше замовлення в реальному часі</value>
+  </data>
+  <data name="Home.EasyPayment" xml:space="preserve">
+    <value>Зручна оплата</value>
+  </data>
+  <data name="Home.EasyPaymentDesc" xml:space="preserve">
+    <value>Оплата онлайн карткою або готівкою при отриманні. Безпечні транзакції</value>
+  </data>
+  <data name="Home.HowItWorks" xml:space="preserve">
+    <value>Як це працює</value>
+  </data>
+  <data name="Home.HowItWorksDesc" xml:space="preserve">
+    <value>Замовити їжу легко — всього за 4 простих кроки</value>
+  </data>
+  <data name="Home.Step1" xml:space="preserve">
+    <value>Оберіть ресторан</value>
+  </data>
+  <data name="Home.Step1Desc" xml:space="preserve">
+    <value>Перегляньте меню та виберіть улюблені страви</value>
+  </data>
+  <data name="Home.Step2" xml:space="preserve">
+    <value>Додайте до кошика</value>
+  </data>
+  <data name="Home.Step2Desc" xml:space="preserve">
+    <value>Налаштуйте страви за вашим смаком</value>
+  </data>
+  <data name="Home.Step3" xml:space="preserve">
+    <value>Оформіть замовлення</value>
+  </data>
+  <data name="Home.Step3Desc" xml:space="preserve">
+    <value>Вкажіть адресу та спосіб оплати</value>
+  </data>
+  <data name="Home.Step4" xml:space="preserve">
+    <value>Отримайте доставку</value>
+  </data>
+  <data name="Home.Step4Desc" xml:space="preserve">
+    <value>Насолоджуйтесь смачною їжею!</value>
+  </data>
+  <data name="Home.PopularCuisines" xml:space="preserve">
+    <value>Популярні кухні</value>
+  </data>
+  <data name="Home.ChooseCuisine" xml:space="preserve">
+    <value>Виберіть улюблену кухню</value>
+  </data>
+  <data name="Home.Italian" xml:space="preserve">
+    <value>Італійська</value>
+  </data>
+  <data name="Home.ItalianDesc" xml:space="preserve">
+    <value>Піца, паста</value>
+  </data>
+  <data name="Home.Japanese" xml:space="preserve">
+    <value>Японська</value>
+  </data>
+  <data name="Home.JapaneseDesc" xml:space="preserve">
+    <value>Суші, роли</value>
+  </data>
+  <data name="Home.American" xml:space="preserve">
+    <value>Американська</value>
+  </data>
+  <data name="Home.AmericanDesc" xml:space="preserve">
+    <value>Бургери, стейки</value>
+  </data>
+  <data name="Home.Ukrainian" xml:space="preserve">
+    <value>Українська</value>
+  </data>
+  <data name="Home.UkrainianDesc" xml:space="preserve">
+    <value>Вареники, борщ</value>
+  </data>
+  <data name="Home.Restaurants" xml:space="preserve">
+    <value>Ресторанів</value>
+  </data>
+  <data name="Home.ActiveUsers" xml:space="preserve">
+    <value>Активних користувачів</value>
+  </data>
+  <data name="Home.OrdersPerMonth" xml:space="preserve">
+    <value>Замовлень щомісяця</value>
+  </data>
+  <data name="Home.AverageRating" xml:space="preserve">
+    <value>Середня оцінка</value>
+  </data>
+  <data name="Home.ReadyToOrder" xml:space="preserve">
+    <value>Готові замовити?</value>
+  </data>
+  <data name="Home.JoinThousands" xml:space="preserve">
+    <value>Приєднуйтесь до тисяч задоволених клієнтів</value>
+  </data>
+
+  <!-- Privacy -->
+  <data name="Privacy.Title" xml:space="preserve">
+    <value>Політика конфіденційності</value>
+  </data>
+  <data name="Privacy.Description" xml:space="preserve">
+    <value>Використовуйте цю сторінку для деталізації політики конфіденційності вашого сайту.</value>
+  </data>
+
+  <!-- Profile -->
+  <data name="Profile.Title" xml:space="preserve">
+    <value>Мій профіль</value>
+  </data>
+  <data name="Profile.PersonalInfo" xml:space="preserve">
+    <value>Особиста інформація</value>
+  </data>
+  <data name="Profile.EditProfile" xml:space="preserve">
+    <value>Редагувати профіль</value>
+  </data>
+
+  <!-- Address -->
+  <data name="Address.Title" xml:space="preserve">
+    <value>Мої адреси</value>
+  </data>
+  <data name="Address.AddNew" xml:space="preserve">
+    <value>Додати нову адресу</value>
+  </data>
+  <data name="Address.Edit" xml:space="preserve">
+    <value>Редагувати адресу</value>
+  </data>
+  <data name="Address.Create" xml:space="preserve">
+    <value>Створити адресу</value>
+  </data>
+  <data name="Address.Street" xml:space="preserve">
+    <value>Вулиця</value>
+  </data>
+  <data name="Address.City" xml:space="preserve">
+    <value>Місто</value>
+  </data>
+  <data name="Address.PostalCode" xml:space="preserve">
+    <value>Поштовий індекс</value>
+  </data>
+  <data name="Address.Default" xml:space="preserve">
+    <value>Адреса за замовчуванням</value>
+  </data>
+
+  <!-- Cart -->
+  <data name="Cart.Title" xml:space="preserve">
+    <value>Кошик</value>
+  </data>
+  <data name="Cart.Empty" xml:space="preserve">
+    <value>Ваш кошик порожній</value>
+  </data>
+  <data name="Cart.Total" xml:space="preserve">
+    <value>Всього</value>
+  </data>
+  <data name="Cart.Checkout" xml:space="preserve">
+    <value>Оформити замовлення</value>
+  </data>
+  <data name="Cart.ContinueShopping" xml:space="preserve">
+    <value>Продовжити покупки</value>
+  </data>
+
+  <!-- Restaurants -->
+  <data name="Restaurant.Title" xml:space="preserve">
+    <value>Ресторани</value>
+  </data>
+  <data name="Restaurant.Menu" xml:space="preserve">
+    <value>Меню</value>
+  </data>
+  <data name="Restaurant.AddToCart" xml:space="preserve">
+    <value>Додати до кошика</value>
+  </data>
+  <data name="Restaurant.Reviews" xml:space="preserve">
+    <value>Відгуки</value>
+  </data>
+
   <!-- Language -->
   <data name="Language.Ukrainian" xml:space="preserve">
     <value>Українська</value>

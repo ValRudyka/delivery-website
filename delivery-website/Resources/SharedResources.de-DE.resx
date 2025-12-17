@@ -239,6 +239,242 @@
     <value>*</value>
   </data>
 
+  <!-- Account - Extended -->
+  <data name="Account.ForgotPasswordTitle" xml:space="preserve">
+    <value>Passwort vergessen?</value>
+  </data>
+  <data name="Account.ForgotPasswordSubtitle" xml:space="preserve">
+    <value>Keine Sorge! Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link zum Zurücksetzen Ihres Passworts.</value>
+  </data>
+  <data name="Account.SendLink" xml:space="preserve">
+    <value>Link senden</value>
+  </data>
+  <data name="Account.BackToLogin" xml:space="preserve">
+    <value>← Zurück zur Anmeldung</value>
+  </data>
+  <data name="Account.ResetPasswordTitle" xml:space="preserve">
+    <value>Passwort zurücksetzen</value>
+  </data>
+  <data name="Account.ResetPasswordSubtitle" xml:space="preserve">
+    <value>Geben Sie ein neues Passwort für Ihr Konto ein</value>
+  </data>
+  <data name="Account.ResetPasswordButton" xml:space="preserve">
+    <value>Passwort zurücksetzen</value>
+  </data>
+  <data name="Account.NewPasswordPlaceholder" xml:space="preserve">
+    <value>Neues Passwort eingeben</value>
+  </data>
+  <data name="Account.ConfirmNewPasswordPlaceholder" xml:space="preserve">
+    <value>Neues Passwort wiederholen</value>
+  </data>
+  <data name="Account.AccessDenied" xml:space="preserve">
+    <value>Zugriff verweigert</value>
+  </data>
+  <data name="Account.AccessDeniedMessage" xml:space="preserve">
+    <value>Sie haben keinen Zugriff auf diese Seite.</value>
+  </data>
+
+  <!-- Home Page -->
+  <data name="Home.Title" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="Home.HeroTitle" xml:space="preserve">
+    <value>Essensbestellung und Lieferplattform</value>
+  </data>
+  <data name="Home.HeroSubtitle" xml:space="preserve">
+    <value>Bestellen Sie Essen von den besten Restaurants Ihrer Stadt schnell und bequem</value>
+  </data>
+  <data name="Home.ViewRestaurants" xml:space="preserve">
+    <value>Restaurants anzeigen</value>
+  </data>
+  <data name="Home.AdminAccess" xml:space="preserve">
+    <value>Administrator-Zugang</value>
+  </data>
+  <data name="Home.AdminMessage" xml:space="preserve">
+    <value>Sie haben Administratorrechte. Gehen Sie zum Kontrollfeld.</value>
+  </data>
+  <data name="Home.OpenAdminPanel" xml:space="preserve">
+    <value>Admin-Panel öffnen</value>
+  </data>
+  <data name="Home.WhyChooseUs" xml:space="preserve">
+    <value>Warum uns wählen</value>
+  </data>
+  <data name="Home.BestPlatform" xml:space="preserve">
+    <value>Die beste Plattform für Online-Essensbestellungen</value>
+  </data>
+  <data name="Home.WideSelection" xml:space="preserve">
+    <value>Große Auswahl an Restaurants</value>
+  </data>
+  <data name="Home.WideSelectionDesc" xml:space="preserve">
+    <value>Über 100+ Restaurants mit verschiedenen Küchen: Italienisch, Japanisch, Ukrainisch, Amerikanisch und mehr</value>
+  </data>
+  <data name="Home.FastDelivery" xml:space="preserve">
+    <value>Schnelle Lieferung</value>
+  </data>
+  <data name="Home.FastDeliveryDesc" xml:space="preserve">
+    <value>Durchschnittliche Lieferzeit 30-40 Minuten. Verfolgen Sie Ihre Bestellung in Echtzeit</value>
+  </data>
+  <data name="Home.EasyPayment" xml:space="preserve">
+    <value>Einfache Bezahlung</value>
+  </data>
+  <data name="Home.EasyPaymentDesc" xml:space="preserve">
+    <value>Online mit Karte oder bar bei Lieferung bezahlen. Sichere Transaktionen</value>
+  </data>
+  <data name="Home.HowItWorks" xml:space="preserve">
+    <value>Wie es funktioniert</value>
+  </data>
+  <data name="Home.HowItWorksDesc" xml:space="preserve">
+    <value>Essen bestellen ist einfach — nur 4 einfache Schritte</value>
+  </data>
+  <data name="Home.Step1" xml:space="preserve">
+    <value>Restaurant wählen</value>
+  </data>
+  <data name="Home.Step1Desc" xml:space="preserve">
+    <value>Durchsuchen Sie die Speisekarte und wählen Sie Ihre Lieblingsgerichte</value>
+  </data>
+  <data name="Home.Step2" xml:space="preserve">
+    <value>In den Warenkorb</value>
+  </data>
+  <data name="Home.Step2Desc" xml:space="preserve">
+    <value>Passen Sie Gerichte nach Ihrem Geschmack an</value>
+  </data>
+  <data name="Home.Step3" xml:space="preserve">
+    <value>Bestellung aufgeben</value>
+  </data>
+  <data name="Home.Step3Desc" xml:space="preserve">
+    <value>Adresse und Zahlungsmethode angeben</value>
+  </data>
+  <data name="Home.Step4" xml:space="preserve">
+    <value>Lieferung erhalten</value>
+  </data>
+  <data name="Home.Step4Desc" xml:space="preserve">
+    <value>Genießen Sie leckeres Essen!</value>
+  </data>
+  <data name="Home.PopularCuisines" xml:space="preserve">
+    <value>Beliebte Küchen</value>
+  </data>
+  <data name="Home.ChooseCuisine" xml:space="preserve">
+    <value>Wählen Sie Ihre Lieblingsküche</value>
+  </data>
+  <data name="Home.Italian" xml:space="preserve">
+    <value>Italienisch</value>
+  </data>
+  <data name="Home.ItalianDesc" xml:space="preserve">
+    <value>Pizza, Pasta</value>
+  </data>
+  <data name="Home.Japanese" xml:space="preserve">
+    <value>Japanisch</value>
+  </data>
+  <data name="Home.JapaneseDesc" xml:space="preserve">
+    <value>Sushi, Rollen</value>
+  </data>
+  <data name="Home.American" xml:space="preserve">
+    <value>Amerikanisch</value>
+  </data>
+  <data name="Home.AmericanDesc" xml:space="preserve">
+    <value>Burger, Steaks</value>
+  </data>
+  <data name="Home.Ukrainian" xml:space="preserve">
+    <value>Ukrainisch</value>
+  </data>
+  <data name="Home.UkrainianDesc" xml:space="preserve">
+    <value>Knödel, Borschtsch</value>
+  </data>
+  <data name="Home.Restaurants" xml:space="preserve">
+    <value>Restaurants</value>
+  </data>
+  <data name="Home.ActiveUsers" xml:space="preserve">
+    <value>Aktive Benutzer</value>
+  </data>
+  <data name="Home.OrdersPerMonth" xml:space="preserve">
+    <value>Bestellungen pro Monat</value>
+  </data>
+  <data name="Home.AverageRating" xml:space="preserve">
+    <value>Durchschnittliche Bewertung</value>
+  </data>
+  <data name="Home.ReadyToOrder" xml:space="preserve">
+    <value>Bereit zu bestellen?</value>
+  </data>
+  <data name="Home.JoinThousands" xml:space="preserve">
+    <value>Treten Sie tausenden zufriedenen Kunden bei</value>
+  </data>
+
+  <!-- Privacy -->
+  <data name="Privacy.Title" xml:space="preserve">
+    <value>Datenschutzerklärung</value>
+  </data>
+  <data name="Privacy.Description" xml:space="preserve">
+    <value>Verwenden Sie diese Seite, um die Datenschutzerklärung Ihrer Website zu detaillieren.</value>
+  </data>
+
+  <!-- Profile -->
+  <data name="Profile.Title" xml:space="preserve">
+    <value>Mein Profil</value>
+  </data>
+  <data name="Profile.PersonalInfo" xml:space="preserve">
+    <value>Persönliche Informationen</value>
+  </data>
+  <data name="Profile.EditProfile" xml:space="preserve">
+    <value>Profil bearbeiten</value>
+  </data>
+
+  <!-- Address -->
+  <data name="Address.Title" xml:space="preserve">
+    <value>Meine Adressen</value>
+  </data>
+  <data name="Address.AddNew" xml:space="preserve">
+    <value>Neue Adresse hinzufügen</value>
+  </data>
+  <data name="Address.Edit" xml:space="preserve">
+    <value>Adresse bearbeiten</value>
+  </data>
+  <data name="Address.Create" xml:space="preserve">
+    <value>Adresse erstellen</value>
+  </data>
+  <data name="Address.Street" xml:space="preserve">
+    <value>Straße</value>
+  </data>
+  <data name="Address.City" xml:space="preserve">
+    <value>Stadt</value>
+  </data>
+  <data name="Address.PostalCode" xml:space="preserve">
+    <value>Postleitzahl</value>
+  </data>
+  <data name="Address.Default" xml:space="preserve">
+    <value>Standardadresse</value>
+  </data>
+
+  <!-- Cart -->
+  <data name="Cart.Title" xml:space="preserve">
+    <value>Warenkorb</value>
+  </data>
+  <data name="Cart.Empty" xml:space="preserve">
+    <value>Ihr Warenkorb ist leer</value>
+  </data>
+  <data name="Cart.Total" xml:space="preserve">
+    <value>Gesamt</value>
+  </data>
+  <data name="Cart.Checkout" xml:space="preserve">
+    <value>Zur Kasse</value>
+  </data>
+  <data name="Cart.ContinueShopping" xml:space="preserve">
+    <value>Weiter einkaufen</value>
+  </data>
+
+  <!-- Restaurants -->
+  <data name="Restaurant.Title" xml:space="preserve">
+    <value>Restaurants</value>
+  </data>
+  <data name="Restaurant.Menu" xml:space="preserve">
+    <value>Speisekarte</value>
+  </data>
+  <data name="Restaurant.AddToCart" xml:space="preserve">
+    <value>In den Warenkorb</value>
+  </data>
+  <data name="Restaurant.Reviews" xml:space="preserve">
+    <value>Bewertungen</value>
+  </data>
+
   <!-- Language -->
   <data name="Language.Ukrainian" xml:space="preserve">
     <value>Українська</value>
