@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" msdata:Ordinal="5" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Navigation -->
+  <data name="Nav.Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Nav.Restaurants" xml:space="preserve">
+    <value>Restaurants</value>
+  </data>
+  <data name="Nav.Cart" xml:space="preserve">
+    <value>Cart</value>
+  </data>
+  <data name="Nav.Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Nav.Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Nav.Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="Nav.AdminPanel" xml:space="preserve">
+    <value>Admin Panel</value>
+  </data>
+  <data name="Nav.MyProfile" xml:space="preserve">
+    <value>My Profile</value>
+  </data>
+  <data name="Nav.MyAddresses" xml:space="preserve">
+    <value>My Addresses</value>
+  </data>
+  <data name="Nav.MyOrders" xml:space="preserve">
+    <value>My Orders</value>
+  </data>
+  <data name="Nav.MyReviews" xml:space="preserve">
+    <value>My Reviews</value>
+  </data>
+
+  <!-- Common -->
+  <data name="Common.FoodDelivery" xml:space="preserve">
+    <value>Food Delivery</value>
+  </data>
+  <data name="Common.FoodDeliveryPlatform" xml:space="preserve">
+    <value>Food Delivery Platform</value>
+  </data>
+  <data name="Common.Copyright" xml:space="preserve">
+    <value>2025 - Food Delivery Platform</value>
+  </data>
+  <data name="Common.Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Common.Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Common.Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Common.Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Common.Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Common.Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Common.Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Common.Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Common.Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Common.No" xml:space="preserve">
+    <value>No</value>
+  </data>
+
+  <!-- Account -->
+  <data name="Account.Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Account.LoginTitle" xml:space="preserve">
+    <value>Login to System</value>
+  </data>
+  <data name="Account.LoginSubtitle" xml:space="preserve">
+    <value>Sign in to your account</value>
+  </data>
+  <data name="Account.LoginButton" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="Account.Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Account.RegisterTitle" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="Account.RegisterSubtitle" xml:space="preserve">
+    <value>Create your account</value>
+  </data>
+  <data name="Account.RegisterButton" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Account.Email" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+  <data name="Account.EmailPlaceholder" xml:space="preserve">
+    <value>your@email.com</value>
+  </data>
+  <data name="Account.Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Account.PasswordPlaceholder" xml:space="preserve">
+    <value>Enter password</value>
+  </data>
+  <data name="Account.PasswordMinLength" xml:space="preserve">
+    <value>Minimum 6 characters</value>
+  </data>
+  <data name="Account.PasswordHint" xml:space="preserve">
+    <value>Password must be at least 6 characters</value>
+  </data>
+  <data name="Account.ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="Account.ConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>Repeat password</value>
+  </data>
+  <data name="Account.RememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="Account.ForgotPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="Account.ResetPassword" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="Account.NewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="Account.FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="Account.FirstNamePlaceholder" xml:space="preserve">
+    <value>John</value>
+  </data>
+  <data name="Account.LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="Account.LastNamePlaceholder" xml:space="preserve">
+    <value>Doe</value>
+  </data>
+  <data name="Account.PhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="Account.PhoneNumberPlaceholder" xml:space="preserve">
+    <value>+1XXXXXXXXXX</value>
+  </data>
+  <data name="Account.AgreeToTerms" xml:space="preserve">
+    <value>I agree to the terms of service and privacy policy</value>
+  </data>
+  <data name="Account.AgreeToTermsPart1" xml:space="preserve">
+    <value>I agree to the</value>
+  </data>
+  <data name="Account.TermsOfService" xml:space="preserve">
+    <value>terms of service</value>
+  </data>
+  <data name="Account.And" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="Account.PrivacyPolicy" xml:space="preserve">
+    <value>privacy policy</value>
+  </data>
+  <data name="Account.NoAccount" xml:space="preserve">
+    <value>Don't have an account?</value>
+  </data>
+  <data name="Account.HaveAccount" xml:space="preserve">
+    <value>Already have an account?</value>
+  </data>
+  <data name="Account.RequiredField" xml:space="preserve">
+    <value>*</value>
+  </data>
+
+  <!-- Language -->
+  <data name="Language.Ukrainian" xml:space="preserve">
+    <value>Українська</value>
+  </data>
+  <data name="Language.English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Language.German" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="Language.SelectLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+</root>

@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 using delivery_website.Data;
 using delivery_website.Repositories.Interfaces;
 using delivery_website.Repositories.Implementations;
@@ -9,7 +11,12 @@ using delivery_website.Models.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+// Configure localization
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -70,6 +77,26 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+// Configure supported cultures
+var supportedCultures = new[]
+{
+    new CultureInfo("uk-UA"), // Ukrainian
+    new CultureInfo("en-US"), // English
+    new CultureInfo("de-DE")  // German
+};
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("uk-UA");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+    options.RequestCultureProviders = new List<IRequestCultureProvider>
+    {
+        new CookieRequestCultureProvider(),
+        new AcceptLanguageHeaderRequestCultureProvider()
+    };
+});
+
 var app = builder.Build();
 
 // Seed Database and Roles
@@ -126,6 +153,10 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+// Enable request localization
+app.UseRequestLocalization();
+
 app.UseRouting();
 app.UseSession();
 app.UseAuthentication();

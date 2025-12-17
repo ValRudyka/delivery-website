@@ -1,13 +1,17 @@
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@inject IViewLocalizer Localizer
+@inject IStringLocalizer<delivery_website.Resources.SharedResources> SharedLocalizer
 
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Платформа доставки їжі</title>
+    <title>@ViewData["Title"] - @SharedLocalizer["Common.FoodDeliveryPlatform"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
@@ -16,7 +20,7 @@
         <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom shadow-sm">
             <div class="container">
                 <a class="navbar-brand fw-bold text-primary" asp-area="" asp-controller="Home" asp-action="Index">
-                    🍕 Доставка їжі
+                    🍕 @SharedLocalizer["Common.FoodDelivery"]
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
@@ -24,17 +28,17 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Головна</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">@SharedLocalizer["Nav.Home"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Customer" asp-controller="Restaurants" asp-action="Index">Ресторани</a>
+                            <a class="nav-link" asp-area="Customer" asp-controller="Restaurants" asp-action="Index">@SharedLocalizer["Nav.Restaurants"]</a>
                         </li>
 
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
                                 <a class="nav-link position-relative" asp-area="Customer" asp-controller="Cart" asp-action="Index">
-                                    🛒 Кошик
+                                    🛒 @SharedLocalizer["Nav.Cart"]
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                                           id="cartBadge" style="display: none; font-size: 0.7rem;">
                                         0
@@ -46,7 +50,7 @@
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-danger fw-bold" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
-                                        🛡️ Адмін-панель
+                                        🛡️ @SharedLocalizer["Nav.AdminPanel"]
                                     </a>
                                 </li>
                             }
@@ -58,19 +62,19 @@
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     @if (User.IsInRole("Admin"))
                                     {
-                                        <li><a class="dropdown-item text-danger fw-bold" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">🛡️ Адмін-панель</a></li>
+                                        <li><a class="dropdown-item text-danger fw-bold" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">🛡️ @SharedLocalizer["Nav.AdminPanel"]</a></li>
                                         <li><hr class="dropdown-divider"></li>
                                     }
-                                    <li><a class="dropdown-item" asp-area="Customer" asp-controller="Profile" asp-action="Index">👤 Мій профіль</a></li>
-                                    <li><a class="dropdown-item" asp-area="Customer" asp-controller="Address" asp-action="Index">📍 Мої адреси</a></li>
-                                    <li><a class="dropdown-item" href="#">📋 Мої замовлення</a></li>
-                                    <li><a class="dropdown-item" href="#">⭐ Мої відгуки</a></li>
+                                    <li><a class="dropdown-item" asp-area="Customer" asp-controller="Profile" asp-action="Index">👤 @SharedLocalizer["Nav.MyProfile"]</a></li>
+                                    <li><a class="dropdown-item" asp-area="Customer" asp-controller="Address" asp-action="Index">📍 @SharedLocalizer["Nav.MyAddresses"]</a></li>
+                                    <li><a class="dropdown-item" href="#">📋 @SharedLocalizer["Nav.MyOrders"]</a></li>
+                                    <li><a class="dropdown-item" href="#">⭐ @SharedLocalizer["Nav.MyReviews"]</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
                                             @Html.AntiForgeryToken()
                                             <button type="submit" class="dropdown-item text-danger">
-                                                🚪 Вийти
+                                                🚪 @SharedLocalizer["Nav.Logout"]
                                             </button>
                                         </form>
                                     </li>
@@ -80,12 +84,48 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Account" asp-action="Login">Увійти</a>
+                                <a class="nav-link" asp-controller="Account" asp-action="Login">@SharedLocalizer["Nav.Login"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn btn-primary text-white ms-2" asp-controller="Account" asp-action="Register">Реєстрація</a>
+                                <a class="nav-link btn btn-primary text-white ms-2" asp-controller="Account" asp-action="Register">@SharedLocalizer["Nav.Register"]</a>
                             </li>
                         }
+
+                        <!-- Language Switcher -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                🌐 @SharedLocalizer["Language.SelectLanguage"]
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                                <li>
+                                    <form asp-controller="Language" asp-action="SetLanguage" method="post" class="dropdown-item">
+                                        <input type="hidden" name="culture" value="uk-UA" />
+                                        <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                                        <button type="submit" class="btn btn-link text-decoration-none text-dark p-0">
+                                            @SharedLocalizer["Language.Ukrainian"]
+                                        </button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form asp-controller="Language" asp-action="SetLanguage" method="post" class="dropdown-item">
+                                        <input type="hidden" name="culture" value="en-US" />
+                                        <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                                        <button type="submit" class="btn btn-link text-decoration-none text-dark p-0">
+                                            @SharedLocalizer["Language.English"]
+                                        </button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form asp-controller="Language" asp-action="SetLanguage" method="post" class="dropdown-item">
+                                        <input type="hidden" name="culture" value="de-DE" />
+                                        <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                                        <button type="submit" class="btn btn-link text-decoration-none text-dark p-0">
+                                            @SharedLocalizer["Language.German"]
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -128,7 +168,7 @@
 
     <footer class="bg-light border-top mt-5 py-3">
         <div class="container text-center text-muted">
-            <p>&copy; 2025 - Платформа доставки їжі</p>
+            <p>&copy; @SharedLocalizer["Common.Copyright"]</p>
         </div>
     </footer>
 
