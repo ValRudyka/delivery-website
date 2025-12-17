@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<delivery_website.Models.DTOs.Restaurant.RestaurantListDto>
 
 @{
-    ViewData["Title"] = "Ресторани";
+    ViewData["Title"] = SharedLocalizer["Restaurant.Title"];
 }
 
 <div class="container mt-4">
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>🍽️ Наші ресторани</h2>
-        <span class="text-muted">Знайдено: @Model.Count() ресторанів</span>
+        <h2>🍽️ @SharedLocalizer["Restaurant.OurRestaurants"]</h2>
+        <span class="text-muted">@SharedLocalizer["Restaurant.Found"]: @Model.Count() @SharedLocalizer["Restaurant.Restaurants"]</span>
     </div>
 
     <!-- Filters -->
@@ -17,16 +17,16 @@
             <form method="get" class="row g-3">
                 <!-- Search -->
                 <div class="col-md-4">
-                    <label class="form-label">🔍 Пошук</label>
+                    <label class="form-label">🔍 @SharedLocalizer["Common.Search"]</label>
                     <input type="text" class="form-control" name="searchTerm"
-                           value="@ViewBag.SearchTerm" placeholder="Назва ресторану або кухня...">
+                           value="@ViewBag.SearchTerm" placeholder="@SharedLocalizer["Restaurant.SearchPlaceholder"]">
                 </div>
 
                 <!-- Cuisine Filter -->
                 <div class="col-md-3">
-                    <label class="form-label">🍴 Тип кухні</label>
+                    <label class="form-label">🍴 @SharedLocalizer["Restaurant.CuisineType"]</label>
                     <select class="form-select" name="cuisineType">
-                        <option value="">Всі кухні</option>
+                        <option value="">@SharedLocalizer["Restaurant.AllCuisines"]</option>
                         @foreach (var cuisine in ViewBag.CuisineTypes)
                         {
                             <option value="@cuisine" selected="@(ViewBag.SelectedCuisine == cuisine)">
@@ -38,9 +38,9 @@
 
                 <!-- Rating Filter -->
                 <div class="col-md-2">
-                    <label class="form-label">⭐ Мін. рейтинг</label>
+                    <label class="form-label">⭐ @SharedLocalizer["Restaurant.MinRating"]</label>
                     <select class="form-select" name="minRating">
-                        <option value="">Будь-який</option>
+                        <option value="">@SharedLocalizer["Restaurant.Any"]</option>
                         <option value="4.5" selected="@(ViewBag.MinRating == 4.5m)">4.5+</option>
                         <option value="4.0" selected="@(ViewBag.MinRating == 4.0m)">4.0+</option>
                         <option value="3.5" selected="@(ViewBag.MinRating == 3.5m)">3.5+</option>
@@ -49,33 +49,33 @@
 
                 <!-- Delivery Time Filter -->
                 <div class="col-md-2">
-                    <label class="form-label">🚚 Час доставки</label>
+                    <label class="form-label">🚚 @SharedLocalizer["Restaurant.DeliveryTime"]</label>
                     <select class="form-select" name="maxDeliveryTime">
-                        <option value="">Будь-який</option>
-                        <option value="30" selected="@(ViewBag.MaxDeliveryTime == 30)">До 30 хв</option>
-                        <option value="45" selected="@(ViewBag.MaxDeliveryTime == 45)">До 45 хв</option>
-                        <option value="60" selected="@(ViewBag.MaxDeliveryTime == 60)">До 60 хв</option>
+                        <option value="">@SharedLocalizer["Restaurant.Any"]</option>
+                        <option value="30" selected="@(ViewBag.MaxDeliveryTime == 30)">@SharedLocalizer["Restaurant.UpTo30Min"]</option>
+                        <option value="45" selected="@(ViewBag.MaxDeliveryTime == 45)">@SharedLocalizer["Restaurant.UpTo45Min"]</option>
+                        <option value="60" selected="@(ViewBag.MaxDeliveryTime == 60)">@SharedLocalizer["Restaurant.UpTo60Min"]</option>
                     </select>
                 </div>
 
                 <!-- Sort By -->
                 <div class="col-md-1">
-                    <label class="form-label">Сортування</label>
+                    <label class="form-label">@SharedLocalizer["Restaurant.SortBy"]</label>
                     <select class="form-select" name="sortBy">
-                        <option value="rating" selected="@(ViewBag.SortBy == "rating")">Рейтинг</option>
-                        <option value="name" selected="@(ViewBag.SortBy == "name")">Назва</option>
-                        <option value="deliveryTime" selected="@(ViewBag.SortBy == "deliveryTime")">Час</option>
-                        <option value="deliveryFee" selected="@(ViewBag.SortBy == "deliveryFee")">Вартість</option>
+                        <option value="rating" selected="@(ViewBag.SortBy == "rating")">@SharedLocalizer["Restaurant.Rating"]</option>
+                        <option value="name" selected="@(ViewBag.SortBy == "name")">@SharedLocalizer["Restaurant.Name"]</option>
+                        <option value="deliveryTime" selected="@(ViewBag.SortBy == "deliveryTime")">@SharedLocalizer["Restaurant.Time"]</option>
+                        <option value="deliveryFee" selected="@(ViewBag.SortBy == "deliveryFee")">@SharedLocalizer["Restaurant.Cost"]</option>
                     </select>
                 </div>
 
                 <!-- Buttons -->
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-search"></i> Застосувати фільтри
+                        <i class="bi bi-search"></i> @SharedLocalizer["Restaurant.ApplyFilters"]
                     </button>
                     <a href="@Url.Action("Index", "Restaurants", new { area = "Customer" })" class="btn btn-outline-secondary">
-                        Скинути
+                        @SharedLocalizer["Restaurant.Reset"]
                     </a>
                 </div>
             </form>
@@ -129,8 +129,8 @@
                             </div>
 
                             <div class="d-flex justify-content-between text-muted small mb-3">
-                                <span>Мін. замовлення: @restaurant.MinimumOrderAmount?.ToString("C0") ₴</span>
-                                <span>Доставка: @restaurant.DeliveryFee?.ToString("C0") ₴</span>
+                                <span>@SharedLocalizer["Restaurant.MinOrder"]: @restaurant.MinimumOrderAmount?.ToString("C0") ₴</span>
+                                <span>@SharedLocalizer["Restaurant.Delivery"]: @restaurant.DeliveryFee?.ToString("C0") ₴</span>
                             </div>
 
                             <div class="text-muted small mb-3">
@@ -139,7 +139,7 @@
 
                             <a asp-area="Customer" asp-controller="Restaurants" asp-action="Details" asp-route-id="@restaurant.RestaurantId"
                                class="btn btn-primary w-100">
-                                Переглянути меню
+                                @SharedLocalizer["Restaurant.ViewMenu"]
                             </a>
                         </div>
                     </div>
@@ -150,8 +150,8 @@
     else
     {
         <div class="alert alert-info text-center">
-            <h4>😔 Ресторани не знайдено</h4>
-            <p>Спробуйте змінити параметри пошуку або скинути фільтри</p>
+            <h4>😔 @SharedLocalizer["Restaurant.NotFound"]</h4>
+            <p>@SharedLocalizer["Restaurant.NotFoundText"]</p>
         </div>
     }
 </div>
