@@ -1,17 +1,18 @@
-namespace delivery_website
+namespace delivery_website.Resources
 {
     /// <summary>
     /// Marker class for shared resources localization.
     /// This class is intentionally empty and serves as a type reference for IStringLocalizer.
-    /// The class MUST be in the root namespace (not delivery_website.Resources) because
-    /// when ResourcesPath = "Resources" is set, ASP.NET Core constructs the resource path as:
-    /// {ResourcesPath}/{TypeFullName - RootNamespace}.resx
-    /// So for delivery_website.SharedResources with ResourcesPath="Resources", it looks for:
-    /// Resources/SharedResources.resx (correct!)
-    /// But for delivery_website.Resources.SharedResources, it would look for:
-    /// Resources/Resources/SharedResources.resx (wrong!)
+    ///
+    /// IMPORTANT: This class MUST be in delivery_website.Resources namespace to match
+    /// the embedded resource naming convention. When .resx files are in the Resources/ folder,
+    /// they get embedded as delivery_website.Resources.SharedResources.resources
+    ///
+    /// The IStringLocalizer looks for resources based on this class's full name,
+    /// so it correctly finds: delivery_website.Resources.SharedResources
     /// </summary>
-    public class SharedResources
+    public partial class SharedResources
     {
+        // Empty marker class - resources are accessed via IStringLocalizer<SharedResources>
     }
 }

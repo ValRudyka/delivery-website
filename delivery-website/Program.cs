@@ -12,7 +12,10 @@ using delivery_website.Models.Configuration;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure localization
-builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+// Note: ResourcesPath is NOT set because our marker class (SharedResources)
+// is in delivery_website.Resources namespace, which matches the embedded resource path directly.
+// Setting ResourcesPath = "Resources" would cause it to look for Resources/Resources/SharedResources.resx
+builder.Services.AddLocalization();
 
 builder.Services.AddControllersWithViews()
     .AddViewLocalization()
