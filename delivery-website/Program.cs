@@ -154,19 +154,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-// Enable request localization
-var localizationOptions = new RequestLocalizationOptions
-{
-    DefaultRequestCulture = new RequestCulture("uk-UA"),
-    SupportedCultures = supportedCultures,
-    SupportedUICultures = supportedCultures,
-    RequestCultureProviders = new List<IRequestCultureProvider>
-    {
-        new CookieRequestCultureProvider(),
-        new AcceptLanguageHeaderRequestCultureProvider()
-    }
-};
-app.UseRequestLocalization(localizationOptions);
+// Enable request localization (uses options configured via DI above)
+app.UseRequestLocalization();
 
 app.UseRouting();
 app.UseSession();
